@@ -14,17 +14,17 @@ $pageName = 'stays_insert';
                         <div class="mb-3">
                             <label for="hotel_categories" class="form-label">飯店名稱</label>
                             <br>
-                            <select name="hotel_categories" id=""></select>
+                            <select name="hotel_categories" id="hotelcategories"></select>
                         </div>
                         <div class="mb-3">
                             <label for="city_name" class="form-label">縣市名稱</label>
                             <br>
-                            <select name="city_name" id=""></select>
+                            <select name="city_name" id="cityname"></select>
                         </div>
                         <div class="mb-3">
                             <label for="area_name" class="form-label">地區名稱</label>
                             <br>
-                            <select name="area_name" id=""></select>
+                            <select name="area_name" id="areaname"></select>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">飯店名稱</label>
@@ -47,7 +47,7 @@ $pageName = 'stays_insert';
                             <input type="file" class="form-control" id="birthday" name="birthday">
                         </div>
                         <div class="mb-3">
-                            <label for="birthday" class="form-label">wifi</label>
+                            <label for="birthday" class="form-label">WIFI</label>
                             <input type="checkbox" class="form-control" id="birthday" name="birthday">
                             <label for="birthday" class="form-label">早餐</label>
                             <input type="checkbox" class="form-control" id="birthday" name="birthday">
@@ -82,14 +82,30 @@ $pageName = 'stays_insert';
         </div>
     </div>
 </div>
+<script src="county&area.js"></script>
 <script>
-    function checkForm() {
+    let hotelcategories = document.querySelector('#hotelcategories')
+    let cityname = document.querySelector('#cityname')
+    let areaname = document.querySelector('#areaname')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function checkForm() {
         let fd = new FormData(document.form1);
         for (let k of fd.keys()) {
             console.log(`${k}:${fd.get(k)}`);
         }
-
         fetch('insert-api.php', {
                 method: 'POST',
                 body: fd
@@ -100,7 +116,6 @@ $pageName = 'stays_insert';
             //         alert(obj.error);
             //     }
             //  })
-
             .then(function(f) {
                 return f.json()
             }).then(function(obj) {
@@ -112,8 +127,6 @@ $pageName = 'stays_insert';
                     location.href = 'basepagewithdel&edit.php';
                 }
             })
-
-
     }
 </script>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
