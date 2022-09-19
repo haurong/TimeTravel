@@ -40,7 +40,7 @@ $output = [
 
 
 ?>
-?<?php require __DIR__ . '/stays.php' ?>
+
 <div class="container mt-3">
     <div class="row">
         <div class="col">
@@ -51,6 +51,7 @@ $output = [
                         <th scope="col">分類代號</th>
                         <th scope="col">地區代號</th>
                         <th scope="col">飯店名稱</th>
+                        <th scope="col">飯店代碼</th>
                         <th scope="col">飯店電話</th>
                         <th scope="col">飯店地址</th>
                         <th scope="col">飯店圖片</th>
