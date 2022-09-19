@@ -58,7 +58,14 @@
             <label for="validationServer05">手機號碼</label>
             <input type="text" class="form-control" id="validationServer06" placeholder="password" required>
             <div class="invalid-feedback">
+<<<<<<< HEAD
                 （可不填）
+=======
+<<<<<<< HEAD
+                Please provide a valid zip.
+=======
+                
+>>>>>>> 0a44694919f7a4edcdcab7e92e317cfa92deb547
             </div>
         </div>
         <div class="text-center py-3">
@@ -68,3 +75,4 @@
 </div>
 
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
+>>>>>>> 91a8ec7b38e622e463486f7f19ef92ca712eedf9
