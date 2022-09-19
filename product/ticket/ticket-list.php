@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require __DIR__ . '/../../parts/connect_db.php';
 
 
 $t_sql = "SELECT COUNT(1) FROM tickets ";
@@ -49,9 +49,9 @@ exit;
     <?php 
 
     if(empty($_SESSION['admin'])){
-            include __DIR__. '/list-table-no-admin.php';
+            include __DIR__. '/product/ticket/list-table-no-admin.php';
         } else {
-            include __DIR__. '/list-table-admin.php';
+            include __DIR__. '/product/ticket/list-table-admin.php';
         }
     ?>
 
