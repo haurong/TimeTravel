@@ -31,10 +31,3 @@
             <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
             <div class="invalid-feedback">
                 Please provide a valid zip.
-            </div>
-        </div>
-        <button class="btn btn-primary mx-auto" type="submit">Submit form</button>
-    </form>
-</div>
-
-<?php include __DIR__ . '/../parts/html-foot.php'; ?>
