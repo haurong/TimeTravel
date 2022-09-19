@@ -90,10 +90,15 @@ $output = [
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="justify-content-center mt-3">
+    <div class="row justify-content-center">
+        <div class="mt-3">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
+                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                            最前頁
+                        </a>
+                    </li>
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
@@ -113,6 +118,11 @@ $output = [
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">
                             <i class="fa-solid fa-circle-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            最後一頁
                         </a>
                     </li>
                 </ul>
