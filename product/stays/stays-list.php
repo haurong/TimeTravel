@@ -22,7 +22,15 @@ if ($totalRows) {
         exit;
     }
     $sql = sprintf(
-        "SELECT * FROM hotel ORDER BY SID LIMIT %s , %s",
+        "SELECT * 
+        FROM hotel 
+        JOIN `area` 
+        ON `hotel`.`area_sid` = `area`.`area_sid` 
+        JOIN `city`
+        ON `area`.`city_sid` = `city`.`city_sid`
+        JOIN `hotel_categories`
+        ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
+        ORDER BY SID LIMIT %s , %s",
         ($page - 1) * $perPage,
         $perPage
     );
@@ -90,8 +98,9 @@ $output = [
                             <i class="fa-solid fa-trash-can"></i>
                         </th>
                         <th scope="col">#</th>
-                        <th scope="col">分類代號</th>
-                        <th scope="col">地區代號</th>
+                        <th scope="col">分類</th>
+                        <th scope="col">縣市名稱</th>
+                        <th scope="col">地區名稱</th>
                         <th scope="col">飯店名稱</th>
                         <th scope="col">飯店代碼</th>
                         <th scope="col">飯店電話</th>
@@ -119,8 +128,9 @@ $output = [
                                 </a>
                             </td>
                             <td><?= $r['sid'] ?></td>
-                            <td><?= $r['categories_sid'] ?></td>
-                            <td><?= $r['area_sid'] ?></td>
+                            <td><?= $r['hotel_categories'] ?></td>
+                            <td><?= $r['city_name'] ?></td>
+                            <td><?= $r['area_name'] ?></td>
                             <td><?= $r['hotel_name'] ?></td>
                             <td><?= $r['hotel_code'] ?></td>
                             <td><?= $r['phone'] ?></td>
