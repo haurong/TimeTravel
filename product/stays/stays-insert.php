@@ -14,11 +14,17 @@ $pageName = 'stays_insert';
                         <div class="mb-3">
                             <label for="hotel_categories" class="form-label">飯店名稱</label>
                             <br>
-                            <select name="hotel_categories" id="">
-                                <option value="1">旅館</option>
-                                <option value="2">飯店</option>
-                                <option value="3">名宿</option>
-                            </select>
+                            <select name="hotel_categories" id=""></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city_name" class="form-label">縣市名稱</label>
+                            <br>
+                            <select name="city_name" id=""></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="area_name" class="form-label">地區名稱</label>
+                            <br>
+                            <select name="area_name" id=""></select>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">飯店名稱</label>
@@ -41,13 +47,32 @@ $pageName = 'stays_insert';
                             <input type="file" class="form-control" id="birthday" name="birthday">
                         </div>
                         <div class="mb-3">
-                            <label for="birthday" class="form-label">飯店地址</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
+                            <label for="birthday" class="form-label">wifi</label>
+                            <input type="checkbox" class="form-control" id="birthday" name="birthday">
+                            <label for="birthday" class="form-label">早餐</label>
+                            <input type="checkbox" class="form-control" id="birthday" name="birthday">
+                            <label for="birthday" class="form-label">午餐</label>
+                            <input type="checkbox" class="form-control" id="birthday" name="birthday">
+                            <label for="birthday" class="form-label">晚餐</label>
+                            <input type="checkbox" class="form-control" id="birthday" name="birthday">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">address</label>
-
-                            <textarea class="form-control" name="address" id="address" cols="50" rows="3"></textarea>
+                            <label for="address" class="form-label">入住時間</label>
+                            <input type="time">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">退房時間</label>
+                            <input type="time">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">特殊設施</label>
+                            <br>
+                            <textarea name="" id="" cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">飯店描述</label>
+                            <br>
+                            <textarea name="" id="" cols="30" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
