@@ -27,10 +27,7 @@ $sql = "INSERT INTO `address_book`(
 
 $stmt = $pdo->prepare($sql);
 
-$birthday = null;
-if(strtotime($_POST['birthday'])!==false){
-    $birthday = $_POST['birthday'];
-}
+
 
 
 try {

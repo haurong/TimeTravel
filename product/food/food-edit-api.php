@@ -1,7 +1,7 @@
 <?php 
 //連結權限頁
-require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/parts/connect_db.php';
+require __DIR__ . '/../../parts/admin-required.php';
+require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
@@ -45,10 +45,7 @@ WHERE sid=?";
 
 $stmt = $pdo->prepare($sql);
 
-$birthday = null;
-if(strtotime($_POST['product_adress'])!==false){
-    $birthday = $_POST['birthday'];
-}
+
 
 
 try {

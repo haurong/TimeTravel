@@ -22,12 +22,19 @@ if ($totalRows) {
         header('Location: ?page=' . $totalPages);
         exit;
     }
-
     $sql = sprintf(
-        "SELECT * FROM food_product_all ORDER BY sid DESC LIMIT %s, %s",
+        "SELECT * FROM `food_product_all`
+         LEFT JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
+         LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`sid`
+         ORDER BY `food_product_all`.`sid`",
         ($page - 1) * $perPage,
         $perPage
     );
+    // $sql = sprintf(
+    //     "SELECT * FROM `food_product_all` JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` ORDER BY `food_product_all`.`sid`",
+    //     ($page - 1) * $perPage,
+    //     $perPage
+    // );
     $rows = $pdo->query($sql)->fetchAll();
 }
 
@@ -44,10 +51,64 @@ $output = [
 ?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <nav aria-label="Page navigation example">
+<div class="container-fluid">
+<div class="col">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </th>
+                    <th scope="col">sid</th>
+                    <th scope="col">產品編號</th>
+                    <th scope="col">產品名稱</th>
+                    <th scope="col">產品實際售價</th>
+                    <th scope="col">產品面額</th>
+                    <th scope="col">產品照片</th>
+                    <th scope="col">適用商家</th>
+                    <th scope="col">產品描述</th>
+                    <th scope="col">商家營業時間</th>
+                    <th scope="col">商家地址</th>
+                    <th scope="col">上架狀態</th>
+                    <th scope="col">分類</th>
+                    <th scope="col">縣市</th>
+                    <th scope="col">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($rows as $r) : ?>
+                    <tr>
+                        <td>
+                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+                            <td><?= $r['sid'] ?></td>
+                            <td><?= $r['product_number'] ?></td>
+                            <td><?= $r['product_name'] ?></td>
+                            <td><?= $r['p_selling_price'] ?></td>
+                            <td><?= $r['p_discounted_price'] ?></td>
+                            <td><img width=300 src="./../../imgs/<?= $r['product_photo'] ?>" alt=""></td>
+                            <td><?= $r['applicable_store'] ?></td>
+                            <td><?= $r['product_introdution'] ?></td>
+                            <td><?= $r['p_business_hours'] ?></td>
+                            <td><?= $r['product_address'] ?></td>
+                            <td><?= $r['Listing_status_sid'] ?></td>
+                            <td><?= $r['name'] ?></td>
+                            <td><?= $r['city_name'] ?></td>
+                        <td>
+                            <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="col m-auto">
+            <nav aria-label="Page navigation example  ">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
@@ -73,80 +134,11 @@ $output = [
                 </ul>
             </nav>
         </div>
-    </div>
-    <div class="row">
-    <div class="col">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </th>
-                    <th scope="col">sid</th>
-                    <th scope="col">產品編號</th>
-                    <th scope="col">產品名稱</th>
-                    <th scope="col">產品實際售價</th>
-                    <th scope="col">產品面額</th>
-                    <th scope="col">產品照片</th>
-                    <th scope="col">適用商家</th>
-                    <th scope="col">產品描述</th>
-                    <th scope="col">商家營業時間</th>
-                    <th scope="col">商家地址</th>
-                    <th scope="col">上架狀態</th>
-                    <th scope="col">分類</th>
-                    <th scope="col">城市</th>
-                    <th scope="col">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rows as $r) : ?>
-                    <tr>
-                        <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </td>
-                            <td><?= $r['sid'] ?></td>
-                            <td><?= $r['product_number'] ?></td>
-                            <td><?= $r['product_name'] ?></td>
-                            <td><?= $r['p_selling_price'] ?></td>
-                            <td><?= $r['p_discounted_price'] ?></td>
-                            <td><?= $r['product_photo'] ?></td>
-                            <td><?= $r['applicable_store'] ?></td>
-                            <td><?= $r['product_introdution'] ?></td>
-                            <td><?= $r['p_business_hours'] ?></td>
-                            <td><?= $r['product_address'] ?></td>
-                            <td><?= $r['Listing_status_sid'] ?></td>
-                            <td><?= $r['categories_sid'] ?></td>
-                            <td><?= $r['city_sid'] ?></td>
-                        <td>
-                            <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+   
+  
 </div>
 
-<!-- $sql = "UPDATE `food_product_all` SET 
-`product_number`=?,
-`product_name`=?,
-`p_selling_price`=?,
-`p_discounted_price`=?,
-`product_photo`=?,
-`applicable_store`=?,
-`product_introdution`=?,
-`p_business_hours`=?,
-`product_address`=?,
-`Listing_status_sid`=?,
-`categories_sid`=?,
-`city_sid`=?
-WHERE sid=?"; -->
+
    <?php 
     //如果沒有登入的話
     // if(empty($_SESSION['admin'])){

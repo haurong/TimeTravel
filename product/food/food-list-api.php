@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
 
-$perPage = 10; // 一頁有幾筆
+$perPage = 5; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
@@ -22,10 +22,18 @@ if ($totalRows) {
     }
 
     $sql = sprintf(
-        "SELECT * FROM food_product_all LEFT JOIN city ON food_product_all.city_sid = city.sid  ORDER BY sid DESC LIMIT %s, %s",
+        "SELECT * FROM `food_product_all`
+         LEFT JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
+         LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`sid`
+         ORDER BY `food_product_all`.`sid`",
         ($page - 1) * $perPage,
         $perPage
     );
+    // $sql = sprintf(
+    //     "SELECT * FROM `food_product_all` JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` ORDER BY `food_product_all`.`sid`",
+    //     ($page - 1) * $perPage,
+    //     $perPage
+    // );
     $rows = $pdo->query($sql)->fetchAll();
 }
 
