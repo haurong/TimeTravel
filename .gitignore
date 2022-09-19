@@ -1,1 +1,3 @@
-imgs
+.gitignore
+/imgs/hotel
+/parts/connect_athome_db.php
