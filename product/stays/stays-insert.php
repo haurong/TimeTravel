@@ -89,6 +89,25 @@ $pageName = 'stays_insert';
     let areaname = document.querySelector('#areaname')
 
 
+    county.forEach(function(value , index , array){
+        let {city_name} = value;
+        console.log(value);
+        cityname[index] = new Option(city_name)
+    })
+    
+    
+    
+    
+    // area.filter(function(value , index , array){
+
+    // })
+    
+    
+    area.forEach(function(value , index , array){
+        let {area_name} = value;
+        console.log(value);
+        areaname[index] = new Option(area_name)
+    })
 
 
 
