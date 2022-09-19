@@ -1,3 +1,4 @@
 .gitignore
+/node_modules
 /imgs/hotel
 /parts/connect_athome_db.php
