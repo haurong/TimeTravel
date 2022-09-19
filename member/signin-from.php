@@ -1,9 +1,24 @@
 <?php session_start(); ?>
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
-
+<script>
+        
+        function validateForm() {
+            let re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&]).{8,}$/g;
+            let x = document.forms["signinForm"]["password"].value;
+            let y = document.forms["signinForm"]["password_check"].value;
+            if(x.length<6){
+                alert("密碼長度不足");
+                return false;
+            }
+            if (x != y) {
+                alert("請確認密碼是否輸入正確");
+                return false;
+            }
+        }
+</script>
 <div class="container">
-    <form>
+    <form name="signinForm" method="post" action="register.php" onsubmit="return validateForm()">
         <h4 class="text-center">創建帳戶</h4>
         <div class="col-5 my-3 mx-auto">
             <label for="validationServer01">姓名</label>
@@ -34,12 +49,21 @@
         </div>
         <div class="col-5 my-3 mx-auto">
             <label for="validationServer05">再次輸入密碼</label>
-            <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
+            <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="password" required>
             <div class="invalid-feedback">
-                
+                請輸入相同的密碼
             </div>
         </div>
-        <button class="btn btn-primary mx-auto" type="submit">註冊</button>
+        <div class="col-5 my-3 mx-auto">
+            <label for="validationServer05">手機號碼</label>
+            <input type="text" class="form-control" id="validationServer06" placeholder="password" required>
+            <div class="invalid-feedback">
+                （可不填）
+            </div>
+        </div>
+        <div class="text-center py-3">
+            <button class="btn btn-primary " type="submit">註冊</button>
+        </div>
     </form>
 </div>
 
