@@ -1,7 +1,12 @@
+<?php include __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/navbar.php'; ?>
+
+
+
 <?php 
     //  在別的地方是 connect_athome_db.php
     //  原本是   connect_db.php
-    require __DIR__ . '/../../parts/connect_db.php';
+    require __DIR__ . '/../../parts/connect_athome_db.php';
 
 $perPage = 40;
 
@@ -202,3 +207,6 @@ $output = [
         </div>
     </div>
 </div>
+
+<?php include __DIR__ . '/../../parts/script.php';?>
+<?php include __DIR__ . '/../../parts/html-foot.php'; ?>
