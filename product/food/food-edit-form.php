@@ -27,7 +27,6 @@ if(empty($r)){
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
-
                 <div class="card-body">
                     <h5 class="card-title">修改資料</h5>
                     <form name="form1" onsubmit="checkForm(); return false;" novalidate>
@@ -109,7 +108,7 @@ if(empty($r)){
 
         for(let k of fd.keys()){
             console.log(`${k}: ${fd.get(k)}`);
-        }
+        };
         // TODO: 檢查欄位資料
 
         fetch('food-edit-api.php', {
@@ -123,7 +122,7 @@ if(empty($r)){
                 alert('修改成功')
                 // location.href = 'list.php';
             }
-        })
+        });
     }
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

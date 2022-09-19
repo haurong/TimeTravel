@@ -1,6 +1,5 @@
 <?php 
 //連結權限頁
-require __DIR__ . '/../../parts/admin-required.php';
 require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
@@ -38,14 +37,17 @@ $sql = "UPDATE `food_product_all` SET
 `product_introdution`=?,
 `p_business_hours`=?,
 `product_address`=?,
-`Listing_status_sid`=?,
+`listing_status_sid`=?,
 `categories_sid`=?,
 `city_sid`=?
 WHERE sid=?";
 
 $stmt = $pdo->prepare($sql);
 
-
+$product_address = null;
+if(strtotime($_POST['product_adress'])!==false){
+    $product_adress = $_POST['product_adress'];
+}
 
 
 try {
@@ -59,9 +61,10 @@ try {
         $_POST['product_introdution'],
         $_POST['p_business_hours'],
         $product_adress,
-        $_POST['Listing_status_sid'],
+        $_POST['listing_status_sid'],
         $_POST['categories_sid'],
         $_POST['city_sid'],
+        $_POST['sid']
     ]);
 } catch(PDOException $ex) {
     $output['error'] = $ex->getMessage();

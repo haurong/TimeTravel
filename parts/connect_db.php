@@ -1,9 +1,9 @@
 <?php
 
-$db_host = '192.168.35.119';
-$db_name = 'project';
-$db_user = 'project';
-$db_pass = '123';
+$db_host = 'localhost';
+$db_name = 'eliot';
+$db_user = 'root';
+$db_pass = '';
 
 // data source name
 $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8";

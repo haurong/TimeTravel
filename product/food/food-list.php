@@ -2,7 +2,7 @@
 require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-list';
 
-$perPage = 10; // 一頁有幾筆
+$perPage = 5; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
@@ -26,18 +26,13 @@ if ($totalRows) {
         "SELECT * FROM `food_product_all`
          LEFT JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
          LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`sid`
-         ORDER BY `food_product_all`.`sid`",
-        ($page - 1) * $perPage,
-        $perPage
+         LEFT JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`sid`
+         ORDER BY `food_product_all`.`product_number`",
+        ($page - 1) * $perPage, $perPage
     );
-    // $sql = sprintf(
-    //     "SELECT * FROM `food_product_all` JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` ORDER BY `food_product_all`.`sid`",
-    //     ($page - 1) * $perPage,
-    //     $perPage
-    // );
+
     $rows = $pdo->query($sql)->fetchAll();
 }
-
 $output = [
     'totalRows' => $totalRows,
     'totalPages' => $totalPages,
@@ -46,20 +41,22 @@ $output = [
     'perPage' => $perPage,
 ];
 
+
 // echo json_encode($output); exit;
 
 ?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
-<div class="container-fluid">
-<div class="col">
+<div class="container-fluid p-4">
+      
+        <div class="col">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">
                         <i class="fa-solid fa-trash-can"></i>
                     </th>
-                    <th scope="col">sid</th>
+                    <th scope="col">#</th> 
                     <th scope="col">產品編號</th>
                     <th scope="col">產品名稱</th>
                     <th scope="col">產品實際售價</th>
@@ -90,12 +87,12 @@ $output = [
                             <td><?= $r['product_name'] ?></td>
                             <td><?= $r['p_selling_price'] ?></td>
                             <td><?= $r['p_discounted_price'] ?></td>
-                            <td><img width=300 src="./../../imgs/<?= $r['product_photo'] ?>" alt=""></td>
+                            <td><img width=200 src="./../../imgs/<?= $r['product_photo'] ?>" alt=""></td>
                             <td><?= $r['applicable_store'] ?></td>
                             <td><?= $r['product_introdution'] ?></td>
                             <td><?= $r['p_business_hours'] ?></td>
                             <td><?= $r['product_address'] ?></td>
-                            <td><?= $r['Listing_status_sid'] ?></td>
+                            <td><?= $r['status'] ?></td>
                             <td><?= $r['name'] ?></td>
                             <td><?= $r['city_name'] ?></td>
                         <td>
@@ -107,6 +104,7 @@ $output = [
                 <?php endforeach; ?>
             </tbody>
         </table>
+
         <div class="col m-auto">
             <nav aria-label="Page navigation example  ">
                 <ul class="pagination">
@@ -134,8 +132,6 @@ $output = [
                 </ul>
             </nav>
         </div>
-   
-  
 </div>
 
 
