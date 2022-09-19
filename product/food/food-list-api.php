@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 10; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -22,7 +22,7 @@ if ($totalRows) {
     }
 
     $sql = sprintf(
-        "SELECT * FROM address_book ORDER BY sid DESC LIMIT %s, %s",
+        "SELECT * FROM food_product_all LEFT JOIN city ON food_product_all.city_sid = city.sid  ORDER BY sid DESC LIMIT %s, %s",
         ($page - 1) * $perPage,
         $perPage
     );

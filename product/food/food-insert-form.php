@@ -1,11 +1,11 @@
 <?php 
 //連結權限頁
 require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'insert';
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar.php'; ?>
+<?php require __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
@@ -46,7 +46,7 @@ $pageName = 'insert';
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include __DIR__ . '/../../parts/scripts.php'; ?>
 <script>
     function checkForm(){
         // document.form1.email.value
@@ -58,7 +58,7 @@ $pageName = 'insert';
         }
         // TODO: 檢查欄位資料
 
-        fetch('insert-api.php', {
+        fetch('food-insert-api.php', {
             method: 'POST',
             body: fd
         }).then(r=>r.json()).then(obj=>{
@@ -67,11 +67,11 @@ $pageName = 'insert';
                 alert(obj.error);
             } else {
                 alert('新增成功')
-                location.href = 'list.php';
+                location.href = 'food-list.php';
             }
         })
 
 
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include __DIR__ . '/../../parts/html-foot.php'; ?>

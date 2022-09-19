@@ -10,5 +10,5 @@
         <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
     </div>
 </div>
-
+<?php include __DIR__ . '/../../parts/script.php';?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
