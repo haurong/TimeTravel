@@ -16,7 +16,7 @@
   </div>
   <div class="my-3">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="email" required>
+    <input type="email" class="form-control" id="email" placeholder="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
     <div class="invalid-feedback">
       請輸入正確的email格式
     </div>
@@ -42,8 +42,8 @@
 </form>
 
 <script>
-  let passwordStatus = document.getElementById('passwordStatus');
-  let passwordCheckStatus = document.getElementById('passwordCheckStatus');
+  let passwordStatus = document.querySelector('#passwordStatus');
+  let passwordCheckStatus = document.querySelector('#passwordCheckStatus');
   let password = document.forms["signinForm"]["password"].value;
 
   function passwordValidate() {
@@ -54,14 +54,14 @@
     if (re.test(password) === true) {
       passwordStatus.innerHTML = "輸入正確";
       console.log("輸入正確");
-      return false;
+      return true;
     } else if (re.test(password) !== true) {
       passwordStatus.innerHTML = "密碼格式錯誤";
       console.log("密碼格式錯誤");
       return false;
     }
   }
-  let password_check = document.getElementById('password_check');
+  let password_check = document.querySelector('#password_check');
   password_check.addEventListener('keydown',
     function passwordCheckValidate() {
       let password_check_value = document.forms["signinForm"]["password_check"].value;
@@ -80,8 +80,12 @@
   )
 
   function validateForm() {
-    return passwordValidate();
-    return passwordCheckValidate();
+    if (passwordValidate() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+
   }
   // (function() {
   //   'use strict';
