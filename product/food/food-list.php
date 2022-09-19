@@ -6,7 +6,7 @@ $perPage = 5; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
-$t_sql = "SELECT COUNT(1) FROM food_product_all ";
+$t_sql = "SELECT COUNT(1) FROM food_product_all";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 $totalPages = ceil($totalRows / $perPage);
@@ -48,7 +48,7 @@ $output = [
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container-fluid p-4">
-      
+       
         <div class="col">
         <table class="table table-striped table-bordered">
             <thead>
@@ -104,7 +104,7 @@ $output = [
                 <?php endforeach; ?>
             </tbody>
         </table>
-
+    </div>
         <div class="col m-auto">
             <nav aria-label="Page navigation example  ">
                 <ul class="pagination">
