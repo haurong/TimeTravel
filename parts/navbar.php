@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 ?>
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/TimeTravel/index.php">TimeTravel</a>

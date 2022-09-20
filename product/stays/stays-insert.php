@@ -1,6 +1,16 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'stays_insert';
+$perPage = 40;
+
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+$t_sql = "SELECT COUNT(1) FROM hotel";
+
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+$totalPages = ceil($totalRows / $perPage);
 ?>
+
 
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
@@ -42,10 +52,10 @@ $pageName = 'stays_insert';
                             <label for="address" class="form-label">飯店地址</label>
                             <input type="text" class="form-control" id="address" name="address">
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
-                            <input type="file" class="form-control" id="picture" name="picture">
-                        </div> -->
+                            <input type="text" class="form-control" id="picture" name="picture">
+                        </div>
                         <div class="mb-3">
                             <label for="wifi" class="form-label">WIFI</label>
                             <input type="text" class="form-control" id="wifi" name="wifi">
@@ -84,13 +94,13 @@ $pageName = 'stays_insert';
 </div>
 <script src="hotel.js"></script>
 <script>
-    let hotelcategories = document.querySelector('#hotelcategories')
+    let categoriessel = document.querySelector('#hotelcategories')
     let cityname = document.querySelector('#cityname')
     let areaname = document.querySelector('#area_sid ')
 
-    hotelcate.forEach(function(value,index,array){
+    hotelcategories.forEach(function(value,index,array){
         let {hotel_categories_sid} = value
-        hotelcategories[index] = new Option(hotel_categories_sid)
+        categoriessel[index] = new Option(hotel_categories_sid)
     })
 
 
@@ -157,7 +167,8 @@ $pageName = 'stays_insert';
                     alert(obj.error);
                 } else {
                     alert('新增成功')
-                    location.href = 'stays-insert.php';
+                    // location.href = "stay.php?page= + <?=$totalPages?>"
+                    location.href = 'stays.php?page=<?=$totalPages?>';
                 }
             })
     }

@@ -7,6 +7,7 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
 $t_sql = "SELECT COUNT(1) FROM food_product_all";
+
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 $totalPages = ceil($totalRows / $perPage);
@@ -48,7 +49,45 @@ $output = [
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container-fluid p-4">
-       
+    <div class="d-flex justify-content-center">
+         <nav aria-label="Page navigation example  justify-content-center">
+            <ul class="pagination">
+                <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                           最前頁
+                        </a>
+                    </li>
+
+                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-left"></i>
+                        </a>
+                    </li>
+
+                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                        if ($i >= 1 and $i <= $totalPages) :
+                    ?>
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                    <?php
+                        endif;
+                    endfor; ?>
+
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?=$totalPages?>">
+                            最後一頁
+                        </a>
+                    </li>
+                    <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
+                </ul>
+        </nav>
+     </div>            
         <div class="col">
         <table class="table table-striped table-bordered">
             <thead>
@@ -75,6 +114,9 @@ $output = [
                 </tr>
             </thead>
             <tbody>
+            <div class="col m-auto">
+          
+        </div>
                 <?php foreach ($rows as $r) : ?>
                     <tr>
                         <td>
@@ -87,7 +129,7 @@ $output = [
                             <td><?= $r['product_name'] ?></td>
                             <td><?= $r['p_selling_price'] ?></td>
                             <td><?= $r['p_discounted_price'] ?></td>
-                            <td><img width=200 src="./../../imgs/<?= $r['product_photo'] ?>" alt=""></td>
+                            <td><img width=200 src="./../../imgs/./food-img/<?=$r['product_photo'] ?>" alt=""></td>
                             <td><?= $r['applicable_store'] ?></td>
                             <td><?= $r['product_introdution'] ?></td>
                             <td><?= $r['p_business_hours'] ?></td>
@@ -105,33 +147,7 @@ $output = [
             </tbody>
         </table>
     </div>
-        <div class="col m-auto">
-            <nav aria-label="Page navigation example  ">
-                <ul class="pagination">
-                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-left"></i>
-                        </a>
-                    </li>
-
-                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                        if ($i >= 1 and $i <= $totalPages) :
-                    ?>
-                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                            </li>
-                    <?php
-                        endif;
-                    endfor; ?>
-
-                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        
 </div>
 
 
@@ -158,23 +174,6 @@ $output = [
             location.href = `food-delete.php?sid=${sid}`;
         }
     }
-    /*
-    table.addEventListener('click', function(event){
-        const t = event.target;
-        console.log(event.target);
-        if(t.classList.contains('fa-trash-can')){
-            t.closest('tr').remove();
-        }
-        if(t.classList.contains('fa-pen-to-square')){
-            // console.log(t.closest('tr').querySelectorAll('td'));
-            
-            console.log( 
-                t.closest('tr').querySelectorAll('td')[2].innerHTML
-            );
-            
-        }
-    });
-    */
 
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

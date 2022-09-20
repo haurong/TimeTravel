@@ -121,7 +121,7 @@ if (empty($r)) {
                 alert(obj.error);
             } else {
                 alert('修改成功');
-                //location.href = 'list.php'; 
+                location.href = 'ticket.php'; 
                 //改完回列表↑
             }
         });

@@ -2,7 +2,7 @@
 
 $pageName = 'list';
 
-$perPage = 5; //一頁幾筆
+$perPage = 30; //一頁幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
 
 //算資料總比數
@@ -40,10 +40,6 @@ $output = [
     'rows' => $rows,
     'perPage' => $perPage,
 ];
-
-
-
-
 ?>
 
 

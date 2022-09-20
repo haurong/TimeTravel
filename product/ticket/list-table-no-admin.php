@@ -40,7 +40,7 @@
                         <td><?= $r['product_notice'] ?></td>
                         <td><?= $r['start_day'] ?></td>
                         <td><?= $r['end_day'] ?></td>
-                        <td><?= $r['product_cover'] ?></td>
+                        <td><img style="width: 100px;" src="./../../imgs/<?= $r['product_imgs'] ?>" alt=""></td>
                         <td><?= $r['product_imgs'] ?></td>
                         <td><?= $r['categories_id'] ?></td>
                         <td><?= $r['cities_id'] ?></td>

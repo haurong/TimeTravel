@@ -26,6 +26,7 @@ $sql = "INSERT INTO `hotel`(
     `hotel_code`,
     `phone`, 
     `address`, 
+    `picture`,
     `wifi`, 
     `breakfast`, 
     `lunch`, 
@@ -35,7 +36,7 @@ $sql = "INSERT INTO `hotel`(
     `facility`, 
     `tag`, 
     `create_time`
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,NOW())";
+    ) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?,NOW())";
 
 
 
@@ -49,6 +50,7 @@ try {
         $_POST['hotel_code'],
         $_POST['phone'],
         $_POST['address'],
+        $_POST['picture'],
         $_POST['wifi'],
         $_POST['breakfast'],
         $_POST['lunch'],

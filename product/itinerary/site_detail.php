@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
 
-$sid = isset($_GET['sid'])? intval($_GET['sid']) : 0;
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $sql = sprintf(
     "SELECT * FROM `site` 
     JOIN `area` ON `site`.`area_sid`=`area`.`area_sid` 
@@ -16,9 +16,18 @@ $rows = $pdo->query($sql)->fetchAll();
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
+    <div class="btn-group-vertical col-2 my-3" role="group" aria-label="Vertical button group">
+        <a type="button" class="btn btn-outline-dark py-2" href="../product-list.php">全部</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../itinerary/itinerary.php">行程</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../food/food.php">美食</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../stays/stays.php">住宿</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
+    </div>
+    
+<div class="container">
     <div class="row">
         <div class="col">
-            <table class="table table-striped table-bordered">
+            <!-- <table class="table table-striped table-bordered">
             <?php foreach ($rows as $r) : ?>
                 <h2><?= $r['name'] ?></h2>
                 <?php endforeach; ?>
@@ -53,7 +62,7 @@ $rows = $pdo->query($sql)->fetchAll();
                             <td><?= $r['city_name'] ?><?= $r['area_name'] ?></td>
                             <td><?= $r['site_category_name'] ?></td>
                             <td><?= $r['description'] ?></td>
-                            <td><img src="<?= $r['img_small'] ?>" alt=""></td>
+                            <td><img style="width: 200px;" src="./../../imgs/site/<?= $r['img_small'] ?>" alt=""></td>
                             <td><a href="<?= $r['website'] ?>">網站</a></td>
                             <td><iframe src="https://www.google.com/maps/embed?pb=<?= $r['map'] ?>!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></td>
                             <td>
@@ -65,8 +74,52 @@ $rows = $pdo->query($sql)->fetchAll();
                     <?php endforeach; ?>
                 </tbody>
 
-            </table>
+            </table> -->
 
+            <div class="card" style="width: 40%; display: flex;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./../../imgs/site/<?= $r['img_l1'] ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./../../imgs/site/<?= $r['img_l2'] ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./../../imgs/site/<?= $r['img_l3'] ?>" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="card-body">
+
+                    <?php foreach ($rows as $r) : ?>
+                        <h2><?= $r['name'] ?></h2>
+                        <h3><?= $r['city_name'] ?><?= $r['area_name'] ?></h3>
+                        <h3><?= $r['site_category_name'] ?></h3>
+                        <h3><?= $r['description'] ?></h3>
+                        <h3><a href="<?= $r['website'] ?>">網站</a></h3>
+                        <iframe src="https://www.google.com/maps/embed?pb=<?= $r['map'] ?>!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+                    <?php endforeach; ?>
+
+
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -98,6 +151,5 @@ $rows = $pdo->query($sql)->fetchAll();
         }
     });
     */
-    
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
