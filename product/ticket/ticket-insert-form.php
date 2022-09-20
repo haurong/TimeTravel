@@ -13,7 +13,7 @@ $pageName = 'insert';
 
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
-                    <form name="form1" onsubmit="checkForm(); return false;">
+                    <form name="form1"  method="post" onsubmit="checkForm(); return false;">
                                         
                         <div class="mb-3">
                             <label for="product_number" class="form-label">票券代號</label>
@@ -52,7 +52,7 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="product_cover" class="form-label">封面圖片</label>
-                            <input type="text" class="form-control" id="product_cover" name="product_cover">
+                            <input type="file" class="form-control" id="product_cover" name="product_cover">
                         </div>
 
                         <div class="mb-3">
