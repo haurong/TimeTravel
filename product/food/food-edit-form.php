@@ -1,7 +1,7 @@
 <?php 
 //連結權限頁
-
-require __DIR__ . '/../../parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_athome_db.php'; 
+//require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-edit';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
@@ -77,9 +77,9 @@ if(empty($r)){
                             <input type="text" class="form-control" id="product_address" name="product_address"  value="<?= $r['product_address'] ?>" >
                         </div>
                     <!--上架狀態-->
-                        <div class="mb-3">
+                    <div class="mb-3">
                             <label for="listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid"  value="<?= $r['listing_status_sid'] ?>" >
+                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid" value="<?= $r['listing_status_sid']?>">
                         </div>
                     <!--分類-->
                         <div class="mb-3">
@@ -103,7 +103,6 @@ if(empty($r)){
 <script>
     function checkForm(){
         // document.form1.email.value
-
         const fd = new FormData(document.form1);
 
         for(let k of fd.keys()){

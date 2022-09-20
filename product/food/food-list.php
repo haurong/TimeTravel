@@ -1,8 +1,9 @@
 <?php 
-require __DIR__ . '/../../parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_athome_db.php'; 
+//require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-list';
 
-$perPage = 5; // 一頁有幾筆
+$perPage = 10; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
@@ -28,7 +29,7 @@ if ($totalRows) {
         JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
         JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
         JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
-        ORDER BY `food_product_all`.`sid` LIMIT %s, %s",
+        ORDER BY `food_product_all`.`sid`  LIMIT %s, %s",
         ($page - 1) * $perPage, $perPage
     );
 
@@ -88,66 +89,63 @@ $output = [
                 </ul>
         </nav>
      </div>            
-        <div class="col">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </th>
-                    <th scope="col">#</th> 
-                    <th scope="col">產品編號</th>
-                    <th scope="col">產品名稱</th>
-                    <th scope="col">產品實際售價</th>
-                    <th scope="col">產品面額</th>
-                    <th scope="col">產品照片</th>
-                    <th scope="col">適用商家</th>
-                    <th scope="col">產品描述</th>
-                    <th scope="col">商家營業時間</th>
-                    <th scope="col">商家地址</th>
-                    <th scope="col">上架狀態</th>
-                    <th scope="col">分類</th>
-                    <th scope="col">縣市</th>
-                    <th scope="col">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            <div class="col m-auto">
-          
-        </div>
-                <?php foreach ($rows as $r) : ?>
+    <div class="col">
+            <table class="table table-striped table-bordered">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </td>
-                            <td><?= $r['sid'] ?></td>
-                            <td><?= $r['product_number'] ?></td>
-                            <td><?= $r['product_name'] ?></td>
-                            <td><?= $r['p_selling_price'] ?></td>
-                            <td><?= $r['p_discounted_price'] ?></td>
-                            <td><img width=200 src="./../../imgs/./food-img/<?=$r['product_photo'] ?>" alt=""></td>
-                            <td><?= $r['applicable_store'] ?></td>
-                            <td><?= $r['product_introdution'] ?></td>
-                            <td><?= $r['p_business_hours'] ?></td>
-                            <td><?= $r['product_address'] ?></td>
-                            <td><?= $r['status'] ?></td>
-                            <td><?= $r['name'] ?></td>
-                            <td><?= $r['city_name'] ?></td>
-                        <td>
-                            <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </td>
+                        <th scope="col">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </th>
+                        <th scope="col">#</th> 
+                        <th scope="col">產品編號</th>
+                        <th scope="col">產品名稱</th>
+                        <th scope="col">產品實際售價</th>
+                        <th scope="col">產品面額</th>
+                        <th scope="col">產品照片</th>
+                        <th scope="col">適用商家</th>
+                        <th scope="col">產品描述</th>
+                        <th scope="col">商家營業時間</th>
+                        <th scope="col">商家地址</th>
+                        <th scope="col">上架狀態</th>
+                        <th scope="col">分類</th>
+                        <th scope="col">縣市</th>
+                        <th scope="col">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-        
+                </thead>
+                    <tbody>
+                        <!--foreach去抓底下的資料欄位-->
+                        <?php foreach ($rows as $r) : ?>
+                            <tr>
+                                <td>
+                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                                    <td><?= $r['sid'] ?></td>
+                                    <td><?= $r['product_number']?></td>
+                                    <td><?= $r['product_name'] ?></td>
+                                    <td><?= $r['p_selling_price'] ?></td>
+                                    <td><?= $r['p_discounted_price'] ?></td>
+                                    <td><img width=200 src="./../../imgs/./food-img/<?=$r['product_photo'] ?>" alt=""></td>
+                                    <td><?= $r['applicable_store'] ?></td>
+                                    <td><?= $r['product_introdution'] ?></td>
+                                    <td><?= $r['p_business_hours'] ?></td>
+                                    <td><?= $r['product_address'] ?></td>
+                                    <td><?= $r['status'] ?></td>
+                                    <td><?= $r['name'] ?></td>
+                                    <td><?= $r['city_name'] ?></td>
+                                <td>
+                                    <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+             </table>
+    </div>       
 </div>
 
 
@@ -167,7 +165,6 @@ $output = [
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
 <script>
-    const table = document.querySelector('table');
 
     function delete_it(sid){
         if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){

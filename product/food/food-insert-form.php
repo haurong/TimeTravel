@@ -1,9 +1,10 @@
 <?php 
 //連結權限頁
-
-require __DIR__ . '/../../parts/connect_db.php';
-
+require __DIR__ . '/../../parts/connect_athome_db.php'; 
+//require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-insert';
+
+
 ?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
@@ -18,7 +19,7 @@ $pageName = 'food-insert';
                     <!--產品編號-->
                         <div class="mb-3">
                             <label for="product_number" class="form-label">產品編號</label>
-                            <input type="text" class="form-control" id="product_number" name="product_number" required >
+                            <input type="text" class="form-control" id="product_number" name="product_number" placeholder="ex:F000" required >
                         </div>
                     <!--產品名稱-->
                         <div class="mb-3">
@@ -53,7 +54,7 @@ $pageName = 'food-insert';
                     <!--商家營業時間-->
                         <div class="mb-3">
                             <label for="p_business_hours" class="form-label">商家營業時間</label>
-                            <input type="text" class="form-control" id="p_business_hours" name="p_business_hours" >
+                            <input type="text" class="form-control" id="p_business_hours" name="p_business_hours" placeholder="1100-2100">
                         </div>
                     <!--商家地址-->
                         <div class="mb-3">
@@ -63,7 +64,7 @@ $pageName = 'food-insert';
                     <!--上架狀態-->
                         <div class="mb-3">
                             <label for="listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid">
+                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid" placeholder="1">
                         </div>
                     <!--分類-->
                         <div class="mb-3">
@@ -73,8 +74,23 @@ $pageName = 'food-insert';
                    <!--縣市--> 
                         <div class="mb-3">
                             <label for="city_sid" class="form-label">縣市</label>
-                            <input type="text" class="form-control" id="city_sid" name="city_sid" >
-                        </div>      
+                            <input type="text" class="form-control" id="city_sid" name="city_sid"  >
+                        </div>     
+                        
+                        <!-- <div id="citysel">
+                            <select name="city" id="city" style="width:80px;height:30px;margin:20px 0;">
+                                <option value="$r['city_name']"></option>
+                            </select>
+                        </div> -->
+                           
+
+
+
+
+
+
+
+
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

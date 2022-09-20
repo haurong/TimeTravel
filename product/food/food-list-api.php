@@ -1,6 +1,8 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';
+<?php
+ require __DIR__ . '/../../parts/connect_athome_db.php'; 
+//require __DIR__ . '/../../parts/connect_db.php';
 
-$perPage = 5; // 一頁有幾筆
+$perPage = 10; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
