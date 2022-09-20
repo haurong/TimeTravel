@@ -3,10 +3,10 @@
 
 
 
-<?php 
-    //  在別的地方是 connect_athome_db.php
-    //  原本是   connect_db.php
-    require __DIR__ . '/../../parts/connect_db.php';
+<?php
+//  在別的地方是 connect_athome_db.php
+//  原本是   connect_db.php
+require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 40;
 
@@ -160,7 +160,7 @@ $output = [
                             <td><?= $r['facility'] ?></td>
                             <td><?= $r['tag'] ?></td>
                             <td>
-                                <a href="">
+                                <a href="stays-edit.php?sid=<?= $r['sid'] ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>
@@ -214,5 +214,5 @@ $output = [
     </div>
 </div>
 
-<?php include __DIR__ . '/../../parts/script.php';?>
+<?php include __DIR__ . '/../../parts/script.php'; ?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
