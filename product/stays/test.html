@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="form1" onclick="checkForm(); return false;">
+        <select name="categories_sid" id="categoriessel"></select>
+        <select name="city_sid" id="citysel">
+            <!-- <option value="1">台北市</option>
+            <option value="2">新北市</option>
+            <option value="3">基隆市</option> -->
+        </select>
+        <select name="area_name" id="areasel"></select>
+        <button type="submit" class="btn btn-primary" id="submitbtn">Submit</button>
+    </form>
+    <script src="hotel.js"></script>
+    <script>
+        let categoriessel = document.getElementById('categoriessel')
+        let citysel = document.getElementById('citysel')
+        let areasel = document.getElementById('areasel')
+        let submitbtn = document.getElementById('submitbtn')
+
+        hotelcategories.forEach(function(value,index,array){
+            let {hotel_categories,hotel_categories_sid} = value
+            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+        })
+
+
+
+
+
+
+        function checkForm() {
+            let fd = new FormData(document.form1);
+            for (let k of fd.keys()) {
+                console.log(`${k}:${fd.get(k)}`);
+            }
+            // fetch('stays-insertapi.php', {
+            //     method: 'POST',
+            //     body: fd
+            // })
+            // // .then(r=>r.json()).then(obj=>{
+            // //      console.log(obj);
+            // //     if(! obj.success){
+            // //         alert(obj.error);
+            // //     }
+            // //  })
+            // .then(function(f) {
+            //     return f.json()
+            // }).then(function(obj) {
+            // })
+        }
+    </script>
+</body>
+
+</html>

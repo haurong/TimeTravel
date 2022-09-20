@@ -149,9 +149,9 @@ $output = [
                             <td><?= $r['phone'] ?></td>
                             <td><?= $r['address'] ?></td>
                             <td>
-                                <a href="/../TimeTravel/imgs/hotel/A/<?= $r['picture'] ?>">
+                                <img style="width:200px"src="/../TimeTravel/imgs/hotel/A/<?= $r['picture'] ?>">
                                     <?= $r['picture'] ?>
-                                </a>
+                                </img>
                             </td>
                             <td><?= $r['wifi'] ?></td>
                             <td><?= $r['breakfast'] ?></td>
