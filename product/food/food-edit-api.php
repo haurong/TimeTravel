@@ -9,7 +9,7 @@ $output = [
     'success' => false,
     'error' => '',
     'code' => 0,
-    'postData' => $_POST, // 除錯用的
+    'postData' => $_POST// 除錯用的
 ];
 
 if(empty($_POST['product_name'])){
@@ -38,7 +38,6 @@ WHERE sid=?";
 
 $stmt = $pdo->prepare($sql);
 
-$product_address = null;
 
 
 
@@ -55,7 +54,8 @@ try {
         $_POST['product_address'],
         $_POST['listing_status_sid'],
         $_POST['categories_sid'],
-        $_POST['city_sid']
+        $_POST['city_sid'],
+        $_POST['sid']
     ]);
 } catch(PDOException $ex) {
     $output['error'] = $ex->getMessage();

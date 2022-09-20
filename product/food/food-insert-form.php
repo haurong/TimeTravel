@@ -63,7 +63,7 @@ $pageName = 'food-insert';
                     <!--上架狀態-->
                         <div class="mb-3">
                             <label for="listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid" >
+                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid">
                         </div>
                     <!--分類-->
                         <div class="mb-3">

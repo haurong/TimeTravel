@@ -52,7 +52,7 @@ try {
         $_POST['product_address'],
         $_POST['listing_status_sid'],
         $_POST['categories_sid'],
-        $_POST['city_sid'],
+        $_POST['city_sid']
     ]);
 } catch(PDOException $ex) {
     $output['error'] = $ex->getMessage();
