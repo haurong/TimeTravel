@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';
+<?php require __DIR__ . '/../../parts/connect_athome_db.php';
 
 $pageName = 'edit';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
@@ -26,7 +26,8 @@ if (empty($r)) {
                         <div class="mb-3">
                             <label for="categories_sid" class="form-label">飯店種類</label>
                             <br>
-                            <input type="text" name="categories_sid" id="hotelcategories" value="<?= $r['categories_sid'] ?>"></input>
+                            <select type="text" name="categories_sid" id="categoriessel">
+                            </select>
                         </div>
                         <!-- <div class="mb-3">
                             <label for="city_name" class="form-label">縣市名稱</label>
@@ -36,7 +37,7 @@ if (empty($r)) {
                         <div class="mb-3">
                             <label for="area_sid" class="form-label">地區名稱</label>
                             <br>
-                            <input type="text" name="area_sid" id="area_sid" value="<?= $r['area_sid'] ?>"></input>
+                            <select type="text" name="area_sid" id="areasel" value="<?= $r['area_sid'] ?>"></select>
                         </div>
                         <div class="mb-3">
                             <label for="hotel_name" class="form-label">飯店名稱</label>
@@ -86,7 +87,7 @@ if (empty($r)) {
                             <br>
                             <textarea name="tag" id="tag" cols="30" rows="3"><?= $r['tag'] ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submitbtn">更改</button>
                     </form>
                 </div>
             </div>
@@ -96,52 +97,31 @@ if (empty($r)) {
 </div>
 <script src="hotel.js"></script>
 <script>
-    let categoriessel = document.querySelector('#hotelcategories')
-    let cityname = document.querySelector('#cityname')
-    let areaname = document.querySelector('#area_sid ')
+    let categoriessel = document.getElementById('categoriessel')
+    let citysel = document.getElementById('citysel')
+    let areasel = document.getElementById('areasel')
+    let submitbtn = document.getElementById('submitbtn')
 
     hotelcategories.forEach(function(value,index,array){
-        let {hotel_categories_sid} = value
-        categoriessel[index] = new Option(hotel_categories_sid)
+            let {hotel_categories,hotel_categories_sid} = value
+            
+            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+
+            if((categoriessel[index].value) == <?= $r['categories_sid'] ?>){
+                categoriessel[index].setAttribute('selected','selected')
+            }
+            
+        })
+
+    area.forEach(function(value,index,array){
+        let { area_name , area_sid} = value
+        areasel[index] = new Option(area_name,area_sid)
+
+        if((areasel[index].value) == <?= $r['area_sid'] ?>){
+            areasel[index].setAttribute('selected','selected')
+        }
+
     })
-
-
-
-    // county.forEach(function(value , index , array){
-    //     let {city_sid} = value;
-    //     // let {city_sid} = index;
-    //     // console.log(index);
-    //     cityname[index] = new Option(city_sid)
-    // })
-
-
-    // let areasel = area.filter(function(value,index,array){
-    //     console.log(cityname.index);
-    // return area.area_name = cityname.value
-    // })
-    // console.log(areasel);
-
-
-
-
-
-
-    area.forEach(function(value, index, array) {
-        let {
-            area_sid
-        } = value;
-        // console.log(value);
-        areaname[index] = new Option(area_sid)
-    })
-
-
-
-
-
-
-
-
-
 
 
 

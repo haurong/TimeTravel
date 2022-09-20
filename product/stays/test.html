@@ -9,14 +9,20 @@
 </head>
 
 <body>
+        <select>
+            <option value="0">123</option>
+            <option value="1" selected="selected">456</option>
+            <option value="2">789</option>
+        </select>
     <form name="form1" onclick="checkForm(); return false;">
+        
         <select name="categories_sid" id="categoriessel"></select>
         <select name="city_sid" id="citysel">
             <!-- <option value="1">台北市</option>
             <option value="2">新北市</option>
             <option value="3">基隆市</option> -->
         </select>
-        <select name="area_name" id="areasel"></select>
+        <select name="area_sid" id="areasel"></select>
         <button type="submit" class="btn btn-primary" id="submitbtn">Submit</button>
     </form>
     <script src="hotel.js"></script>
@@ -29,6 +35,11 @@
         hotelcategories.forEach(function(value,index,array){
             let {hotel_categories,hotel_categories_sid} = value
             categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+        })
+
+        area.forEach(function(value,index,array){
+            let { area_name , area_sid} = value
+            areasel[index] = new Option(area_name,area_sid)
         })
 
 

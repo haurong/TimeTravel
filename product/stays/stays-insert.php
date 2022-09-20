@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';
+<?php require __DIR__ . '/../../parts/connect_athome_db.php';
 $pageName = 'stays_insert';
 $perPage = 40;
 
@@ -24,7 +24,7 @@ $totalPages = ceil($totalRows / $perPage);
                         <div class="mb-3">
                             <label for="categories_sid" class="form-label">飯店種類</label>
                             <br>
-                            <select name="categories_sid" id="hotelcategories"></select>
+                            <select name="categories_sid" id="categoriessel"></select>
                         </div>
                         <!-- <div class="mb-3">
                             <label for="city_name" class="form-label">縣市名稱</label>
@@ -34,7 +34,7 @@ $totalPages = ceil($totalRows / $perPage);
                         <div class="mb-3">
                             <label for="area_sid" class="form-label">地區名稱</label>
                             <br>
-                            <select name="area_sid" id="area_sid"></select>
+                            <select name="area_sid" id="areasel"></select>
                         </div>
                         <div class="mb-3">
                             <label for="hotel_name" class="form-label">飯店名稱</label>
@@ -84,7 +84,7 @@ $totalPages = ceil($totalRows / $perPage);
                             <br>
                             <textarea name="tag" id="tag" cols="30" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submitbtn">新增</button>
                     </form>
                 </div>
             </div>
@@ -94,52 +94,23 @@ $totalPages = ceil($totalRows / $perPage);
 </div>
 <script src="hotel.js"></script>
 <script>
-    let categoriessel = document.querySelector('#hotelcategories')
-    let cityname = document.querySelector('#cityname')
-    let areaname = document.querySelector('#area_sid ')
+    let categoriessel = document.getElementById('categoriessel')
+        let citysel = document.getElementById('citysel')
+        let areasel = document.getElementById('areasel')
+        let submitbtn = document.getElementById('submitbtn')
 
     hotelcategories.forEach(function(value,index,array){
-        let {hotel_categories_sid} = value
-        categoriessel[index] = new Option(hotel_categories_sid)
+            let {hotel_categories,hotel_categories_sid} = value
+            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+        })
+
+    area.forEach(function(value,index,array){
+        let { area_name , area_sid} = value
+        areasel[index] = new Option(area_name,area_sid)
     })
 
 
-    // county.forEach(function(value , index , array){
-    //     let {city_sid} = value;
-    //     // let {city_sid} = index;
-    //     // console.log(index);
-    //     cityname[index] = new Option(city_sid)
-    // })
-    
-    
-    // let areasel = area.filter(function(value,index,array){
-    //     console.log(cityname.index);
-        // return area.area_name = cityname.value
-    // })
-    // console.log(areasel);
-
-
-    
-
-    
-    
-    area.forEach(function(value , index , array){
-        let {area_sid} = value;
-        // console.log(value);
-        areaname[index] = new Option(area_sid)
-    })
-
-
-
-    
-    
-
-
-
-
-
-
-
+   
 
 
 
