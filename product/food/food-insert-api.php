@@ -20,26 +20,43 @@ if(empty($_POST['name'])){
 
 // TODO: 檢查欄位資料
 
-$sql = "INSERT INTO `address_book`(
-    `name`, `email`, `mobile`, `birthday`, `address`, `created_at`
-    ) VALUES (?, ?, ?, ?, ?, NOW())";
+$sql = "INSERT INTO `food_product_all`(
+    `product_number`,
+    `product_name`,
+    `p_selling_price`, 
+    `p_discounted_price`,
+    `product_photo`,
+    `applicable_store`, 
+    `product_introdution`, 
+    `p_business_hours`, 
+    `product_address`,
+    `listing_status_sid`,
+    `categories_sid`,
+    `city_sid`) 
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 $stmt = $pdo->prepare($sql);
+$product_address = null;
 
 
-
-
-try {
-    $stmt->execute([
-        $_POST['name'],
-        $_POST['email'],
-        $_POST['mobile'],
-        $birthday,
-        $_POST['address'],
-    ]);
-} catch(PDOException $ex) {
-    $output['error'] = $ex->getMessage();
-}
+// try {
+//     $stmt->execute([
+//         $_POST['product_number'],
+//         $_POST['product_name'],
+//         $_POST['p_selling_price'],
+//         $_POST['p_discounted_price'],
+//         $_POST['product_photo'],
+//         $_POST['applicable_store'],
+//         $_POST['product_introdution'],
+//         $_POST['p_business_hours'],
+//         $product_address,
+//         $_POST['listing_status_sid'],
+//         $_POST['categories_sid'],
+//         $_POST['city_sid'],
+//     ]);
+// } catch(PDOException $ex) {
+//     $output['error'] = $ex->getMessage();
+// }
 
 
 if($stmt->rowCount()){

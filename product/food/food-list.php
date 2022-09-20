@@ -24,10 +24,10 @@ if ($totalRows) {
     }
     $sql = sprintf(
         "SELECT * FROM `food_product_all`
-         LEFT JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
-         LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`sid`
-         LEFT JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`sid`
-         ORDER BY `food_product_all`.`product_number`",
+        JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
+        JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
+        JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
+        ORDER BY `food_product_all`.`sid` LIMIT %s, %s",
         ($page - 1) * $perPage, $perPage
     );
 

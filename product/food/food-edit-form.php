@@ -52,10 +52,10 @@ if(empty($r)){
                             <input type="text" class="form-control" id="p_discounted_price" name="p_discounted_price"  value="<?= $r['p_discounted_price'] ?>" >
                         </div>
                     <!--產品照片-->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="product_photo" class="form-label">產品照片</label>
-                            <input type="file" class="form-control" id="product_photo" name="product_photo"  value="<?= $r['product_photo'] ?>" >
-                        </div>
+                            <input type="file" class="form-control" id="product_photo" name="product_photo"  value="-<?= $r['product_photo'] ?>" >
+                        </div> -->
                     <!--適用店家-->
                         <div class="mb-3">
                             <label for="applicable_store" class="form-label">適用商家</label>
@@ -79,7 +79,7 @@ if(empty($r)){
                     <!--上架狀態-->
                         <div class="mb-3">
                             <label for="Listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="Listing_status_sid" name="Listing_status_sid"  value="<?= $r['Listing_status_sid'] ?>" >
+                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid"  value="<?= $r['listing_status_sid'] ?>" >
                         </div>
                     <!--分類-->
                         <div class="mb-3">

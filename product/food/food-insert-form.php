@@ -33,13 +33,13 @@ $pageName = 'food-insert';
                     <!--產品面額-->
                         <div class="mb-3">
                             <label for="p_discounted_price" class="form-label">產品面額</label>
-                            <input type="text" class="form-control" id="p_discounted_price" name="p_discounted_price"   >
+                            <input type="text" class="form-control" id="p_discounted_price" name="p_discounted_price" >
                         </div>
                     <!--產品照片-->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="product_photo" class="form-label">產品照片</label>
-                            <input type="file" class="form-control" id="product_photo" name="product_photo"  >
-                        </div>
+                            <input type="file" class="form-control" id="product_photo" name="product_photo">
+                        </div> -->
                     <!--適用店家-->
                         <div class="mb-3">
                             <label for="applicable_store" class="form-label">適用商家</label>
@@ -48,7 +48,7 @@ $pageName = 'food-insert';
                     <!--產品敘述-->
                         <div class="mb-3">
                             <label for="product_introdution" class="form-label">產品描述</label>
-                            <input type="text" class="form-control" id="product_introdution" name="product_introdution"  >
+                            <input type="text" class="form-control" id="product_introdution" name="product_introdution" >
                         </div>
                     <!--商家營業時間-->
                         <div class="mb-3">
@@ -62,18 +62,18 @@ $pageName = 'food-insert';
                         </div>
                     <!--上架狀態-->
                         <div class="mb-3">
-                            <label for="Listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="Listing_status_sid" name="Listing_status_sid" >
+                            <label for="listing_status_sid" class="form-label">上架狀態</label>
+                            <input type="text" class="form-control" id="status" name="status" >
                         </div>
                     <!--分類-->
                         <div class="mb-3">
                             <label for="categories_sid" class="form-label">分類</label>
-                            <input type="text" class="form-control" id="categories_sid" name="categories_sid" >
+                            <input type="text" class="form-control" id="name" name="name" >
                         </div>
                    <!--縣市--> 
                         <div class="mb-3">
                             <label for="city_sid" class="form-label">縣市</label>
-                            <input type="text" class="form-control" id="city_sid" name="city_name" >
+                            <input type="text" class="form-control" id="city_name" name="city_name" >
                         </div>      
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -83,7 +83,7 @@ $pageName = 'food-insert';
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/../../parts/script.php'; ?>
+
 <script>
     function checkForm(){
         // document.form1.email.value
@@ -107,8 +107,8 @@ $pageName = 'food-insert';
                 alert('新增成功')
                  location.href = 'food-list.php';
             }
-        });
+        })
     }
 </script>
-
+<?php include __DIR__ . '/../../parts/script.php'; ?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

@@ -11,7 +11,7 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if(empty($_POST['name'])){
+if(empty($_POST['product_name'])){
     $output['error'] = '參數不足';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE); 
@@ -32,7 +32,7 @@ $sql = "UPDATE `food_product_all` SET
 `product_name`=?,
 `p_selling_price`=?,
 `p_discounted_price`=?,
-`product_photo`=?,
+-- `product_photo`=?,
 `applicable_store`=?,
 `product_introdution`=?,
 `p_business_hours`=?,
@@ -45,9 +45,7 @@ WHERE sid=?";
 $stmt = $pdo->prepare($sql);
 
 $product_address = null;
-if(strtotime($_POST['product_adress'])!==false){
-    $product_adress = $_POST['product_adress'];
-}
+
 
 
 try {
@@ -56,7 +54,7 @@ try {
         $_POST['product_name'],
         $_POST['p_selling_price'],
         $_POST['p_discounted_price'],
-        $_POST['product_photo'],
+        // $_POST['product_photo'],
         $_POST['applicable_store'],
         $_POST['product_introdution'],
         $_POST['p_business_hours'],
