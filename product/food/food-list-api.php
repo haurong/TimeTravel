@@ -24,8 +24,8 @@ if ($totalRows) {
     $sql = sprintf(
         "SELECT * FROM `food_product_all`
          LEFT JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
-         LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`sid`
-         ORDER BY `food_product_all`.`sid`",
+         LEFT JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
+         ORDER BY `food_product_all`.`status_sid` LIMIT %s, %s",
         ($page - 1) * $perPage,
         $perPage
     );

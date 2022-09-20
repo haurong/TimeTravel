@@ -89,13 +89,13 @@ $output = [
 
 
     <?php include __DIR__ . '/../../parts/script.php'; ?>
-    <!-- <script>
+    <script>
     const table = document.querySelector('table');
     function delete_it(sid){
         if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
-            location.href = `delete.php?sid=${sid}`;
+            location.href = `ticket-delete.php?sid=${sid}`;
         }
     }
-</script> -->
+</script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

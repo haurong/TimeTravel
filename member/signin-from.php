@@ -2,11 +2,11 @@
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
 
-<form class="needs-validation col-6 mx-auto" name="signinForm" method="post" action="register.php" onsubmit="return validateForm()" validate>
+<form class="needs-validation col-6 mx-auto" name="signinForm" method="post" action="register.php" onsubmit="" validate>
   <h4 class="text-center">創建帳戶</h4>
   <div class="my-3">
     <label for="name">姓名</label>
-    <input type="text" class="form-control" id="name" placeholder="name" required>
+    <input type="text" class="form-control" id="name" placeholder="name" name="username" required>
     <div class="invalid-feedback">
       請輸入正確姓名
     </div>
@@ -42,21 +42,21 @@
 </form>
 
 <script>
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      var forms = document.getElementsByClassName('needs-validation');
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
+  // (function() {
+  //   'use strict';
+  //   window.addEventListener('load', function() {
+  //     var forms = document.getElementsByClassName('needs-validation');
+  //     var validation = Array.prototype.filter.call(forms, function(form) {
+  //       form.addEventListener('submit', function(event) {
+  //         if (form.checkValidity() === false) {
+  //           event.preventDefault();
+  //           event.stopPropagation();
+  //         }
+  //         form.classList.add('was-validated');
+  //       }, false);
+  //     });
+  //   }, false);
+  // })();
 </script>
 
 <?php include __DIR__ . '/../parts/script.php'; ?>
