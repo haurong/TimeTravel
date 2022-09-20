@@ -15,16 +15,16 @@
 
                     <form name="form1" onsubmit="checkForm(); return false;">
                         <div class="mb-3">
-                            <label for="account" class="form-label">帳號</label>
-                            <input type="text" class="form-control" id="account" 
-                            name="account">
+                            <label for="email" class="form-label">帳號</label>
+                            <input type="text" class="form-control" id="email" 
+                            name="email">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">密碼</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">註冊</button>
                     </form>
 
                 </div>

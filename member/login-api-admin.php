@@ -15,7 +15,7 @@ if(empty($_POST['email']) or empty($_POST['password'])){
 }
 
 // 用帳號找資料
-$sql = "SELECT * FROM email WHERE email=?";
+$sql = "SELECT * FROM member_information WHERE email=?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$_POST['email']]);
 $row = $stmt->fetch();
@@ -32,7 +32,7 @@ if( password_verify($_POST['password'], $row['password_hash']) ) {
     $output['success'] = true;
     $_SESSION['admin'] = [
         'sid' => $row['sid'],
-        'account' => $row['account'],
+        'email' => $row['email'],
     ];
 } else {
     $output['error'] = '帳號或密碼錯誤'; // 帳號錯誤
