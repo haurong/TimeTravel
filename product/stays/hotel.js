@@ -54,3 +54,9 @@ let area = [
     { "area_sid": "47", "city_sid": "3", "area_name": "暖暖區" },
     { "area_sid": "48", "city_sid": "3", "area_name": "七堵區" }
 ]
+
+let hotelcate = [
+    { "hotel_categories_sid": "1", "hotel_categories": "旅館" },
+    { "hotel_categories_sid": "2", "hotel_categories": "飯店" },
+    { "hotel_categories_sid": "3", "hotel_categories": "名宿" }
+]
