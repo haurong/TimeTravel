@@ -56,7 +56,7 @@ try {
         $_POST['check_in'],
         $_POST['check_out'],
         $_POST['facility'],
-        $_POST['tag'],
+        $_POST['tag']
     ]);
 } catch (PDOException $ex) {
     $output['error'] = $ex->getMessage();
