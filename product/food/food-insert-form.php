@@ -36,10 +36,10 @@ $pageName = 'food-insert';
                             <input type="text" class="form-control" id="p_discounted_price" name="p_discounted_price" >
                         </div>
                     <!--產品照片-->
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="product_photo" class="form-label">產品照片</label>
-                            <input type="file" class="form-control" id="product_photo" name="product_photo">
-                        </div> -->
+                            <input type="text" class="form-control" id="product_photo" name="product_photo">
+                        </div>
                     <!--適用店家-->
                         <div class="mb-3">
                             <label for="applicable_store" class="form-label">適用商家</label>
@@ -63,17 +63,17 @@ $pageName = 'food-insert';
                     <!--上架狀態-->
                         <div class="mb-3">
                             <label for="listing_status_sid" class="form-label">上架狀態</label>
-                            <input type="text" class="form-control" id="status" name="status" >
+                            <input type="text" class="form-control" id="listing_status_sid" name="listing_status_sid" >
                         </div>
                     <!--分類-->
                         <div class="mb-3">
                             <label for="categories_sid" class="form-label">分類</label>
-                            <input type="text" class="form-control" id="name" name="name" >
+                            <input type="text" class="form-control" id="categories_sid" name="categories_sid" >
                         </div>
                    <!--縣市--> 
                         <div class="mb-3">
                             <label for="city_sid" class="form-label">縣市</label>
-                            <input type="text" class="form-control" id="city_name" name="city_name" >
+                            <input type="text" class="form-control" id="city_sid" name="city_sid" >
                         </div>      
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

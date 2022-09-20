@@ -25,7 +25,7 @@ $sql = "INSERT INTO `food_product_all`(
     `product_name`,
     `p_selling_price`, 
     `p_discounted_price`,
-    -- `product_photo`,
+    `product_photo`,
     `applicable_store`, 
     `product_introdution`, 
     `p_business_hours`, 
@@ -33,7 +33,7 @@ $sql = "INSERT INTO `food_product_all`(
     `listing_status_sid`,
     `categories_sid`,
     `city_sid`) 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 $stmt = $pdo->prepare($sql);
 $product_address = null;
@@ -45,11 +45,11 @@ try {
         $_POST['product_name'],
         $_POST['p_selling_price'],
         $_POST['p_discounted_price'],
-        $_POST['product_photo'],
+        $_POST['product_photo'] ?? '',
         $_POST['applicable_store'],
         $_POST['product_introdution'],
         $_POST['p_business_hours'],
-        $product_address,
+        $_POST['product_address'],
         $_POST['listing_status_sid'],
         $_POST['categories_sid'],
         $_POST['city_sid'],

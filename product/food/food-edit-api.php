@@ -4,6 +4,7 @@ require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
+
 $output = [
     'success' => false,
     'error' => '',
@@ -20,13 +21,6 @@ if(empty($_POST['product_name'])){
 
 // TODO: 檢查欄位資料
 
-// $sql = "UPDATE `address_book` SET 
-// `name`=?,
-// `email`=?,
-// `mobile`=?,
-// `birthday`=?,
-// `address`=?
-// WHERE sid=?";
 $sql = "UPDATE `food_product_all` SET 
 `product_number`=?,
 `product_name`=?,
@@ -54,15 +48,14 @@ try {
         $_POST['product_name'],
         $_POST['p_selling_price'],
         $_POST['p_discounted_price'],
-        $_POST['product_photo'],
+        $_POST['product_photo'] ,
         $_POST['applicable_store'],
         $_POST['product_introdution'],
         $_POST['p_business_hours'],
-        $product_adress,
+        $_POST['product_address'],
         $_POST['listing_status_sid'],
         $_POST['categories_sid'],
-        $_POST['city_sid'],
-        $_POST['sid']
+        $_POST['city_sid']
     ]);
 } catch(PDOException $ex) {
     $output['error'] = $ex->getMessage();
