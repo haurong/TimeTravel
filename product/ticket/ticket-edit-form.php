@@ -112,7 +112,7 @@ if (empty($r)) {
             console.log(`${k}: ${fd.get(k)}`);
         }
 
-        fetch('edit-api.php', {
+        fetch('ticket-edit-api.php', {
             method: 'POST',
             body: fd
         }).then(r => r.json()).then(obj => {

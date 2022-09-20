@@ -47,7 +47,7 @@
                         <td><?= $r['on_sale'] ?></td>
 
                         <td>
-                            <a href="edit-form.php?sid=<?= $r['sid'] ?>">
+                            <a href="ticket-edit-form.php?sid=<?= $r['sid'] ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
