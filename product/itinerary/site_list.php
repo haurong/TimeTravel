@@ -1,9 +1,19 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';?>
-<?php require __DIR__ . '/site_list_api.php';?>
+<?php require __DIR__ . '/../../parts/connect_db.php'; ?>
+<?php require __DIR__ . '/site_list_api.php'; ?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
     <div class="row">
+        <!-- 分類選單 -->
+        <div class="col">
+            <div class="btn-group">
+                <a href="?" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>">所有分類</a>
+                <?php foreach($cates as $c): ?>
+                <a href="?cate=<?= $c['site_category_sid']?>" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>"><?= $c['site_category_name'] ?></a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <!-- 分類選單 -->
         <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
@@ -15,6 +25,7 @@
 
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
+                            // $pageBtnQS['page']=$i;
                     ?>
                             <li class="page-item <?= $i == $page ? 'active' : '' ?>">
                                 <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
@@ -56,9 +67,9 @@
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $r) : ?>
-                        <tr>
+                        <tr data-sid="<? $r['sid']?>">
                             <td>
-                                <a href="javascript: delete_it(<?= $r['sid'] ?>)" >
+                                <a href="javascript: delete_it(<?= $r['sid'] ?>)">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </td>
@@ -67,7 +78,7 @@
                             <td><?= $r['city_name'] ?><?= $r['area_name'] ?></td>
                             <td><?= $r['site_category_name'] ?></td>
                             <td><?= $r['description'] ?></td>
-                            <td ><img style="width: 200px;" src="./../../imgs/site/<?= $r['img_small']?>" alt=""></td>
+                            <td><img style="width: 200px;" src="./../../imgs/site/<?= $r['img_small'] ?>" alt=""></td>
                             <td><a href="<?= $r['website'] ?>">網站</a></td>
                             <td>
                                 <a href="site_detail.php?sid=<?= $r['sid'] ?>">detail</a>
@@ -87,8 +98,8 @@
 <script>
     const table = document.querySelector('table');
 
-    function delete_it(sid){
-        if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
+    function delete_it(sid) {
+        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
             location.href = `delete.php?sid=${sid}`;
         }
     }
@@ -109,6 +120,5 @@
         }
     });
     */
-    
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
