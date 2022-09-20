@@ -52,10 +52,10 @@ $totalPages = ceil($totalRows / $perPage);
                             <label for="address" class="form-label">飯店地址</label>
                             <input type="text" class="form-control" id="address" name="address">
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
-                            <input type="file" class="form-control" id="picture" name="picture">
-                        </div> -->
+                            <input type="text" class="form-control" id="picture" name="picture">
+                        </div>
                         <div class="mb-3">
                             <label for="wifi" class="form-label">WIFI</label>
                             <input type="text" class="form-control" id="wifi" name="wifi">
@@ -94,13 +94,13 @@ $totalPages = ceil($totalRows / $perPage);
 </div>
 <script src="hotel.js"></script>
 <script>
-    let hotelcategories = document.querySelector('#hotelcategories')
+    let categoriessel = document.querySelector('#hotelcategories')
     let cityname = document.querySelector('#cityname')
     let areaname = document.querySelector('#area_sid ')
 
-    hotelcate.forEach(function(value,index,array){
+    hotelcategories.forEach(function(value,index,array){
         let {hotel_categories_sid} = value
-        hotelcategories[index] = new Option(hotel_categories_sid)
+        categoriessel[index] = new Option(hotel_categories_sid)
     })
 
 
