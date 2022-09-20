@@ -2,3 +2,4 @@
 /node_modules
 /imgs/hotel
 /parts/connect_athome_db.php
+/parts/connect_huang_db.php
