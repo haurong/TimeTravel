@@ -172,8 +172,8 @@ if (empty($r)) {
                 if (!obj.success) {
                     alert(obj.error);
                 } else {
-                    alert('新增成功')
-                    location.href = 'stays-insert.php';
+                    alert('更改成功')
+                    location.href = 'stays.php';
                 }
             })
     }

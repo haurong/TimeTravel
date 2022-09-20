@@ -1,10 +1,15 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
-$pageName = 'stays_delete';
+
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+
+$sql = "DELETE FROM hotel WHERE sid={$sid}";
+
+$pdo->query($sql);
+
+$come_from = 'stays.php';
+if (!empty($_SERVER['HTTP_REFERER'])) {
+    $come_from = $_SERVER['HTTP_REFERER'];
+}
+
+header("Location: {$come_from}");
 ?>
-
-
-<?php include __DIR__ . '/../../parts/html-head.php'; ?>
-<?php include __DIR__ . '/../../parts/navbar.php'; ?>
-刪除
-<?php include __DIR__ . '/../../parts/script.php';?>
-<?php include __DIR__ . '/../../parts/html-foot.php'; ?>
