@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
                             <a class="nav-link" href="/TimeTravel/member/login-form.php">登入</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/TimeTravel/member/signin-from.php">註冊</a>
+                            <a class="nav-link" href="/TimeTravel/member/signin-form.php">註冊</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
