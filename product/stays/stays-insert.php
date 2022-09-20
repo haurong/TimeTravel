@@ -58,11 +58,11 @@ $pageName = 'stays_insert';
                         </div>
                         <div class="mb-3">
                             <label for="check_in" class="form-label">入住時間</label>
-                            <input type="time" name="check_in" id="check_in">
+                            <input type="text" name="check_in" id="check_in">
                         </div>
                         <div class="mb-3">
                             <label for="check_out" class="form-label">退房時間</label>
-                            <input type="time" name="check_out" id="check_out">
+                            <input type="text" name="check_out" id="check_out">
                         </div>
                         <div class="mb-3">
                             <label for="facility" class="form-label">特殊設施</label>
