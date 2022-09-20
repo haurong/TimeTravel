@@ -1,4 +1,4 @@
-<?php 
+<?php
 // require __DIR__ . '/parts/admin-required.php';
 require __DIR__ . '/../../parts/connect_db.php';
 
@@ -11,18 +11,29 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if(empty($_POST['name'])){
+if (empty($_POST['product_name'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
-    echo json_encode($output, JSON_UNESCAPED_UNICODE); 
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 // TODO: 檢查欄位資料
 
 $sql = "INSERT INTO `tickets`(
-    `product_number`, `product_name`, `product_price`, `product_introduction`, `product_notice`, `start_day`, `end_day`, `product_cover`, `product_imgs`, `categories_id`, `cities_id`, `on_sale`, 
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ";
+    `product_number`, 
+    `product_name`, 
+    `product_price`, 
+    `product_introduction`, 
+    `product_notice`, 
+    `start_day`, 
+    `end_day`, 
+    `product_cover`, 
+    `product_imgs`, 
+    `categories_id`, 
+    `cities_id`, 
+    `on_sale`
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
 $stmt = $pdo->prepare($sql);
 
@@ -36,26 +47,25 @@ try {
         $_POST['product_notice'],
         $_POST['start_day'],
         $_POST['end_day'],
-        $_POST['roduct_cover'],
+        $_POST['product_cover'],
         $_POST['product_imgs'],
         $_POST['categories_id'],
         $_POST['cities_id'],
         $_POST['on_sale'],
     ]);
-} catch(PDOException $ex) {
+} catch (PDOException $ex) {
     $output['error'] = $ex->getMessage();
 }
 
 
-if($stmt->rowCount()){
+if ($stmt->rowCount()) {
     $output['success'] = true;
 } else {
-    if(empty($output['error']))
+    if (empty($output['error']))
         $output['error'] = '資料沒有新增';
-
 }
 
 
 
 
-echo json_encode($output, JSON_UNESCAPED_UNICODE); 
+echo json_encode($output, JSON_UNESCAPED_UNICODE);
