@@ -1,6 +1,16 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'stays_insert';
+$perPage = 40;
+
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+$t_sql = "SELECT COUNT(1) FROM hotel";
+
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+$totalPages = ceil($totalRows / $perPage);
 ?>
+
 
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
@@ -157,7 +167,8 @@ $pageName = 'stays_insert';
                     alert(obj.error);
                 } else {
                     alert('新增成功')
-                    location.href = 'stays-insert.php';
+                    // location.href = "stay.php?page= + <?=$totalPages?>"
+                    location.href = 'stays.php?page=<?=$totalPages?>';
                 }
             })
     }

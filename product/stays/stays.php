@@ -1,6 +1,7 @@
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
-
+<style>
+</style>
 
 
 <?php
@@ -58,10 +59,10 @@ $output = [
 ?>
 
 <div class="mx-5 mt-3">
-    <div class="row justify-content-center">
-        <div class="mt-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="mt-3 d-flex  justify-content-center flex-grow-1">
             <nav aria-label="Page navigation example" class="d-flex">
-                <ul class="pagination">
+                <ul class="pagination align-items-center">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
                             最前頁
@@ -96,6 +97,7 @@ $output = [
                 </ul>
             </nav>
         </div>
+        <button type="button" class="btn btn-light" onclick="location.href='stays-insert.php'">新增</button>
     </div>
 
 
@@ -173,10 +175,10 @@ $output = [
 
 
 
-    <div class="row justify-content-center">
-        <div class="mt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
+    <div class="row justify-content-center align-items-center">
+        <div class="mt-3 d-flex  justify-content-center flex-grow-1">
+            <nav aria-label="Page navigation example" class="d-flex">
+                <ul class="pagination align-items-center">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
                             最前頁
@@ -211,6 +213,7 @@ $output = [
                 </ul>
             </nav>
         </div>
+        <button type="button" class="btn btn-light" onclick="location.href='stays-insert.php'">新增</button>
     </div>
 </div>
 
