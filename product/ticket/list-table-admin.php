@@ -7,6 +7,7 @@
                         <i class="fa-solid fa-trash-can"></i>
                     </th>
                     <th scope="col">#</th>
+                    <th scope="col">票券代號</th>
                     <th scope="col">票券名稱</th>
                     <th scope="col">價錢</th>
                     <th scope="col">介紹</th>
@@ -32,6 +33,7 @@
                             </a>
                         </td>
                         <td><?= $r['sid'] ?></td>
+                        <td><?= $r['product_number'] ?></td>
                         <td><?= $r['product_name'] ?></td>
                         <td><?= $r['product_price'] ?></td>
                         <td><?= $r['product_introduction'] ?></td>
