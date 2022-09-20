@@ -52,10 +52,10 @@ if(empty($r)){
                             <input type="text" class="form-control" id="p_discounted_price" name="p_discounted_price"  value="<?= $r['p_discounted_price'] ?>" >
                         </div>
                     <!--產品照片-->
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="product_photo" class="form-label">產品照片</label>
-                            <input type="file" class="form-control" id="product_photo" name="product_photo"  value="-<?= $r['product_photo'] ?>" >
-                        </div> -->
+                            <input type="text" class="form-control" id="product_photo" name="product_photo"  value="-<?= $r['product_photo'] ?>" >
+                        </div>
                     <!--適用店家-->
                         <div class="mb-3">
                             <label for="applicable_store" class="form-label">適用商家</label>

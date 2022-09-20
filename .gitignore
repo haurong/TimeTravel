@@ -1,3 +1,5 @@
 .gitignore
-/imgs/hotel
+/node_modules
+/imgs
 /parts/connect_athome_db.php
+/parts/connect_huang_db.php

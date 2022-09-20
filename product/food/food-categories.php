@@ -30,49 +30,42 @@
         </li>
       
 </ul>
-<div class="container-fluid m-0 p-0">
-    <div class="row m-auto">
-        <div class="col d-flex">
-            <div class="card flex-wrap" style="width: 18rem; margin:auto">
+<div class="container-fluid m-0 p-0 d-flex">
+    <div class="row ">
+        <div class="col">
+            <div class="card" style="width: 18rem ">
             <img src="./../../imgs/./TPTEA.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title"></h5>
+                <h5 class="card-title">50嵐</h5>
                 <p class="card-text">百元折抵券</p>
-                <a href="" class="btn btn-primary">Go somewhere</a>
+                <a href="" class="btn btn-primary">加入購物車</a>
             </div>
             <div class="card" style="width: 18rem;">
             <img src="./../../imgs/./TPTEA.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">50嵐</h5>
                 <p class="card-text">百元折抵券</p>
-                <a href="" class="btn btn-primary">Go somewhere</a>
+                <a href="" class="btn btn-primary">加入購物車</a>
             </div>
             <div class="card" style="width: 18rem;">
             <img src="./../../imgs/./TPTEA.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">50嵐</h5>
                 <p class="card-text">百元折抵券</p>
-                <a href="" class="btn btn-primary">Go somewhere</a>
+                <a href="" class="btn btn-primary">加入購物車</a>
             </div>
             <div class="card" style="width: 18rem;">
             <img src="./../../imgs/./TPTEA.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">50嵐</h5>
                 <p class="card-text">百元折抵券</p>
-                <a href="" class="btn btn-primary">Go somewhere</a>
+                <a href="" class="btn btn-primary">加入購物車</a>
             </div>
         </div>
     </div>
 
 
 </div>
-
-
-
-
-
-
-
 
 
 <?php include __DIR__ . '/../../parts/script.php';?>
