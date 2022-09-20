@@ -1,4 +1,4 @@
-<?php 
+<?php
 require __DIR__ . '/../parts/connect_db.php';
 
 header('Content-Type: application/json');
@@ -10,49 +10,45 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if(empty($_POST['name'])){
+if (empty($_POST['memberName'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
-    echo json_encode($output, JSON_UNESCAPED_UNICODE); 
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 // TODO: 檢查欄位資料
-
+$telephone = null;
 $sql = "INSERT INTO `member_information`(
-    `name`, `email`, `mobile`, `birthday`, `address`, `created_at`
-    ) VALUES (?, ?, ?, ?, ?, NOW())";
+    `memberName`,
+    `email`,
+    `password`,
+    `telephone`
+    ) VALUES (?, ?, ?, ?)";
 
 $stmt = $pdo->prepare($sql);
-
-$birthday = null;
-if(strtotime($_POST['birthday'])!==false){
-    $birthday = $_POST['birthday'];
-}
 
 
 try {
     $stmt->execute([
-        $_POST['name'],
+        $_POST['memberName'],
         $_POST['email'],
-        $_POST['mobile'],
-        $birthday,
-        $_POST['address'],
+        $_POST['password'],
+        $telephone,
     ]);
-} catch(PDOException $ex) {
+} catch (PDOException $ex) {
     $output['error'] = $ex->getMessage();
 }
 
 
-if($stmt->rowCount()){
+if ($stmt->rowCount()) {
     $output['success'] = true;
 } else {
-    if(empty($output['error']))
+    if (empty($output['error']))
         $output['error'] = '資料沒有新增';
-
 }
 
 
 
 
-echo json_encode($output, JSON_UNESCAPED_UNICODE); 
+echo json_encode($output, JSON_UNESCAPED_UNICODE);
