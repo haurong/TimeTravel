@@ -6,7 +6,7 @@
 <?php 
     //  在別的地方是 connect_athome_db.php
     //  原本是   connect_db.php
-    require __DIR__ . '/../../parts/connect_athome_db.php';
+    require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 40;
 
@@ -60,7 +60,7 @@ $output = [
 <div class="mx-5 mt-3">
     <div class="row justify-content-center">
         <div class="mt-3">
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example" class="d-flex">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
@@ -97,6 +97,9 @@ $output = [
             </nav>
         </div>
     </div>
+
+
+
     <div class="row">
         <div class="col">
             <table class="table table-striped table-bordered">
@@ -167,6 +170,9 @@ $output = [
             </table>
         </div>
     </div>
+
+
+
     <div class="row justify-content-center">
         <div class="mt-3">
             <nav aria-label="Page navigation example">

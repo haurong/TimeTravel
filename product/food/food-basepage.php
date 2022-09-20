@@ -4,18 +4,21 @@ $pageName = 'basepage';
 ?>
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
+
+
 <div class="container">
-<select name="categories" id="categories" >
-    <option value=""><a type="button" href="././food-list.php">特色小吃</a></option>
-    <option value=""><a href="food-list.php">台式料理</a></option>
-    <option value="">日式料理</option>
-    <option value="">泰式料理</option>
-    <option value="">火鍋</option>
-    <option value="">飲品</option>
-    <option value="">甜點</option>
-    <option value="">咖啡</option>
-</select>
+    <div class="btn-group-vertical col-2 my-3" role="group" aria-label="Vertical button group">
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">特色小吃</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">台式料理</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">泰式料理</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">日式料理</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">火鍋</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">飲品</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">甜點</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="./../food/food-list.php">咖啡</a>
+    </div>
 </div>
+
 
 <?php include __DIR__ . '/../../parts/script.php';?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
