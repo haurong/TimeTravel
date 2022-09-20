@@ -3,13 +3,24 @@
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
+    <div class="btn-group-vertical col-2 my-3" role="group" aria-label="Vertical button group">
+        <a type="button" class="btn btn-outline-dark py-2" href="../product-list.php">全部</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../itinerary/itinerary.php">行程</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../food/food.php">美食</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../stays/stays.php">住宿</a>
+        <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
+    </div>
+</div>
+
+
+<div class="container">
     <div class="row">
         <!-- 分類選單 -->
         <div class="col">
             <div class="btn-group">
                 <a href="?" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>">所有分類</a>
                 <?php foreach($cates as $c): ?>
-                <a href="?cate=<?= $c['site_category_sid']?>" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>"><?= $c['site_category_name'] ?></a>
+                <a href="?cate=<?= $c['site_category_sid']?>" class="btn btn-primary <?= $cate==$c['site_category_sid'] ? 'active' : '' ?>"><?= $c['site_category_name'] ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -50,9 +61,9 @@
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <!-- <th scope="col">
                             <i class="fa-solid fa-trash-can"></i>
-                        </th>
+                        </th> -->
                         <th scope="col">#</th>
                         <th scope="col">景點名稱</th>
                         <th scope="col">地區</th>
@@ -68,11 +79,11 @@
                 <tbody>
                     <?php foreach ($rows as $r) : ?>
                         <tr data-sid="<? $r['sid']?>">
-                            <td>
+                            <!-- <td>
                                 <a href="javascript: delete_it(<?= $r['sid'] ?>)">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
-                            </td>
+                            </td> -->
                             <td><?= $r['sid'] ?></td>
                             <td><?= $r['name'] ?></td>
                             <td><?= $r['city_name'] ?><?= $r['area_name'] ?></td>
