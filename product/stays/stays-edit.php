@@ -103,15 +103,15 @@ if (empty($r)) {
     let submitbtn = document.getElementById('submitbtn')
 
     hotelcategories.forEach(function(value,index,array){
-            let {hotel_categories,hotel_categories_sid} = value
-            
-            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+        let {hotel_categories,hotel_categories_sid} = value
+        
+        categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
 
-            if((categoriessel[index].value) == <?= $r['categories_sid'] ?>){
-                categoriessel[index].setAttribute('selected','selected')
-            }
-            
-        })
+        if((categoriessel[index].value) == <?= $r['categories_sid'] ?>){
+            categoriessel[index].setAttribute('selected','selected')
+        }
+        
+    })
 
     area.forEach(function(value,index,array){
         let { area_name , area_sid} = value
