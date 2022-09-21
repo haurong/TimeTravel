@@ -25,10 +25,12 @@ if ($totalRows) {
     }
     $sql = sprintf(
         "SELECT * FROM `member_information`
-        JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
-        JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
-        JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
-        ORDER BY `food_product_all`.`sid`  LIMIT %s, %s",
+        JOIN `member_verification_status` ON `member_information`.`verification_sid` = `member_verification_status`.`sid` 
+        ORDER BY `member_information`.`verification_sid`  LIMIT %s, %s",
+        ($page - 1) * $perPage, $perPage
+    );
+    $sql = sprintf(
+        "SELECT * FROM `member_information`",
         ($page - 1) * $perPage, $perPage
     );
 
@@ -46,8 +48,8 @@ $output = [
 // echo json_encode($output); exit;
 
 ?>
-<?php require __DIR__ . '/../../parts/html-head.php'; ?>
-<?php include __DIR__ . '/../../parts/navbar.php'; ?>
+<?php require __DIR__ . '/../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../parts/navbar.php'; ?>
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-center">
          <nav aria-label="Page navigation example  justify-content-center">
@@ -84,7 +86,6 @@ $output = [
                             最後一頁
                         </a>
                     </li>
-                    <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
                 </ul>
         </nav>
      </div>            
@@ -92,24 +93,20 @@ $output = [
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </th>
                         <th scope="col">#</th> 
-                        <th scope="col">產品編號</th>
-                        <th scope="col">產品名稱</th>
-                        <th scope="col">產品實際售價</th>
-                        <th scope="col">產品面額</th>
-                        <th scope="col">產品照片</th>
-                        <th scope="col">適用商家</th>
-                        <th scope="col">產品描述</th>
-                        <th scope="col">商家營業時間</th>
-                        <th scope="col">商家地址</th>
-                        <th scope="col">上架狀態</th>
-                        <th scope="col">分類</th>
-                        <th scope="col">縣市</th>
+                        <th scope="col">會員編號</th>
+                        <th scope="col">會員姓名</th>
+                        <th scope="col">email</th>
+                        <th scope="col">密碼</th>
+                        <th scope="col">手機</th>
+                        <th scope="col">登入時間</th>
+                        <!-- <th scope="col">驗證狀態</th> -->
+                        <th scope="col">創建時間</th>
                         <th scope="col">
                             <i class="fa-solid fa-pen-to-square"></i>
+                        </th>
+                        <th scope="col">
+                            <i class="fa-solid fa-trash-can"></i>
                         </th>
                     </tr>
                 </thead>
@@ -117,29 +114,14 @@ $output = [
                         <!--foreach去抓底下的資料欄位-->
                         <?php foreach ($rows as $r) : ?>
                             <tr>
-                                <td>
-                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </td>
                                     <td><?= $r['sid'] ?></td>
-                                    <td><?= $r['product_number']?></td>
-                                    <td><?= $r['product_name'] ?></td>
-                                    <td><?= $r['p_selling_price'] ?></td>
-                                    <td><?= $r['p_discounted_price'] ?></td>
-                                    <td><img width=200 src="./../../imgs/./food-img/<?=$r['product_photo'] ?>" alt=""></td>
-                                    <td><?= $r['applicable_store'] ?></td>
-                                    <td><?= $r['product_introdution'] ?></td>
-                                    <td><?= $r['p_business_hours'] ?></td>
-                                    <td><?= $r['product_address'] ?></td>
-                                    <td><?= $r['status'] ?></td>
-                                    <td><?= $r['name'] ?></td>
-                                    <td><?= $r['city_name'] ?></td>
-                                <td>
-                                    <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </td>
+                                    <td><?= $r['userID']?></td>
+                                    <td><?= $r['username'] ?></td>
+                                    <td><?= $r['email'] ?></td>
+                                    <td><?= $r['password_hash'] ?></td>
+                                    <td><?= $r['telephone'] ?></td>
+                                    <td><?= $r['login_time'] ?></td>
+                                    <td><?= $r['creating_time'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -162,8 +144,8 @@ $output = [
 
 
 </div>
-<?php include __DIR__ . '/../../parts/script.php'; ?>
-<script>
+<?php include __DIR__ . '/../parts/script.php'; ?>
+<!-- <script>
 
     function delete_it(sid){
         if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
@@ -171,5 +153,5 @@ $output = [
         }
     }
 
-</script>
-<?php include __DIR__ . '/../../parts/html-foot.php'; ?>
+</script> -->
+<?php include __DIR__ . '/../parts/html-foot.php'; ?>
