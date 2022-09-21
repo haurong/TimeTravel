@@ -45,7 +45,7 @@ if ($totalRows) {
         JOIN `area` ON `site`.`area_sid`=`area`.`area_sid` 
         JOIN `city` ON `area`.`city_sid`=`city`.`city_sid`
         JOIN `site_categories` ON `site`.`site_category_sid`=`site_categories`.`site_category_sid`
-        -- ORDER BY `site`.`sid` DESC
+        ORDER BY `site`.`sid` ;
         $where
         LIMIT %s, %s",
         ($page - 1) * $perPage, $perPage
@@ -60,12 +60,12 @@ $c_sql = "SELECT * FROM `site_categories`" ;
 $cates = $pdo->query($c_sql)->fetchAll();
 //分類資料
 
-// $output = [
-//     'totalRows' => $totalRows,
-//     'totalPages' => $totalPages,
-//     'page' => $page,
-//     'rows' => $rows,
-//     'perPage' => $perPage,
-// ];
+$output = [
+    'totalRows' => $totalRows,
+    'totalPages' => $totalPages,
+    'page' => $page,
+    'rows' => $rows,
+    'perPage' => $perPage,
+];
 
 ?>

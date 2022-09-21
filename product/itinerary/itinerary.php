@@ -10,5 +10,11 @@
         <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
     </div>
 </div>
-<?php include __DIR__ . '/../../parts/script.php';?>
+<div class="container">
+    <button type="button" class="btn btn-primary" onclick="location.href='site-list.php'">前往景點列表</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='site-insert.php'">新增景點</button>
+    <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
+</div>
+
+<?php include __DIR__ . '/../../parts/script.php'; ?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
