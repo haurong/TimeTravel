@@ -138,7 +138,26 @@ if (empty($r)) {
         
     })
 
-    area.forEach(function(value,index,array){
+    county.forEach(function(value,index,array){
+        let {city_name,city_sid} = value
+        citysel[index] = new Option(city_name,city_sid)
+        let a = area.filter(function(value,index,array){
+            return value.area_sid == <?= $r['area_sid'] ?>
+        })
+        if((citysel[index].value) == (a[0].city_sid)){
+            citysel[index].setAttribute('selected','selected')
+        }
+    })
+
+
+    let firstarea = area.filter(function(value,index,array){
+        return value.city_sid == (citysel.selectedIndex) + 1   
+    })
+
+    // console.log(firstarea);
+
+
+    firstarea.forEach(function(value,index,array){
         let { area_name , area_sid} = value
         areasel[index] = new Option(area_name,area_sid)
         if((areasel[index].value) == <?= $r['area_sid'] ?>){
@@ -147,16 +166,7 @@ if (empty($r)) {
         }
     })
     
-    county.forEach(function(value,index,array){
-            let {city_name,city_sid} = value
-            citysel[index] = new Option(city_name,city_sid)
-            let a = area.filter(function(value,index,array){
-                return value.area_sid == <?= $r['area_sid'] ?>
-            })
-            if((citysel[index].value) == (a[0].city_sid)){
-                citysel[index].setAttribute('selected','selected')
-            }
-    })
+    
 
     citysel.addEventListener('change',function(){
             areasel.options.length = 0;

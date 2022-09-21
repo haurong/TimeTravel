@@ -124,7 +124,10 @@ $totalPages = ceil($totalRows / $perPage);
             citysel[index] = new Option(city_name,city_sid)
         })
 
-    area.forEach(function(value, index, array) {
+    let firstarea = area.filter(function(value,index,array){
+        return value.city_sid == 1
+    })
+    firstarea.forEach(function(value, index, array) {
         let {area_name,area_sid} = value
         areasel[index] = new Option(area_name, area_sid)
     })
