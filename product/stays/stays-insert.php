@@ -59,25 +59,25 @@ $totalPages = ceil($totalRows / $perPage);
                         <div class="mb-3">
                             <label class="form-label mr-5">WIFI</label>
                             <label class="form-label " for="wifitrue">有</label>
-                            <input type="radio" name="wifi" value="TRUE" id="wifitrue">
+                            <input type="radio" name="wifi" value="TRUE" id="wifitrue" >
                             <label class="form-label ml-5" for="wififalse">沒有</label>
                             <input type="radio" name="wifi" value="FALSE" id="wififalse">
                             <br>
                             <label class="form-label mr-5">早餐</label>
                             <label class="form-label " for="breakfasttrue">有</label>
-                            <input type="radio" name="breakfast" value="TRUE" id="breakfasttrue">
+                            <input type="radio" name="breakfast" value="TRUE" id="breakfasttrue" required>
                             <label class="form-label ml-5" for="breakfastfalse">沒有</label>
                             <input type="radio" name="breakfast" value="FALSE" id="breakfastfalse">
                             <br>
                             <label class="form-label mr-5">午餐</label>
                             <label class="form-label " for="lunchtrue">有</label>
-                            <input type="radio" name="lunch" value="TRUE" id="lunchtrue">
+                            <input type="radio" name="lunch" value="TRUE" id="lunchtrue" required>
                             <label class="form-label ml-5" for="lunchfalse">沒有</label>
                             <input type="radio" name="lunch" value="FALSE" id="lunchfalse">
                             <br>
                             <label class="form-label mr-5">晚餐</label>
                             <label class="form-label " for="dinnertrue">有</label>
-                            <input type="radio" name="dinner" value="TRUE" id="dinnertrue">
+                            <input type="radio" name="dinner" value="TRUE" id="dinnertrue" required>
                             <label class="form-label ml-5" for="dinnerfalse">沒有</label>
                             <input type="radio" name="dinner" value="FALSE" id="dinnerfalse">
                         </div>
