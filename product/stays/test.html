@@ -13,12 +13,13 @@
             <option value="0">123</option>
             <option value="1" selected="selected">456</option>
             <option value="2">789</option>
-            <input type="checkbox" >123
+            
         </select>
 
         
-    <form name="form1" onclick="checkForm(); return false;">
-        
+    <form name="form1" onsubmit="checkForm(); return false;checkBox()">
+        <input type="radio" name="wifi" value="TRUE" id="wifi">有
+        <input type="radio" name="wifi" value="FALSE" id="wifi">沒有
         <select name="categories_sid" id="categoriessel"></select>
         <select name="city_sid" id="citysel">
             <!-- <option value="1">台北市</option>
@@ -35,6 +36,8 @@
         let areasel = document.getElementById('areasel')
         let submitbtn = document.getElementById('submitbtn')
 
+        let wifi = document.getElementById('wifi')
+
         hotelcategories.forEach(function(value,index,array){
             let {hotel_categories,hotel_categories_sid} = value
             categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
@@ -45,16 +48,20 @@
             areasel[index] = new Option(area_name,area_sid)
         })
 
-
-
-
-
+        
+ 
+        
+        function checkBox(){
+            console.log(wifi.checked);
+        }
 
         function checkForm() {
             let fd = new FormData(document.form1);
+            
             for (let k of fd.keys()) {
                 console.log(`${k}:${fd.get(k)}`);
             }
+            
             // fetch('stays-insertapi.php', {
             //     method: 'POST',
             //     body: fd

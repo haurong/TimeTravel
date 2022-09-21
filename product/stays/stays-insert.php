@@ -57,14 +57,29 @@ $totalPages = ceil($totalRows / $perPage);
                             <input type="text" class="form-control" id="picture" name="picture">
                         </div>
                         <div class="mb-3">
-                            <label for="wifi" class="form-label">WIFI</label>
-                            <input type="text" class="form-control" id="wifi" name="wifi">
-                            <label for="breakfast" class="form-label">早餐</label>
-                            <input type="text" class="form-control" id="breakfast" name="breakfast">
-                            <label for="lunch" class="form-label">午餐</label>
-                            <input type="text" class="form-control" id="lunch" name="lunch">
-                            <label for="dinner" class="form-label">晚餐</label>
-                            <input type="text" class="form-control" id="dinner" name="dinner">
+                            <label class="form-label mr-5">WIFI</label>
+                            <label class="form-label " for="wifitrue">有</label>
+                            <input type="radio" name="wifi" value="TRUE" id="wifitrue">
+                            <label class="form-label ml-5" for="wififalse">沒有</label>
+                            <input type="radio" name="wifi" value="FALSE" id="wififalse">
+                            <br>
+                            <label class="form-label mr-5">早餐</label>
+                            <label class="form-label " for="breakfasttrue">有</label>
+                            <input type="radio" name="breakfast" value="TRUE" id="breakfasttrue">
+                            <label class="form-label ml-5" for="breakfastfalse">沒有</label>
+                            <input type="radio" name="breakfast" value="FALSE" id="breakfastfalse">
+                            <br>
+                            <label class="form-label mr-5">午餐</label>
+                            <label class="form-label " for="lunchtrue">有</label>
+                            <input type="radio" name="lunch" value="TRUE" id="lunchtrue">
+                            <label class="form-label ml-5" for="lunchfalse">沒有</label>
+                            <input type="radio" name="lunch" value="FALSE" id="lunchfalse">
+                            <br>
+                            <label class="form-label mr-5">晚餐</label>
+                            <label class="form-label " for="dinnertrue">有</label>
+                            <input type="radio" name="dinner" value="TRUE" id="dinnertrue">
+                            <label class="form-label ml-5" for="dinnerfalse">沒有</label>
+                            <input type="radio" name="dinner" value="FALSE" id="dinnerfalse">
                         </div>
                         <div class="mb-3">
                             <label for="check_in" class="form-label">入住時間</label>
@@ -95,22 +110,28 @@ $totalPages = ceil($totalRows / $perPage);
 <script src="hotel.js"></script>
 <script>
     let categoriessel = document.getElementById('categoriessel')
-        let citysel = document.getElementById('citysel')
-        let areasel = document.getElementById('areasel')
-        let submitbtn = document.getElementById('submitbtn')
+    let citysel = document.getElementById('citysel')
+    let areasel = document.getElementById('areasel')
+    let submitbtn = document.getElementById('submitbtn')
 
-    hotelcategories.forEach(function(value,index,array){
-            let {hotel_categories,hotel_categories_sid} = value
-            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
-        })
+    hotelcategories.forEach(function(value, index, array) {
+        let {
+            hotel_categories,
+            hotel_categories_sid
+        } = value
+        categoriessel[index] = new Option(hotel_categories, hotel_categories_sid)
+    })
 
-    area.forEach(function(value,index,array){
-        let { area_name , area_sid} = value
-        areasel[index] = new Option(area_name,area_sid)
+    area.forEach(function(value, index, array) {
+        let {
+            area_name,
+            area_sid
+        } = value
+        areasel[index] = new Option(area_name, area_sid)
     })
 
 
-   
+
 
 
 
@@ -138,8 +159,8 @@ $totalPages = ceil($totalRows / $perPage);
                     alert(obj.error);
                 } else {
                     alert('新增成功')
-                    // location.href = "stay.php?page= + <?=$totalPages?>"
-                    location.href = 'stays.php?page=<?=$totalPages?>';
+                    // location.href = "stay.php?page= + <?= $totalPages ?>"
+                    location.href = 'stays.php?page=<?= $totalPages ?>';
                 }
             })
     }
