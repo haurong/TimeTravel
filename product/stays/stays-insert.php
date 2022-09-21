@@ -26,11 +26,11 @@ $totalPages = ceil($totalRows / $perPage);
                             <br>
                             <select name="categories_sid" id="categoriessel"></select>
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="city_name" class="form-label">縣市名稱</label>
                             <br>
-                            <select name="city_name" id="cityname"></select>
-                        </div> -->
+                            <select id="citysel"></select>
+                        </div>
                         <div class="mb-3">
                             <label for="area_sid" class="form-label">地區名稱</label>
                             <br>
@@ -83,11 +83,11 @@ $totalPages = ceil($totalRows / $perPage);
                         </div>
                         <div class="mb-3">
                             <label for="check_in" class="form-label">入住時間</label>
-                            <input type="text" name="check_in" id="check_in">
+                            <input type="time" name="check_in" id="check_in">
                         </div>
                         <div class="mb-3">
                             <label for="check_out" class="form-label">退房時間</label>
-                            <input type="text" name="check_out" id="check_out">
+                            <input type="time" name="check_out" id="check_out">
                         </div>
                         <div class="mb-3">
                             <label for="facility" class="form-label">特殊設施</label>
@@ -115,20 +115,32 @@ $totalPages = ceil($totalRows / $perPage);
     let submitbtn = document.getElementById('submitbtn')
 
     hotelcategories.forEach(function(value, index, array) {
-        let {
-            hotel_categories,
-            hotel_categories_sid
-        } = value
+        let {hotel_categories,hotel_categories_sid} = value
         categoriessel[index] = new Option(hotel_categories, hotel_categories_sid)
     })
 
+    county.forEach(function(value,index,array){
+            let {city_name,city_sid} = value
+            citysel[index] = new Option(city_name,city_sid)
+        })
+
     area.forEach(function(value, index, array) {
-        let {
-            area_name,
-            area_sid
-        } = value
+        let {area_name,area_sid} = value
         areasel[index] = new Option(area_name, area_sid)
     })
+
+    citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            // console.log(areafilter);
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
+        })
+        })
 
 
 

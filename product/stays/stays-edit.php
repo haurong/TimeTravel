@@ -29,11 +29,11 @@ if (empty($r)) {
                             <select type="text" name="categories_sid" id="categoriessel">
                             </select>
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="city_name" class="form-label">縣市名稱</label>
                             <br>
-                            <select name="city_name" id="cityname"></select>
-                        </div> -->
+                            <select id="citysel"></select>
+                        </div>
                         <div class="mb-3">
                             <label for="area_sid" class="form-label">地區名稱</label>
                             <br>
@@ -86,11 +86,11 @@ if (empty($r)) {
                         </div>
                         <div class="mb-3">
                             <label for="check_in" class="form-label">入住時間</label>
-                            <input type="text" name="check_in" id="check_in" value="<?= $r['check_in'] ?>">
+                            <input type="time" name="check_in" id="check_in" value="<?= $r['check_in'] ?>">
                         </div>
                         <div class="mb-3">
                             <label for="check_out" class="form-label">退房時間</label>
-                            <input type="text" name="check_out" id="check_out" value="<?= $r['check_out'] ?>">
+                            <input type="time" name="check_out" id="check_out" value="<?= $r['check_out'] ?>">
                         </div>
                         <div class="mb-3">
                             <label for="facility" class="form-label">特殊設施</label>
@@ -142,10 +142,37 @@ if (empty($r)) {
         let { area_name , area_sid} = value
         areasel[index] = new Option(area_name,area_sid)
         if((areasel[index].value) == <?= $r['area_sid'] ?>){
+            // console.log(areasel[index]);
             areasel[index].setAttribute('selected','selected')
         }
     })
+    
+    county.forEach(function(value,index,array){
+            let {city_name,city_sid} = value
+            citysel[index] = new Option(city_name,city_sid)
+            let a = area.filter(function(value,index,array){
+                return value.area_sid == <?= $r['area_sid'] ?>
+            })
+            if((citysel[index].value) == (a[0].city_sid)){
+                citysel[index].setAttribute('selected','selected')
+            }
+            
+            
+        
+    })
 
+    citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            // console.log(areafilter);
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
+        })
+    })
 
     // console.log('<?= $r['wifi'] ?>');
     // console.log(wifitrue.checked);

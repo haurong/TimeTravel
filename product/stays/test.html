@@ -8,20 +8,9 @@
     <title>Document</title>
 </head>
 
-<body>
-        <select>
-            <option value="0">123</option>
-            <option value="1" selected="selected">456</option>
-            <option value="2">789</option>
-            
-        </select>
-
-        
-    <form name="form1" onsubmit="checkForm(); return false;checkBox()">
-        <input type="radio" name="wifi" value="TRUE" id="wifi">有
-        <input type="radio" name="wifi" value="FALSE" id="wifi">沒有
-        <select name="categories_sid" id="categoriessel"></select>
-        <select name="city_sid" id="citysel">
+<body>   
+    <form name="form1" onsubmit="checkForm(); return false">
+        <select name="" id="citysel">
             <!-- <option value="1">台北市</option>
             <option value="2">新北市</option>
             <option value="3">基隆市</option> -->
@@ -29,32 +18,45 @@
         <select name="area_sid" id="areasel"></select>
         <button type="submit" class="btn btn-primary" id="submitbtn">Submit</button>
     </form>
+
     <script src="hotel.js"></script>
+
     <script>
+
         let categoriessel = document.getElementById('categoriessel')
         let citysel = document.getElementById('citysel')
         let areasel = document.getElementById('areasel')
         let submitbtn = document.getElementById('submitbtn')
 
-        let wifi = document.getElementById('wifi')
+        county.forEach(function(value,index,array){
+            let {city_name,city_sid} = value
+            citysel[index] = new Option(city_name,city_sid)
+        })
+        
+        
+        
+        
+        
 
-        hotelcategories.forEach(function(value,index,array){
-            let {hotel_categories,hotel_categories_sid} = value
-            categoriessel[index] = new Option(hotel_categories,hotel_categories_sid)
+        area.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
         })
 
-        area.forEach(function(value,index,array){
-            let { area_name , area_sid} = value
-            areasel[index] = new Option(area_name,area_sid)
+        citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            // console.log(areafilter);
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
+        })
         })
 
         
- 
-        
-        function checkBox(){
-            console.log(wifi.checked);
-        }
-
         function checkForm() {
             let fd = new FormData(document.form1);
             
