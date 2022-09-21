@@ -70,8 +70,8 @@
       if (!obj.success) {
         alert(obj.error);
       } else {
-        alert('新增成功')
-        location.href = 'member-list.php';
+        alert('註冊成功，請重新登入')
+        location.href = '/../TimeTravel/index.php';
       }
     })
 

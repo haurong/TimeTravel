@@ -34,7 +34,7 @@ try {
         $_POST['username'],
         $_POST['email'],
         $_POST['password_hash'],
-        $telephone,
+        $_POST['telephone'],
     ]);
 } catch (PDOException $ex) {
     $output['error'] = $ex->getMessage();

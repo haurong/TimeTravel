@@ -25,12 +25,8 @@ if ($totalRows) {
     }
     $sql = sprintf(
         "SELECT * FROM `member_information`
-        JOIN `member_verification_status` ON `member_information`.`verification_sid` = `member_verification_status`.`sid` 
-        ORDER BY `member_information`.`verification_sid`  LIMIT %s, %s",
-        ($page - 1) * $perPage, $perPage
-    );
-    $sql = sprintf(
-        "SELECT * FROM `member_information`",
+        JOIN `member_verification_status` ON `member_information`.`verification_sid` = `member_verification_status`.`verification_sid` 
+        ORDER BY `member_information`.`sid`  LIMIT %s, %s",
         ($page - 1) * $perPage, $perPage
     );
 
@@ -56,7 +52,7 @@ $output = [
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
-                           最前頁
+                           最前
                         </a>
                     </li>
 
@@ -83,7 +79,7 @@ $output = [
                     </li>
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?=$totalPages?>">
-                            最後一頁
+                            最後
                         </a>
                     </li>
                 </ul>
@@ -100,7 +96,7 @@ $output = [
                         <th scope="col">密碼</th>
                         <th scope="col">手機</th>
                         <th scope="col">登入時間</th>
-                        <!-- <th scope="col">驗證狀態</th> -->
+                        <th scope="col">驗證狀態</th>
                         <th scope="col">創建時間</th>
                         <th scope="col">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -121,7 +117,19 @@ $output = [
                                     <td><?= $r['password_hash'] ?></td>
                                     <td><?= $r['telephone'] ?></td>
                                     <td><?= $r['login_time'] ?></td>
+                                    <td><?= $r['VS_Name'] ?></td>
                                     <td><?= $r['creating_time'] ?></td>
+                                    <td>
+                                    <a href="member-edit-form.php?sid=<?= $r['sid'] ?>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript: 
+                                    delete_it(<?= $r['sid'] ?>)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -145,7 +153,7 @@ $output = [
 
 </div>
 <?php include __DIR__ . '/../parts/script.php'; ?>
-<!-- <script>
+<script>
 
     function delete_it(sid){
         if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
@@ -153,5 +161,5 @@ $output = [
         }
     }
 
-</script> -->
+</script>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
