@@ -10,7 +10,7 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if (empty($_POST['memberName'])) {
+if (empty($_POST['username'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
@@ -20,9 +20,9 @@ if (empty($_POST['memberName'])) {
 // TODO: 檢查欄位資料
 $telephone = null;
 $sql = "INSERT INTO `member_information`(
-    `memberName`,
+    `username`,
     `email`,
-    `password`,
+    `password_hash`,
     `telephone`
     ) VALUES (?, ?, ?, ?)";
 
@@ -31,9 +31,9 @@ $stmt = $pdo->prepare($sql);
 
 try {
     $stmt->execute([
-        $_POST['memberName'],
+        $_POST['username'],
         $_POST['email'],
-        $_POST['password'],
+        $_POST['password_hash'],
         $telephone,
     ]);
 } catch (PDOException $ex) {

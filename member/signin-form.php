@@ -5,8 +5,8 @@
 <form class="needs-validation col-6 mx-auto" name="signinForm" action="" onsubmit="checkForm();return false;" validate>
   <h4 class="text-center">創建帳戶</h4>
   <div class="my-3">
-    <label for="memberName">姓名</label>
-    <input type="text" class="form-control" id="username" placeholder="username" name="memberName" required>
+    <label for="username">姓名</label>
+    <input type="text" class="form-control" id="username" placeholder="username" name="username" required>
     <div class="invalid-feedback">
       請輸入正確姓名
     </div>
@@ -26,7 +26,7 @@
   </div>
   <div class="my-3">
     <label for="password">密碼</label>
-    <input type="password" class="form-control" id="password" placeholder="password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
+    <input type="password" class="form-control" id="password" placeholder="password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password_hash" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
     <div class="valid" id="passwordStatus">
       請輸入8個字元以上的英文大小寫字母、數字
     </div>
