@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_db.php';
+// require __DIR__ . '/../parts/connect_db.php';
+require __DIR__ . '/../parts/connect_athome_db.php';
 header('Content-Type: application/json');
 
 $output = [
@@ -8,7 +9,8 @@ $output = [
     'code' => 0,
 ];
 
-if(empty($_POST['email']) or empty($_POST['password'])){
+
+if (empty($_POST['email']) or empty($_POST['password'])) {
     $output['error'] = '參數不足';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit; // 結束程式
@@ -20,7 +22,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$_POST['email']]);
 $row = $stmt->fetch();
 
-if(empty($row)){
+if (empty($row)) {
     $output['error'] = '帳號或密碼錯誤'; // 帳號錯誤
     $output['code'] = 401;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
@@ -28,7 +30,7 @@ if(empty($row)){
 }
 
 // 驗證密碼
-if( password_verify($_POST['password'], $row['password_hash']) ) {
+if (password_verify($_POST['password'], $row['password_hash'])) {
     $output['success'] = true;
     $_SESSION['admin'] = [
         'sid' => $row['sid'],

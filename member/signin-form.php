@@ -74,8 +74,6 @@
         location.href = '/../TimeTravel/index.php';
       }
     })
-
-
   }
 </script>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
