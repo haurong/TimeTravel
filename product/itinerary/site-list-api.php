@@ -15,7 +15,7 @@ $where = ' WHERE 1 ';
 //     $pageBtnQS['area'] = $area;
 // }
 if(! empty($cate)){
-    $where .= " AND `site`.`site_category_sid`=$cate";
+    $where .= " AND `site`.`site_category_sid` = $cate";
     $pageBtnQS['cate'] = $cate;
 }
 // 分類篩選
@@ -41,12 +41,12 @@ if ($totalRows) {
     }
 
     $sql = sprintf(
-        "SELECT * FROM `site`
+        "SELECT * FROM `site` 
         JOIN `area` ON `site`.`area_sid`=`area`.`area_sid` 
         JOIN `city` ON `area`.`city_sid`=`city`.`city_sid`
         JOIN `site_categories` ON `site`.`site_category_sid`=`site_categories`.`site_category_sid`
-        ORDER BY `site`.`sid` ;
         $where
+        ORDER BY `site`.`sid`
         LIMIT %s, %s",
         ($page - 1) * $perPage, $perPage
     );
@@ -56,7 +56,7 @@ if ($totalRows) {
 //分類資料
 // $a_sql = sprintf("SELECT * FROM `area`") ;
 // $areas = $pdo->query($a_sql)->fetchAll();
-$c_sql = "SELECT * FROM `site_categories`" ;
+$c_sql = "SELECT * FROM site_categories " ;
 $cates = $pdo->query($c_sql)->fetchAll();
 //分類資料
 
