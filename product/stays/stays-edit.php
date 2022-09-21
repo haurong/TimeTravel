@@ -156,9 +156,6 @@ if (empty($r)) {
             if((citysel[index].value) == (a[0].city_sid)){
                 citysel[index].setAttribute('selected','selected')
             }
-            
-            
-        
     })
 
     citysel.addEventListener('change',function(){
