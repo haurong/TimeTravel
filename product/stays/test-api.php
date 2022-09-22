@@ -4,6 +4,15 @@ require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
+$folder = __DIR__ . '/upload/';
+
+
+$extMap = [
+    'image/jpeg'=>'.jpg',
+    'image/png'=>'.png',
+];
+
+
 $output = [
     'success' => false,
     'error' => '',

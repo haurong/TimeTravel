@@ -103,7 +103,6 @@ $totalPages = ceil($totalRows / $perPage);
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

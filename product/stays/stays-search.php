@@ -9,49 +9,66 @@
 //  原本是   connect_db.php
 require __DIR__ . '/../../parts/connect_db.php';
 
-$perPage = 40;
+// $perPage = 40;
 
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+// $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$t_sql = "SELECT COUNT(1) FROM hotel";
+// $t_sql = "SELECT COUNT(1) FROM hotel";
 
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+// $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-$totalPages = ceil($totalRows / $perPage);
+// $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
+$seach = $_GET['search'];
+// if ($totalRows) {
+//     if ($page < 1) {
+//         header('Location: ?page=1');
+//         exit;
+//     }
+//     if ($page > $totalPages) {
+//         header('Location: ?page=' . $totalPages);
+//         exit;
+//     }
+$sql ="SELECT * 
+FROM `hotel` 
+JOIN `area` 
+ON `hotel`.`area_sid` = `area`.`area_sid` 
+JOIN `city`
+ON `area`.`city_sid` = `city`.`city_sid`
+JOIN `hotel_categories`
+ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
+WHERE 
+`sid` like '%$seach%'
+or `city`.`city_name` LIKE '%$seach%'
+OR `area`.`area_name` LIKE '%$seach%'
+OR `hotel_name` LIKE '%$seach%'
+OR `hotel_code` LIKE '%$seach%'
+OR `phone` LIKE '%$seach%'
+OR `address` LIKE '%$seach%'
+OR `picture` LIKE '%$seach%'
+OR `wifi` LIKE '%$seach%'
+OR `breakfast` LIKE '%$seach%'
+OR `lunch` LIKE '%$seach%'
+OR `dinner` LIKE '%$seach%'
+OR `check_in` LIKE '%$seach%'
+OR `check_out` LIKE '%$seach%'
+OR `facility` LIKE '%$seach%'
+OR `tag` LIKE '%$seach%'
+ORDER BY SID";
+    
+    // ($page - 1) * $perPage,
+    // $perPage
+$row = $pdo->query($sql)->fetchAll();
+// }
 
-if ($totalRows) {
-    if ($page < 1) {
-        header('Location: ?page=1');
-        exit;
-    }
-    if ($page > $totalPages) {
-        header('Location: ?page=' . $totalPages);
-        exit;
-    }
-    $sql = sprintf(
-        "SELECT * 
-        FROM hotel 
-        JOIN `area` 
-        ON `hotel`.`area_sid` = `area`.`area_sid` 
-        JOIN `city`
-        ON `area`.`city_sid` = `city`.`city_sid`
-        JOIN `hotel_categories`
-        ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
-        ORDER BY SID LIMIT %s , %s",
-        ($page - 1) * $perPage,
-        $perPage
-    );
-    $row = $pdo->query($sql)->fetchAll();
-}
 
 $output = [
-    'totalRows' => $totalRows,
-    'totalPages' => $totalPages,
-    'page' => $page,
+    // 'totalRows' => $totalRows,
+    // 'totalPages' => $totalPages,
+    // 'page' => $page,
     'rows' => $row,
-    'perPage' => $perPage,
+    // 'perPage' => $perPage,
 ];
 
 
@@ -72,8 +89,8 @@ $output = [
             <button type="submit">Search</button>
         </form>
     </div>
-    <div class="row justify-content-center align-items-center">
-        <div class="mt-3 d-flex  justify-content-center flex-grow-1">
+    <div class="row justify-content-center d-flex align-items-center">
+        <!-- <div class="mt-3 d-flex  justify-content-center flex-grow-1">
             <nav aria-label="Page navigation example" class="d-flex">
                 <ul class="pagination align-items-center">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
@@ -109,7 +126,7 @@ $output = [
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
         <button type="button" class="btn btn-light" onclick="location.href='stays-insert.php'">新增</button>
     </div>
 
@@ -187,8 +204,7 @@ $output = [
 
 
 
-    <div class="row justify-content-center align-items-center">
-        <div class="mt-3 d-flex  justify-content-center flex-grow-1">
+    <!-- <div class="mt-3 d-flex  justify-content-center flex-grow-1">
             <nav aria-label="Page navigation example" class="d-flex">
                 <ul class="pagination align-items-center">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
@@ -224,9 +240,7 @@ $output = [
                     </li>
                 </ul>
             </nav>
-        </div>
-        <button type="button" class="btn btn-light" onclick="location.href='stays-insert.php'">新增</button>
-    </div>
+        </div> -->
 </div>
 
 <script src="hotel.js"></script>
@@ -237,6 +251,7 @@ $output = [
             location.href = `stays-del.php?sid=${sid}`;
         }
     }
+    console.log('<?= $_GET['search'] ?>');
 </script>
 
 <?php include __DIR__ . '/../../parts/script.php'; ?>
