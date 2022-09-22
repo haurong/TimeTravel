@@ -1,4 +1,4 @@
-<?php 
+<?php
 //require __DIR__ . '/../../parts/connect_athome_db.php'; 
 require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-list';
@@ -30,7 +30,8 @@ if ($totalRows) {
         JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
         JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
         ORDER BY `food_product_all`.`sid`  LIMIT %s, %s",
-        ($page - 1) * $perPage, $perPage
+        ($page - 1) * $perPage,
+        $perPage
     );
 
     $rows = $pdo->query($sql)->fetchAll();
@@ -43,7 +44,40 @@ $output = [
     'perPage' => $perPage,
 ];
 
+if (!isset($_SESSION['food-cart'])) {
+    $_SESSION['food-cart'] = [];
+}
 
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+$qty = isset($_GET['qty']) ? intval($_GET['qty']) : 0;
+
+// C: 加到購物車, sid, qty
+// R: 查看購物車內容
+// U: 更新, sid, qty
+// D: 移除項目, sid
+
+if (!empty($sid)) {
+    if (!empty($qty)) {
+        // 新增或變更
+        if (!empty($_SESSION['food-cart'][$sid])) {
+            // 已存在, 變更
+            $_SESSION['food-cart'][$sid]['qty'] = $qty;
+        } else {
+            // 新增
+            // TODO: 檢查資料表是不是有這個商品
+
+            $row = $pdo->query("SELECT * FROM food_product_all WHERE sid=$sid")->fetch();
+            if (!empty($row)) {
+                $row['qty'] = $qty;  // 先把數量放進去
+                $_SESSION['food-cart'][$sid] = $row;
+            }
+        }
+    } else {
+        // 刪除項目
+        unset($_SESSION['food-cart'][$sid]);
+    }
+}
+// echo json_encode($_SESSION['food-cart']);
 // echo json_encode($output); exit;
 
 ?>
@@ -51,101 +85,112 @@ $output = [
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-center">
-         <nav aria-label="Page navigation example  justify-content-center">
+        <nav aria-label="Page navigation example  justify-content-center">
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=1">
-                           最前頁
-                        </a>
-                    </li>
+                    <a class="page-link" href="?page=1">
+                        最前頁
+                    </a>
+                </li>
 
-                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-left"></i>
-                        </a>
-                    </li>
+                <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </a>
+                </li>
 
-                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                        if ($i >= 1 and $i <= $totalPages) :
-                    ?>
-                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                            </li>
-                    <?php
-                        endif;
-                    endfor; ?>
+                <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                    if ($i >= 1 and $i <= $totalPages) :
+                ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                <?php
+                    endif;
+                endfor; ?>
 
-                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-right"></i>
-                        </a>
-                    </li>
-                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?=$totalPages?>">
-                            最後頁
-                        </a>
-                    </li>
-                    <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
-                </ul>
+                <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </li>
+                <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $totalPages ?>">
+                        最後頁
+                    </a>
+                </li>
+                <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
+            </ul>
         </nav>
-     </div>            
+    </div>
     <div class="col">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </th>
-                        <th scope="col">#</th> 
-                        <th scope="col">產品編號</th>
-                        <th scope="col">產品名稱</th>
-                        <th scope="col">產品實際售價</th>
-                        <th scope="col">產品面額</th>
-                        <th scope="col">產品照片</th>
-                        <th scope="col">適用商家</th>
-                        <th scope="col">產品描述</th>
-                        <th scope="col">商家營業時間</th>
-                        <th scope="col">商家地址</th>
-                        <th scope="col">上架狀態</th>
-                        <th scope="col">分類</th>
-                        <th scope="col">縣市</th>
-                        <th scope="col">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                        </th>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </th>
+                    <th scope="col">#</th>
+                    <th scope="col">產品編號</th>
+                    <th scope="col">產品名稱</th>
+                    <th scope="col">產品實際售價</th>
+                    <th scope="col">產品面額</th>
+                    <th scope="col">產品照片</th>
+                    <th scope="col">適用商家</th>
+                    <th scope="col">產品描述</th>
+                    <th scope="col">商家營業時間</th>
+                    <th scope="col">商家地址</th>
+                    <th scope="col">上架狀態</th>
+                    <th scope="col">分類</th>
+                    <th scope="col">縣市</th>
+                    <th scope="col">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </th>
+                    <th>加入購物車</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--foreach去抓底下的資料欄位-->
+                <?php foreach ($rows as $r) : ?>
+                    <form action="food-list.php">
+                        <tr>
+                            <td>
+                                <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                            <td><?= $r['sid'] ?></td>
+                            <td><?= $r['product_number'] ?></td>
+                            <td><?= $r['product_name'] ?></td>
+                            <td><?= $r['p_selling_price'] ?></td>
+                            <td><?= $r['p_discounted_price'] ?></td>
+                            <td><img width=200 src="./../../imgs/./food-img/<?= $r['product_photo'] ?>" alt=""></td>
+                            <td><?= $r['applicable_store'] ?></td>
+                            <td><?= $r['product_introdution'] ?></td>
+                            <td><?= $r['p_business_hours'] ?></td>
+                            <td><?= $r['product_address'] ?></td>
+                            <td><?= $r['status'] ?></td>
+                            <td><?= $r['name'] ?></td>
+                            <td><?= $r['city_name'] ?></td>
+                            <td>
+                                <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <input type="number" name="qty" value="1">
+                                <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
+                                <input type="hidden" name="product_name" value="<?= $r['product_name'] ?>">
+                                <input type="hidden" name="p_selling_price" value="<?= $r['p_selling_price'] ?>">
+                                <input type="submit" name="add_to_cart" value="加入購物車">
+                            </td>
+                        </tr>
+                    </form>
                     </tr>
-                </thead>
-                    <tbody>
-                        <!--foreach去抓底下的資料欄位-->
-                        <?php foreach ($rows as $r) : ?>
-                            <tr>
-                                <td>
-                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </td>
-                                    <td><?= $r['sid'] ?></td>
-                                    <td><?= $r['product_number']?></td>
-                                    <td><?= $r['product_name'] ?></td>
-                                    <td><?= $r['p_selling_price'] ?></td>
-                                    <td><?= $r['p_discounted_price'] ?></td>
-                                    <td><img width=200 src="./../../imgs/./food-img/<?=$r['product_photo'] ?>" alt=""></td>
-                                    <td><?= $r['applicable_store'] ?></td>
-                                    <td><?= $r['product_introdution'] ?></td>
-                                    <td><?= $r['p_business_hours'] ?></td>
-                                    <td><?= $r['product_address'] ?></td>
-                                    <td><?= $r['status'] ?></td>
-                                    <td><?= $r['name'] ?></td>
-                                    <td><?= $r['city_name'] ?></td>
-                                <td>
-                                    <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-             </table>
-    </div>       
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
@@ -153,9 +198,8 @@ $output = [
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
 <script>
-
-    function delete_it(sid){
-        if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
+    function delete_it(sid) {
+        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
             location.href = `food-delete.php?sid=${sid}`;
         }
     }
@@ -163,30 +207,30 @@ $output = [
 
 
     let search = document.getElementById('form2');
-    
-    function checkForm(){
+
+    function checkForm() {
         // document.form1.email.value
 
         const fd = new FormData(document.form1);
 
-        for(let k of fd.keys()){
+        for (let k of fd.keys()) {
             console.log(`${k}: ${fd.get(k)}`);
         };
         // TODO: 檢查欄位資料
 
         fetch('food-insert-api.php', {
-            method: 'POST',
-            body: fd
-        }).then(r=>r.json())
-        .then(obj=>{
-            console.log(obj);
-            if(! obj.success){
-                alert(obj.error);
-            } else {
-                alert('新增成功')
-                 location.href = 'food-list.php';
-            }
-        })
+                method: 'POST',
+                body: fd
+            }).then(r => r.json())
+            .then(obj => {
+                console.log(obj);
+                if (!obj.success) {
+                    alert(obj.error);
+                } else {
+                    alert('新增成功')
+                    location.href = 'food-list.php';
+                }
+            })
     }
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
