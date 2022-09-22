@@ -68,7 +68,7 @@ $output = [
 <div class="mx-5 mt-3">
     <div class="d-flex justify-content-center">
         <form action="stays-search.php">
-            <input type="text" name="search" class="searchbar ">
+            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字 也可輸入wifi或早餐或午餐或是晚餐">
             <button type="submit">Search</button>
         </form>
     </div>

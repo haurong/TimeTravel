@@ -57,9 +57,50 @@ OR `facility` LIKE '%$seach%'
 OR `tag` LIKE '%$seach%'
 ORDER BY SID";
     
+
+if($seach == 'wifi'){
+    $sql = "SELECT * 
+    FROM `hotel` 
+    JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
+    JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
+    JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
+    WHERE `wifi` like 'TRUE'";
+}else if ($seach == '早餐'){
+    $sql = "SELECT * 
+    FROM `hotel` 
+    JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
+    JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
+    JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
+    WHERE `breakfast` like 'TRUE'";
+}else if ($seach == '午餐'){
+    $sql = "SELECT * 
+    FROM `hotel` 
+    JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
+    JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
+    JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
+    WHERE `lunch` like 'TRUE'";
+}else if ($seach == '晚餐'){
+    $sql = "SELECT * 
+    FROM `hotel` 
+    JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
+    JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
+    JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
+    WHERE `dinner` like 'TRUE'";
+}
+
+
+$row = $pdo->query($sql)->fetchAll();
+
+
+
+
+
+
+
+
     // ($page - 1) * $perPage,
     // $perPage
-$row = $pdo->query($sql)->fetchAll();
+// $row = $pdo->query($sql)->fetchAll();
 // }
 
 
@@ -85,7 +126,7 @@ $output = [
 <div class="mx-5 mt-3">
     <div class="d-flex justify-content-center">
         <form action="stays-search.php">
-            <input type="text" name="search" class="searchbar ">
+            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字 也可輸入wifi或早餐或午餐或是晚餐">
             <button type="submit">Search</button>
         </form>
     </div>
