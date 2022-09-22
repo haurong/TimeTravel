@@ -20,7 +20,7 @@ require __DIR__ . '/../../parts/connect_db.php';
 // $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
-$seach = $_GET['search'];
+$search = $_GET['search'];
 // if ($totalRows) {
 //     if ($page < 1) {
 //         header('Location: ?page=1');
@@ -39,47 +39,47 @@ ON `area`.`city_sid` = `city`.`city_sid`
 JOIN `hotel_categories`
 ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
 WHERE 
-`sid` like '%$seach%'
-or `city`.`city_name` LIKE '%$seach%'
-OR `area`.`area_name` LIKE '%$seach%'
-OR `hotel_name` LIKE '%$seach%'
-OR `hotel_code` LIKE '%$seach%'
-OR `phone` LIKE '%$seach%'
-OR `address` LIKE '%$seach%'
-OR `picture` LIKE '%$seach%'
-OR `wifi` LIKE '%$seach%'
-OR `breakfast` LIKE '%$seach%'
-OR `lunch` LIKE '%$seach%'
-OR `dinner` LIKE '%$seach%'
-OR `check_in` LIKE '%$seach%'
-OR `check_out` LIKE '%$seach%'
-OR `facility` LIKE '%$seach%'
-OR `tag` LIKE '%$seach%'
+`sid` like '%$search%'
+or `city`.`city_name` LIKE '%$search%'
+OR `area`.`area_name` LIKE '%$search%'
+OR `hotel_name` LIKE '%$search%'
+OR `hotel_code` LIKE '%$search%'
+OR `phone` LIKE '%$search%'
+OR `address` LIKE '%$search%'
+OR `picture` LIKE '%$search%'
+OR `wifi` LIKE '%$search%'
+OR `breakfast` LIKE '%$search%'
+OR `lunch` LIKE '%$search%'
+OR `dinner` LIKE '%$search%'
+OR `check_in` LIKE '%$search%'
+OR `check_out` LIKE '%$search%'
+OR `facility` LIKE '%$search%'
+OR `tag` LIKE '%$search%'
 ORDER BY SID";
     
 
-if($seach == 'wifi'){
+if($search == 'wifi'){
     $sql = "SELECT * 
     FROM `hotel` 
     JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
     JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
     JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
     WHERE `wifi` like 'TRUE'";
-}else if ($seach == '早餐'){
+}else if ($search == '早餐'){
     $sql = "SELECT * 
     FROM `hotel` 
     JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
     JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
     JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
     WHERE `breakfast` like 'TRUE'";
-}else if ($seach == '午餐'){
+}else if ($search == '午餐'){
     $sql = "SELECT * 
     FROM `hotel` 
     JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
     JOIN `city` ON `area`.`city_sid` = `city`.`city_sid` 
     JOIN `hotel_categories` ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid` 
     WHERE `lunch` like 'TRUE'";
-}else if ($seach == '晚餐'){
+}else if ($search == '晚餐'){
     $sql = "SELECT * 
     FROM `hotel` 
     JOIN `area` ON `hotel`.`area_sid` = `area`.`area_sid` 
@@ -125,13 +125,8 @@ $output = [
 
 <div class="mx-5 mt-3">
     <div class="d-flex justify-content-center">
-<<<<<<< HEAD
         <form action="stays-search.php"  class="form-inline my-2 my-lg-0">
             <input type="text" name="search" class="searchbar form-control mr-sm-2">
-=======
-        <form action="stays-search.php">
-            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字 也可輸入wifi或早餐或午餐或是晚餐">
->>>>>>> d8ded08d061ec78fa58efc5978ee9beb6e8aaf27
             <button type="submit">Search</button>
         </form>
     </div>
