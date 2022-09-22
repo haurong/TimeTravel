@@ -1,7 +1,7 @@
 <?php 
 //連結權限頁
-require __DIR__ . '/../../parts/connect_athome_db.php'; 
-//require __DIR__ . '/../../parts/connect_db.php';
+//require __DIR__ . '/../../parts/connect_athome_db.php'; 
+require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
@@ -30,11 +30,10 @@ $sql = "INSERT INTO `food_product_all`(
     `applicable_store`, 
     `product_introdution`, 
     `p_business_hours`, 
-    `product_address`,
     `listing_status_sid`,
     `categories_sid`,
     `city_sid`) 
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 $stmt = $pdo->prepare($sql);
 $product_address = null;
@@ -46,11 +45,10 @@ try {
         $_POST['product_name'],
         $_POST['p_selling_price'],
         $_POST['p_discounted_price'],
-        $_POST['product_photo'] ?? '',
+        $_POST['product_photo'],
         $_POST['applicable_store'],
         $_POST['product_introdution'],
         $_POST['p_business_hours'],
-        $_POST['product_address'],
         $_POST['listing_status_sid'],
         $_POST['categories_sid'],
         $_POST['city_sid']

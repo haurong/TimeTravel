@@ -1,6 +1,6 @@
 <?php 
-require __DIR__ . '/../../parts/connect_athome_db.php'; 
-//require __DIR__ . '/../../parts/connect_db.php';
+//require __DIR__ . '/../../parts/connect_athome_db.php'; 
+require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-list';
 
 $perPage = 10; // 一頁有幾筆
@@ -82,7 +82,7 @@ $output = [
                     </li>
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?=$totalPages?>">
-                            最後一頁
+                            最後頁
                         </a>
                     </li>
                     <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
@@ -149,18 +149,6 @@ $output = [
 </div>
 
 
-   <?php 
-    //如果沒有登入的話
-    // if(empty($_SESSION['admin'])){
-        //連結到沒有權限的列表頁
-    //     include __DIR__. '/list-table-no-admin.php';
-    // } else {
-        //連結到有權限的列表頁  
-    //     include __DIR__. '/list-table-admin.php';
-    // }
-    
-    ?>
-
 
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
@@ -172,5 +160,33 @@ $output = [
         }
     }
 
+
+
+    let search = document.getElementById('form2');
+    
+    function checkForm(){
+        // document.form1.email.value
+
+        const fd = new FormData(document.form1);
+
+        for(let k of fd.keys()){
+            console.log(`${k}: ${fd.get(k)}`);
+        };
+        // TODO: 檢查欄位資料
+
+        fetch('food-insert-api.php', {
+            method: 'POST',
+            body: fd
+        }).then(r=>r.json())
+        .then(obj=>{
+            console.log(obj);
+            if(! obj.success){
+                alert(obj.error);
+            } else {
+                alert('新增成功')
+                 location.href = 'food-list.php';
+            }
+        })
+    }
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
