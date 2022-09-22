@@ -17,7 +17,7 @@ require __DIR__ . '/../../parts/connect_db.php';
 
 // $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-// $totalPages = ceil($totalRows / $perPage);
+// $totalPages = ceil($totalRows / $       perPage);
 
 $rows = [];
 $search = $_GET['search'];
@@ -127,7 +127,7 @@ $output = [
     <div class="d-flex justify-content-center">
         <form action="stays-search.php"  class="">
             <input type="text" name="search" class="searchbar">
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+            <button type="submit" class="">Search</button>
         </form>
     </div>
     <div class="row justify-content-center d-flex align-items-center">

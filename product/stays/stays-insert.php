@@ -55,6 +55,11 @@ $totalPages = ceil($totalRows / $perPage);
                         <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
                             <input type="text" class="form-control" id="picture" name="picture">
+
+                            <form action="" name="2" style="display: none;">
+                                <input type="file" name="realpicture" id="" accept="image/png , image/jpeg">    
+                            </form> 
+                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn">上傳圖片</button>
                         </div>
                         <div class="mb-3">
                             <label class="form-label mr-5">WIFI</label>
@@ -99,7 +104,8 @@ $totalPages = ceil($totalRows / $perPage);
                             <br>
                             <textarea name="tag" id="tag" cols="30" rows="3"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="submitbtn">新增</button>
+                        <button type="submit" class="btn btn-primary" id="submitbtn"
+                        onclick="">新增</button>
                     </form>
                 </div>
             </div>
@@ -113,6 +119,8 @@ $totalPages = ceil($totalRows / $perPage);
     let areasel = document.getElementById('areasel')
     let submitbtn = document.getElementById('submitbtn')
 
+    let picturebtn = document.getElementById('picturebtn')
+
     hotelcategories.forEach(function(value, index, array) {
         let {hotel_categories,hotel_categories_sid} = value
         categoriessel[index] = new Option(hotel_categories, hotel_categories_sid)
@@ -121,7 +129,7 @@ $totalPages = ceil($totalRows / $perPage);
     county.forEach(function(value,index,array){
             let {city_name,city_sid} = value
             citysel[index] = new Option(city_name,city_sid)
-        })
+    })
 
     let firstarea = area.filter(function(value,index,array){
         return value.city_sid == 1
@@ -142,8 +150,10 @@ $totalPages = ceil($totalRows / $perPage);
             let {area_name,area_sid} = value
             areasel[index] = new Option(area_name, area_sid)
         })
-        })
+    })
 
+    
+    
 
 
 
