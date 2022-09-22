@@ -36,7 +36,7 @@
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION['admin']['email'] ?></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">重設密碼</a>
+                        <a class="dropdown-item" href="/TimeTravel/member/password.php">重設密碼</a>
                         </div>
                             <!-- <a class="nav-link"></a>
                             <a class="nav-link">重設密碼</a> -->

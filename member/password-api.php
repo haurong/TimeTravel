@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_athome_db.php';
-// require __DIR__ . '/../parts/connect_db.php';
+// require __DIR__ . '/../parts/connect_athome_db.php';
+require __DIR__ . '/../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
@@ -11,7 +11,7 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if (empty($_POST['username'])) {
+if (empty($_POST['password'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
