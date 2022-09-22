@@ -1,5 +1,5 @@
-<?php
-//require __DIR__ . '/../../parts/admin-required.php';
+<?php 
+
 require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
@@ -13,10 +13,10 @@ $output = [
 
 
 //todo檢查欄位↓
-if(empty($_POST['product_name'])){
+if (empty($_POST['product_name'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
-    echo json_encode($output, JSON_UNESCAPED_UNICODE); 
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
