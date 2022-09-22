@@ -27,10 +27,10 @@
 
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
-                            // $pageBtnQS['page']=$i;
+                            $pageBtnQS['page']=$i;
                     ?>
                             <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                <a class="page-link" href ="?<?= http_build_query($pageBtnQS) ?>"><?= $i ?></a>
                             </li>
                     <?php
                         endif;
@@ -64,9 +64,8 @@
                         <th scope="col">簡介</th>
                         <th scope="col">照片</th>
                         <th scope="col">網站</th>
-                        <th scope="col">detail
-                            <!-- <i class="fa-solid fa-pen-to-square"></i> -->
-                        </th>
+                        <th scope="col">detail</th>
+                        <th><i class="fa-solid fa-pen-to-square"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,6 +86,11 @@
                             <td><a href="<?= $r['website'] ?>">網站</a></td>
                             <td>
                                 <a href="site-detail.php?sid=<?= $r['sid'] ?>">detail</a>
+                            </td>
+                            <td>
+                                <a href="site-edit.php?sid=<?= $r['sid']?>">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

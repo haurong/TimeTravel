@@ -1,5 +1,6 @@
 <?php require __DIR__ . '/../../parts/connect_db.php';
 
+$pageName = 'detail';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $sql = sprintf(
     "SELECT * FROM `site` 
@@ -23,7 +24,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <a type="button" class="btn btn-outline-dark py-2" href="../stays/stays.php">住宿</a>
         <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
     </div> -->
-    
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -76,7 +77,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
             </table> -->
 
-            <div class="card" style="width: 40%" dflex>
+            <div class="card" dflex>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -107,49 +108,21 @@ $rows = $pdo->query($sql)->fetchAll();
 
                     <?php foreach ($rows as $r) : ?>
                         <h2><?= $r['name'] ?></h2>
-                        <h3><?= $r['city_name'] ?><?= $r['area_name'] ?></h3>
-                        <h3><?= $r['site_category_name'] ?></h3>
-                        <h3><?= $r['description'] ?></h3>
-                        <h3><a href="<?= $r['website'] ?>">網站</a></h3>
-                        <iframe src="https://www.google.com/maps/embed?pb=<?= $r['map'] ?>!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-
+                        <h3>所在地區:<?= $r['city_name'] ?><?= $r['area_name'] ?></h3>
+                        <h3>分類:<?= $r['site_category_name'] ?></h3>
+                        <h3>簡介:<?= $r['description'] ?></h3>
+                        <h3>網站:<a href="<?= $r['website'] ?>"></a></h3>
+                        <div class="map-box">
+                            <h3>所在位置:</h3>
+                            <iframe src="https://www.google.com/maps/embed?pb=<?= $r['map'] ?>!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     <?php endforeach; ?>
-
-
-
                 </div>
             </div>
-
         </div>
     </div>
 
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
-<script>
-    // const table = document.querySelector('table');
-
-    // function delete_it(sid){
-    //     if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
-    //         location.href = `delete.php?sid=${sid}`;
-    //     }
-    // }
-    /*
-    table.addEventListener('click', function(event){
-        const t = event.target;
-        console.log(event.target);
-        if(t.classList.contains('fa-trash-can')){
-            t.closest('tr').remove();
-        }
-        if(t.classList.contains('fa-pen-to-square')){
-            // console.log(t.closest('tr').querySelectorAll('td'));
-            
-            console.log( 
-                t.closest('tr').querySelectorAll('td')[2].innerHTML
-            );
-            
-        }
-    });
-    */
-</script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

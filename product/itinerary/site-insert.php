@@ -16,11 +16,11 @@ $pageName = 'site_insert';
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-row">
-                <!-- <div class="mb-3">
+                <div class="mb-3 pr-2" >
                     <label for="city_name" class="form-label">縣市名稱</label>
                     <br>
                     <select name="city_name" id="citysel" name="city_sid"></select>
-                </div> -->
+                </div>
                 <div class="mb-3">
                     <label for="area_sid" class="form-label">地區名稱</label>
                     <br>
@@ -61,24 +61,39 @@ $pageName = 'site_insert';
 <?php include __DIR__ . '/../../parts/script.php'; ?>
 <script src="site.js"></script>
 <script>
-
     let catessel = document.getElementById('catessel')
-    // let citysel = document.getElementById('citysel')
+    let citysel = document.getElementById('citysel')
     let areasel = document.getElementById('areasel')
-    // let submitbtn = document.getElementById('submitbtn')
 
     cate.forEach((value, index, arry)=>{
         let {site_category_name, site_category_sid} =value
         catesel[index] = new Option(site_category_name, site_category_sid)
     })
 
+    county.forEach(function(value,index,array){
+            let {city_name,city_sid} = value
+            citysel[index] = new Option(city_name,city_sid)
+        })
 
-    area.forEach((value, index, arry)=>{
-        let {area_name, area_sid} =value
+    let firstarea = area.filter(function(value,index,array){
+        return value.city_sid == 1
+    })
+    firstarea.forEach(function(value, index, array) {
+        let {area_name,area_sid} = value
         areasel[index] = new Option(area_name, area_sid)
     })
-   
 
+    citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
+        })
+        })
 
     function checkForm() {
         const fd = new FormData(document.form1);
@@ -97,8 +112,6 @@ $pageName = 'site_insert';
                 location.href = 'site-list.php';
             }
         })
-
-
     }
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
