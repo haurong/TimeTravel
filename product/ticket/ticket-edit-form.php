@@ -10,11 +10,7 @@ if (empty($sid)) {
     exit;
 }
 
-$sql = "SELECT * FROM tickets
-    JOIN `area` 
-    ON `tickets`.`cities_id` = `area`.`area_sid`
-    JOIN `city`
-    ON `area`.`city_sid` = `city`.`city_sid` WHERE sid=$sid";
+$sql = "SELECT * FROM tickets WHERE sid=$sid";
 $r = $pdo->query($sql)->fetch();
 if (empty($r)) {
     header('Location: ticket-list.php');
@@ -82,19 +78,22 @@ if (empty($r)) {
 
                         <div class="mb-3">
                             <label for="categories_id" class="form-label">類別</label>
-                            <select type="text" name="categories_id" id="cateOption">
-                            </select>
+                            <select type="text" class="form-control" id="cateOption" name="categories_id"></select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="cities_id" class="form-label">所在縣市</label>
-                            <select id="citylocation"></select>
+                            <label for="citylocation" class="form-label">縣市名稱</label>
+                            <br>
+                            <select id="citysel"></select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="cities_id" class="form-label">所在行政區</label>
-                            <select id="arealocation"></select>
+                            <label for="arealocation" class="form-label">區域名稱</label>
+                            <br>
+                            <select type="text" name="cities_id" id="areasel" ?>"></select>
                         </div>
+
+
 
                         <div class="mb-3">
                             <label class="form-label">上下架狀態:&nbsp</label>
@@ -103,6 +102,9 @@ if (empty($r)) {
                             <label class="form-label " for="onsale">下架</label>
                             <input type="radio" name="on_sale" value="2" id="notsale" require>
                         </div>
+
+
+
 
                         <button type="submit" class="btn btn-primary" id="btn">Submit</button>
                     </form>
@@ -141,7 +143,7 @@ if (empty($r)) {
     //     let {status, status_sid} = value;
     //     on_sale[index] = new Option(status, status_sid);
 
-    //     if((on_sale[index]).value == <?= $r['on_sale'] ?>){
+    //     if((on_sale[index]).value == ['on_sale'] ?>){
     //         on_sale[index].setAttribute('selected', 'selected')
     //     }
     // })
@@ -153,48 +155,46 @@ if (empty($r)) {
         notsale.checked = true;
     }
     /*地區選單*/
-    county.forEach(function(value, index, array) {
-        let {
-            city_name,
-            city_sid
-        } = value
-        citylocation[index] = new Option(city_name, city_sid)
-        let a = area.filter(function(value, index, array) {
-            return value.area_sid == <?= $r['area_sid'] ?>
+    county.forEach(function(value,index,array){
+        let {city_name,city_sid} = value
+        citysel[index] = new Option(city_name,city_sid)
+        let a = area.filter(function(value,index,array){
+            return value.area_sid == <?= $r['cities_id'] ?>
         })
-        if ((citylocation[index].value) == (a[0].city_sid)) {
-            citylocation[index].setAttribute('selected', 'selected')
+        if((citysel[index].value) == (a[0].city_sid)){
+            citysel[index].setAttribute('selected','selected')
         }
     })
 
-    let firstarea = area.filter(function(value, index, array) {
-        return value.city_sid == (citylocation.selectedIndex) + 1
+
+    let firstarea = area.filter(function(value,index,array){
+        return value.city_sid == (citysel.selectedIndex) + 1   
     })
 
-    firstarea.forEach(function(value, index, array) {
-        let {
-            area_name,
-            area_sid
-        } = value
-        arealocation[index] = new Option(area_name, area_sid)
-        if ((arealocation[index].value) == <?= $r['area_sid'] ?>) {
+    // console.log(firstarea);
 
-            arealocation[index].setAttribute('selected', 'selected')
+
+    firstarea.forEach(function(value,index,array){
+        let { area_name , area_sid} = value
+        areasel[index] = new Option(area_name,area_sid)
+        if((areasel[index].value) == <?= $r['cities_id'] ?>){
+            // console.log(areasel[index]);
+            areasel[index].setAttribute('selected','selected')
         }
     })
+    
+    
 
-    citylocation.addEventListener('change', function() {
-        arealocation.options.length = 0;
-        citychoose = citylocation.options[citylocation.selectedIndex].value
-        let areafilter = area.filter(function(value, index, array) {
-            return value.city_sid == citychoose
-        })
-        areafilter.forEach(function(value, index, array) {
-            let {
-                area_name,
-                area_sid
-            } = value
-            arealocation[index] = new Option(area_name, area_sid)
+    citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            // console.log(areafilter);
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
         })
     })
 

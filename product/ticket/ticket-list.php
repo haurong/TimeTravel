@@ -55,6 +55,8 @@ $output = [
 
 
 <div class="container">
+    
+
     <div class="row">
         <div class="col">
             <nav aria-label="Page navigation example">
@@ -95,6 +97,7 @@ $output = [
         </div>
         <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button>
     </div>
+
 
     <?php
 
