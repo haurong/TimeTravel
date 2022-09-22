@@ -17,7 +17,16 @@ if (!isset($_SESSION)) {
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/TimeTravel/cart/cart-list.php">購物車
-                            <span class="badge badge-pill badge-info cart-count"></span></a>
+                            <?php
+                            if (isset($_SESSION['food-cart'])) {
+                                $count = count($_SESSION['food-cart']);
+                                echo "<span class=\"badge badge-pill badge-info cart-count\">$count</span>";
+                            } else {
+                                echo "<span class=\"badge badge-pill badge-info cart-count\">0</span>";
+                            }
+                            ?>
+                        </a>
+
                     </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0 ml-auto">
