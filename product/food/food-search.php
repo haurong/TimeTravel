@@ -1,46 +1,61 @@
 <?php 
 //require __DIR__ . '/../../parts/connect_athome_db.php'; 
 require __DIR__ . '/../../parts/connect_db.php';
-$pageName = 'food-list';
-
-$perPage = 10; // 一頁有幾筆
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+// $pageName = 'food-list';
+$search = $_GET['search'];
+// $perPage = 10; // 一頁有幾筆
+// $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 算總筆數
-$t_sql = "SELECT COUNT(1) FROM food_product_all";
+// $t_sql = "SELECT COUNT(1) FROM food_product_all";
 
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+// $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-$totalPages = ceil($totalRows / $perPage);
+// $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
 // 如果有資料
-if ($totalRows) {
-    if ($page < 1) {
-        header('Location: ?page=1');
-        exit;
-    }
-    if ($page > $totalPages) {
-        header('Location: ?page=' . $totalPages);
-        exit;
-    }
-    $sql = sprintf(
-        "SELECT * FROM `food_product_all`
-        JOIN `city` ON `food_product_all`.`city_sid` = `city`.`city_sid` 
-        JOIN `food_categories` ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
-        JOIN `listing_status` ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
-        ORDER BY `food_product_all`.`sid`  LIMIT %s, %s",
-        ($page - 1) * $perPage, $perPage
-    );
+// if ($totalRows) {
+//     if ($page < 1) {
+//         header('Location: ?page=1');
+//         exit;
+//     }
+//     if ($page > $totalPages) {
+//         header('Location: ?page=' . $totalPages);
+//         exit;
+//     }
+    $sql = "SELECT * 
+    FROM `food_product_all`
+    JOIN `city` 
+    ON `food_product_all`.`city_sid` = `city`.`city_sid` 
+    JOIN `food_categories` 
+    ON `food_product_all`.`categories_sid` = `food_categories`.`categories_sid`
+    JOIN `listing_status` 
+    ON `food_product_all`.`listing_status_sid`= `listing_status`.`status_sid`
+    WHERE
+        `sid` like '%$search%'
+        OR `product_number` LIKE '%$search%'
+        OR `product_name` LIKE '%$search%'
+        OR `p_selling_price` LIKE '%$search%'
+        OR `p_discounted_price` LIKE '%$search%'
+        OR `product_photo` LIKE '%$search%'
+        OR `applicable_store` LIKE '%$search%'
+        OR `product_introdution` LIKE '%$search%'
+        OR `p_business_hours` LIKE '%$search%'
+        OR `listing_status`.`status` LIKE '%$search%'
+        OR `food_categories`.`name` LIKE '%$search%'
+        OR `city`.`city_name` LIKE '%$search%'
+        ORDER BY SID";
+
 
     $rows = $pdo->query($sql)->fetchAll();
-}
+
 $output = [
-    'totalRows' => $totalRows,
-    'totalPages' => $totalPages,
-    'page' => $page,
+    // 'totalRows' => $totalRows,
+    // 'totalPages' => $totalPages,
+    // 'page' => $page,
     'rows' => $rows,
-    'perPage' => $perPage,
+    // 'perPage' => $perPage,
 ];
 
 
@@ -52,10 +67,10 @@ $output = [
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-center">
         <form action="food-search.php">
-            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字 也可輸入wifi或早餐或午餐或是晚餐">
+            <input type="text" name="search" class="searchbar" >
             <button type="submit">Search</button>
         </form>
-         <nav aria-label="Page navigation example  justify-content-center">
+         <!-- <nav aria-label="Page navigation example  justify-content-center">
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
@@ -91,7 +106,7 @@ $output = [
                     </li>
                     <a href="./food-insert-form.php"><button type="button" class="btn btn-outline-secondary ml-3">新增商品</button></a>
                 </ul>
-        </nav>
+        </nav> -->
      </div>            
     <div class="col">
             <table class="table table-striped table-bordered">
@@ -165,32 +180,7 @@ $output = [
     }
 
 
-
-    let search = document.getElementById('form2');
+        // console.log("$_GET['search']?>");
     
-    function checkForm(){
-        // document.form1.email.value
-
-        const fd = new FormData(document.form1);
-
-        for(let k of fd.keys()){
-            console.log(`${k}: ${fd.get(k)}`);
-        };
-        // TODO: 檢查欄位資料
-
-        fetch('food-insert-api.php', {
-            method: 'POST',
-            body: fd
-        }).then(r=>r.json())
-        .then(obj=>{
-            console.log(obj);
-            if(! obj.success){
-                alert(obj.error);
-            } else {
-                alert('新增成功')
-                 location.href = 'food-list.php';
-            }
-        })
-    }
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
