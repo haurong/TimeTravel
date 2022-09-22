@@ -17,7 +17,8 @@
                     <th scope="col">封面圖片</th>
                     <th scope="col">產品圖片</th>
                     <th scope="col">分類</th>
-                    <th scope="col">區域</th>
+                    <th scope="col">所在縣市</th>
+                    <th scope="col">所在行政區</th>
                     <th scope="col">狀態</th>
                     <th scope="col">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -40,11 +41,15 @@
                         <td><?= $r['product_notice'] ?></td>
                         <td><?= $r['start_day'] ?></td>
                         <td><?= $r['end_day'] ?></td>
-                        <td><img style="width: 100px;" src="./../../imgs/tickets_imgs/<?= $r['product_cover'] ?>" alt=""></td>
-                        <td><img style="width: 100px;" src="./../../imgs/tickets_imgs/<?= $r['product_imgs'] ?>" alt=""></td>
-                        <td><?= $r['categories_id'] ?></td>
-                        <td><?= $r['cities_id'] ?></td>
-                        <td><?= $r['on_sale'] ?></td>
+                        <!-- 封面圖片 -->
+                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $r['product_cover'] ?>" alt=""></td>
+                        <!-- 產品圖片 -->
+                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $r['product_imgs'] ?>" alt=""></td>
+
+                        <td><?= $r['classname'] ?></td>
+                        <td><?= $r['city_name'] ?></td>
+                        <td><?= $r['area_name'] ?></td>
+                        <td><?= $r['status'] ?></td>
 
                         <td>
                             <a href="ticket-edit-form.php?sid=<?= $r['sid'] ?>">

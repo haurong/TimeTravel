@@ -1,6 +1,4 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';
-
-$pageName = 'list';
+<?php require __DIR__ . '/../../parts/connect_db.php'; 
 
 $perPage = 30; //一頁幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
@@ -27,7 +25,20 @@ if ($totalRows) {
         exit;
     }
 
-    $sql = sprintf("SELECT * FROM tickets ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf(
+        "SELECT * FROM tickets 
+    JOIN `area` 
+    ON `tickets`.`cities_id` = `area`.`area_sid`
+    JOIN `city`
+    ON `area`.`city_sid` = `city`.`city_sid`
+    JOIN `tickets_categories`
+    ON `tickets`.`categories_id` = `tickets_categories`.`id`
+    JOIN `listing_status`
+    ON `tickets`.`on_sale` = `listing_status`.`status_sid`
+    ORDER BY sid DESC LIMIT %s, %s",
+        ($page - 1) * $perPage,
+        $perPage
+    );
     //第1個參數%s, 索引值 ;第2個參數%s抓幾個   DESC降冪 ASC升冪
 
     $rows = $pdo->query($sql)->fetchAll();
@@ -49,6 +60,11 @@ $output = [
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                            最前一頁
+                        </a>
+                    </li>
+                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
@@ -69,6 +85,11 @@ $output = [
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>
                     </li>
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            最後一頁
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -86,12 +107,13 @@ $output = [
 
     <?php include __DIR__ . '/../../parts/script.php'; ?>
     <script>
-    const table = document.querySelector('table');
-    function delete_it(sid){
-        if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
-            location.href = `ticket-delete.php?sid=${sid}`;
+        const table = document.querySelector('table');
+
+        function delete_it(sid) {
+            if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
+                location.href = `ticket-delete.php?sid=${sid}`;
+            }
         }
-    }
-</script>
+    </script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 // require __DIR__ . '/parts/admin-required.php';
 require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'edit';
@@ -10,7 +10,11 @@ if (empty($sid)) {
     exit;
 }
 
-$sql = "SELECT * FROM tickets WHERE sid=$sid";
+$sql = "SELECT * FROM tickets
+    JOIN `area` 
+    ON `tickets`.`cities_id` = `area`.`area_sid`
+    JOIN `city`
+    ON `area`.`city_sid` = `city`.`city_sid` WHERE sid=$sid";
 $r = $pdo->query($sql)->fetch();
 if (empty($r)) {
     header('Location: ticket-list.php');
@@ -33,7 +37,7 @@ if (empty($r)) {
 
                         <div class="mb-3">
                             <label for="product_number" class="form-label">票券代號</label>
-                            <input type="text" class="form-control" id="product_number" name="product_number" required value="<?=  htmlentities($r['product_number']) ?>">
+                            <input type="text" class="form-control" id="product_number" name="product_number" required value="<?= htmlentities($r['product_number']) ?>">
                         </div>
 
                         <div class="mb-3">
@@ -43,8 +47,7 @@ if (empty($r)) {
 
                         <div class="mb-3">
                             <label for="product_price" class="form-label">價格</label>
-                            <input type="text" class="form-control" id="product_price" name="product_price" 
-                             value="<?= $r['product_price'] ?>">
+                            <input type="text" class="form-control" id="product_price" name="product_price" value="<?= $r['product_price'] ?>">
                         </div>
 
                         <div class="mb-3">
@@ -79,20 +82,32 @@ if (empty($r)) {
 
                         <div class="mb-3">
                             <label for="categories_id" class="form-label">類別</label>
-                            <input type="text" class="form-control" id="categories_id" name="categories_id" value="<?= $r['categories_id'] ?>">
+                            <select type="text" name="categories_id" id="cateOption">
+                            </select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="cities_id" class="form-label">縣市地區</label>
-                            <input type="text" class="form-control" id="cities_id" name="cities_id" value="<?= $r['cities_id'] ?>">
+                            <label for="cities_id" class="form-label">所在縣市</label>
+                            <select id="citylocation"></select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="on_sale" class="form-label">狀態</label>
-                            <input type="text" class="form-control" id="on_sale" name="on_sale" value="<?= $r['on_sale'] ?>">
+                            <label for="cities_id" class="form-label">所在行政區</label>
+                            <select id="arealocation"></select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="mb-3">
+                            <label class="form-label">上下架狀態:&nbsp</label>
+                            <label class="form-label " for="onsale">上架</label>
+                            <input type="radio" name="on_sale" value="1" id="sale" require>
+                            <label class="form-label " for="onsale">下架</label>
+                            <input type="radio" name="on_sale" value="2" id="notsale" require>
+                        </div>
+
+
+
+
+                        <button type="submit" class="btn btn-primary" id="btn">Submit</button>
                     </form>
                 </div>
             </div>
@@ -103,7 +118,85 @@ if (empty($r)) {
 </div>
 
 <?php include __DIR__ . '/../../parts/script.php'; ?>
+<script src="tickets.js"></script>
 <script>
+    let cateOption = document.getElementById('cateOption');
+    let sale = document.getElementById('sale');
+    let notsale = document.getElementById('notsale');
+    let citylocation = document.getElementById('citylocation');
+    let arealocation = document.getElementById('arealocation');
+    let btn = document.getElementById('btn');
+
+    ticketsCategories.forEach(function(value, index, array) {
+        let {
+            classname,
+            id
+        } = value;
+        cateOption[index] = new Option(classname, id);
+
+        if ((cateOption[index].value) == <?= $r['categories_id'] ?>) {
+            cateOption[index].setAttribute('selected', 'selected')
+        }
+    })
+
+    /*上下架狀態by選單*/
+    // onSale.forEach(function(value,index,array){
+    //     let {status, status_sid} = value;
+    //     on_sale[index] = new Option(status, status_sid);
+
+    //     if((on_sale[index]).value == <?= $r['on_sale'] ?>){
+    //         on_sale[index].setAttribute('selected', 'selected')
+    //     }
+    // })
+
+    /*上下架狀態by radio*/
+    if ('<?= $r['on_sale'] ?>' == "1") {
+        sale.checked = true;
+    } else if ('<?= $r['on_sale'] ?>' == "2") {
+        notsale.checked = true;
+    }
+    /*地區選單*/
+    county.forEach(function(value, index, array) {
+        let {
+            city_name,
+            city_sid
+        } = value
+        citylocation[index] = new Option(city_name, city_sid)
+        let a = area.filter(function(value, index, array) {
+            return value.area_sid == <?= $r['area_sid'] ?>
+        })
+        if ((citylocation[index].value) == (a[0].city_sid)) {
+            citylocation[index].setAttribute('selected', 'selected')
+        }
+    })
+
+    let firstarea = area.filter(function(value, index, array) {
+        return value.city_sid == (citylocation.selectedIndex) + 1
+    })
+
+    firstarea.forEach(function(value,index,array){
+        let { area_name , area_sid} = value
+        arealocation[index] = new Option(area_name,area_sid)
+        if((arealocation[index].value) == <?= $r['area_sid'] ?>){
+           
+            arealocation[index].setAttribute('selected','selected')
+        }
+    })
+
+    citylocation.addEventListener('change',function(){
+            arealocation.options.length = 0;
+            citychoose = citylocation.options[citylocation.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            arealocation[index] = new Option(area_name, area_sid)
+        })
+    })
+
+
+
     function checkForm() {
 
         const fd = new FormData(document.form1);
@@ -121,7 +214,7 @@ if (empty($r)) {
                 alert(obj.error);
             } else {
                 alert('修改成功');
-                location.href = 'ticket.php'; 
+                location.href = 'ticket.php';
                 //改完回列表↑
             }
         });
