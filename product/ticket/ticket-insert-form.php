@@ -67,8 +67,15 @@ $pageName = 'insert';
                         </div>
 
                         <div class="mb-3">
-                            <label for="cities_id" class="form-label">縣市地區</label>
-                            <input type="text" class="form-control" id="cities_id" name="cities_id">
+                            <label for="citylocation" class="form-label">縣市名稱</label>
+                            <br>
+                            <select id="citysel"></select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="arealocation" class="form-label">區域名稱</label>
+                            <br>
+                            <select type="text" name="cities_id" id="areasel" ?>"></select>
                         </div>
 
                         <div class="mb-3">
@@ -93,7 +100,6 @@ $pageName = 'insert';
 <script src="tickets.js"></script>
 <script>
     let cateOption = document.getElementById('cateOption');
-    let sale = document.getElementById('sale');
     let notsale = document.getElementById('notsale');
     let citylocation = document.getElementById('citylocation');
     let arealocation = document.getElementById('arealocation');
@@ -101,24 +107,35 @@ $pageName = 'insert';
 
     // 票券種類
     ticketsCategories.forEach(function(value, index, array) {
-        let {
-            classname,
-            id
-        } = value;
-        cateOption[index] = new Option(classname, id);
-
-        if ((cateOption[index].value) == <?= $r['categories_id'] ?>) {
-            cateOption[index].setAttribute('selected', 'selected')
-        }
+        let {classname, id} = value
+        cateOption[index] = new Option(classname, id)
     })
 
-    // 上下架狀態
-    if ('<?= $r['on_sale'] ?>' == "1") {
-        sale.checked = true;
-    } else if ('<?= $r['on_sale'] ?>' == "2") {
-        notsale.checked = true;
-    }
+    county.forEach(function(value,index,array){
+            let {city_name,city_sid} = value
+            citysel[index] = new Option(city_name,city_sid)
+        })
 
+    let firstarea = area.filter(function(value,index,array){
+        return value.city_sid == 1
+    })
+    firstarea.forEach(function(value, index, array) {
+        let {area_name,area_sid} = value
+        areasel[index] = new Option(area_name, area_sid)
+    })
+
+    citysel.addEventListener('change',function(){
+            areasel.options.length = 0;
+            citychoose = citysel.options[citysel.selectedIndex].value
+            let areafilter = area.filter(function(value,index,array){
+                    return value.city_sid == citychoose
+                })
+            // console.log(areafilter);
+            areafilter.forEach(function(value, index, array) {
+            let {area_name,area_sid} = value
+            areasel[index] = new Option(area_name, area_sid)
+        })
+        })
 
     function checkForm() {
 
