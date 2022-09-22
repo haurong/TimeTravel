@@ -1,31 +1,32 @@
-<?php require __DIR__ . '/../../parts/connect_huang_db.php';
+<?php require __DIR__ . '/../../parts/connect_db.php'; 
 
-$perPage = 30; //一頁幾筆
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
+//$perPage = 30; //一頁幾筆
+//$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
 
 //算資料總比數
-$t_sql = "SELECT COUNT(1) FROM tickets ";
+//$t_sql = "SELECT COUNT(1) FROM tickets ";
 
 //query資料庫溝通
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+//$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-$totalPages = ceil($totalRows / $perPage);
+//$totalPages = ceil($totalRows / $perPage);
 //ceil 天花板 floor 地板,
 
-$rows = []; //預設給他一個陣列
-//如果有資料,做判別
-if ($totalRows) {
-    if ($page < 1) {
-        header('Location: ?page=1');
-        exit;
-    }
-    if ($page > $totalPages) {
-        header('Location: ?page=' . $totalPages);
-        exit;
-    }
 
-    $sql = sprintf(
-        "SELECT * FROM tickets 
+$rows = []; //預設給他一個陣列
+$search = $_GET['search'];
+//如果有資料,做判別
+// if ($totalRows) {
+//     if ($page < 1) {
+//         header('Location: ?page=1');
+//         exit;
+//     }
+//     if ($page > $totalPages) {
+//         header('Location: ?page=' . $totalPages);
+//         exit;
+//     }
+
+    $sql = "SELECT * FROM tickets 
     JOIN `area` 
     ON `tickets`.`cities_id` = `area`.`area_sid`
     JOIN `city`
@@ -34,29 +35,36 @@ if ($totalRows) {
     ON `tickets`.`categories_id` = `tickets_categories`.`id`
     JOIN `listing_status`
     ON `tickets`.`on_sale` = `listing_status`.`status_sid`
-    ORDER BY sid DESC LIMIT %s, %s",
-        ($page - 1) * $perPage,
-        $perPage
-    );
+    WHERE
+    `sid` LIKE '%search'
+    OR `city`.`city_name` LIKE '%$search%'
+    OR `area`.`area_name` LIKE '%$search%'
+    OR `product_price` LIKE '%$search%'
+    OR `product_introduction` LIKE '%$search%'
+    OR `product_notice` LIKE '%$search%'
+    OR `start_day` LIKE '%$search%'
+    OR `end_day` LIKE '%$search%'
+    ORDER BY SID";
     //第1個參數%s, 索引值 ;第2個參數%s抓幾個   DESC降冪 ASC升冪
 
     $rows = $pdo->query($sql)->fetchAll();
-}
+
 
 $output = [
-    'totalRows' => $totalRows,
-    'totalPages' => $totalPages,
-    'page' => $page,
+    // 'totalRows' => $totalRows,
+    // 'totalPages' => $totalPages,
+    // 'page' => $page,
     'rows' => $rows,
-    'perPage' => $perPage,
+    // 'perPage' => $perPage,
 ];
 ?>
 
-
+<?php require __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col">
-            <nav aria-label="Page navigation example">
+            <!-- <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=1">
@@ -92,24 +100,10 @@ $output = [
                 </ul>
             </nav>
         </div>
+        
+        <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button> -->
 
-        <div class="d-flex justify-content-center">
-            <form action="ticket-search.php">
-                <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-
-        <style>
-            .btn {
-                width: 150px;
-                height: 50px;
-            }
-        </style>
-
-        <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button>
-
-    </div>
+    <!-- </div> -->
 
 
     <div class="row">
