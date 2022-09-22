@@ -37,7 +37,7 @@ if (empty($r)) {
                         <div class="mb-3">
                             <label for="area_sid" class="form-label">地區名稱</label>
                             <br>
-                            <select type="text" name="area_sid" id="areasel" value="<?= $r['area_sid'] ?>"></select>
+                            <select type="text" name="area_sid" id="areasel"></select>
                         </div>
                         <div class="mb-3">
                             <label for="hotel_name" class="form-label">飯店名稱</label>
