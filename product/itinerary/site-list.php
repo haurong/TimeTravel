@@ -4,9 +4,16 @@
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
 <div class="container">
+
+    <!-- <div class="row d-flex justify-content-center">
+        <form action="site-search.php" class="form-inline my-2 my-lg-0">
+            <input name="search" class="form-control mr-sm-2" type="search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
+        </form>
+    </div> -->
     <div class="row">
         <!-- 分類選單 -->
-        <div class="col">
+        <div class="col d-flex justify-content-center mt-3">
             <div class="btn-group">
                 <a type="button" href="?" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>">所有分類</a>
                 <?php foreach ($cates as $c) : ?>
@@ -15,39 +22,47 @@
             </div>
         </div>
         <!-- 分類選單 -->
-        
-        <div class="col">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-left"></i>
-                        </a>
-                    </li>
 
-                    <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                        if ($i >= 1 and $i <= $totalPages) :
-                            $pageBtnQS['page']=$i;
-                    ?>
-                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href ="?<?= http_build_query($pageBtnQS) ?>"><?= $i ?></a>
-                            </li>
-                    <?php
-                        endif;
-                    endfor; ?>
 
-                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
-                            <i class="fa-solid fa-circle-arrow-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center mt-3">
+
+            <ul class="pagination">
+                <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </a>
+                </li>
+
+                <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                    if ($i >= 1 and $i <= $totalPages) :
+                        $pageBtnQS['page'] = $i;
+                ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?<?= http_build_query($pageBtnQS) ?>"><?= $i ?></a>
+                        </li>
+                <?php
+                    endif;
+                endfor; ?>
+
+                <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+
         </div>
     </div>
-    <button type="button" class="btn btn-primary" onclick="location.href='site-insert.php'">新增景點</button>
+    <div class="row ">
+        <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" onclick="location.href='site-insert.php'">新增景點</button>
+            <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
+        </div>
+    </div>
     <!-- <button type="submit" class="btn btn-warning">刪除</button> -->
-    <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
+
     <div class="row">
         <div class="col">
             <table class="table table-striped table-bordered">
@@ -58,13 +73,13 @@
                             <!-- <input type="checkbox" onclick="check_all(this,'c')"> -->
                         </th>
                         <th scope="col">#</th>
-                        <th scope="col">景點名稱</th>
-                        <th scope="col">地區</th>
-                        <th scope="col">分類</th>
-                        <th scope="col">簡介</th>
-                        <th scope="col">照片</th>
-                        <th scope="col">網站</th>
-                        <th scope="col">detail</th>
+                        <th scope="col" style="width: 100px">景點名稱</th>
+                        <th scope="col" style="width: 100px">地區</th>
+                        <th scope="col" style="width: 100px">分類</th>
+                        <th scope="col" style="width: 250px">簡介</th>
+                        <th scope="col" style="width: 250px">照片</th>
+                        <th scope="col" style="width: 80px">網站</th>
+                        <th scope="col" style="width: 80px">detail</th>
                         <th><i class="fa-solid fa-pen-to-square"></i></th>
                     </tr>
                 </thead>
@@ -88,7 +103,7 @@
                                 <a href="site-detail.php?sid=<?= $r['sid'] ?>">detail</a>
                             </td>
                             <td>
-                                <a href="site-edit.php?sid=<?= $r['sid']?>">
+                                <a href="site-edit.php?sid=<?= $r['sid'] ?>">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </a>
                             </td>

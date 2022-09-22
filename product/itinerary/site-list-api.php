@@ -1,19 +1,16 @@
 <?php 
 $pageName = 'list';
 
-$perPage = 5; // 一頁有幾筆
+$perPage = 10; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 分類篩選
-// $area = isset($_GET['area']) ? intval($_GET['area']) : 0;
+
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
 $pageBtnQS=[];
 
 $where = ' WHERE 1 ';
-// if(! empty($area)){
-//     $where .= "AND area_sid=$area";
-//     $pageBtnQS['area'] = $area;
-// }
+
 if(! empty($cate)){
     $where .= " AND `site`.`site_category_sid` = $cate";
     $pageBtnQS['cate'] = $cate;
@@ -25,10 +22,9 @@ $t_sql = "SELECT COUNT(1) FROM `site` $where";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 $totalPages = ceil($totalRows / $perPage);
-// if($page<1) $page=1;
-// if($page>$totalPages) $page=$totalPages;
 
 $rows = [];
+
 // 如果有資料
 if ($totalRows) {
     if ($page < 1) {
@@ -54,8 +50,6 @@ if ($totalRows) {
 }
 
 //分類資料
-// $a_sql = sprintf("SELECT * FROM `area`") ;
-// $areas = $pdo->query($a_sql)->fetchAll();
 $c_sql = "SELECT * FROM site_categories " ;
 $cates = $pdo->query($c_sql)->fetchAll();
 //分類資料
