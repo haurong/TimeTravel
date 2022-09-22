@@ -84,8 +84,8 @@ $output = [
 
 <div class="mx-5 mt-3">
     <div class="d-flex justify-content-center">
-        <form action="stays-search.php">
-            <input type="text" name="search" class="searchbar ">
+        <form action="stays-search.php"  class="form-inline my-2 my-lg-0">
+            <input type="text" name="search" class="searchbar form-control mr-sm-2">
             <button type="submit">Search</button>
         </form>
     </div>
