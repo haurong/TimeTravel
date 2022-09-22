@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/../parts/connect_db.php'; 
+<?php
+//require __DIR__ . '/../parts/connect_db.php'; 
+require __DIR__ . '/../parts/connect_athome_db.php';
 $pageName = 'base';
 
 ?>

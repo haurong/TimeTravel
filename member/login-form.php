@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_db.php';
-// require __DIR__ . '/../parts/connect_athome_db.php';
+// require __DIR__ . '/../parts/connect_db.php';
+require __DIR__ . '/../parts/connect_athome_db.php';
 $pageName = 'login';
 ?>
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
