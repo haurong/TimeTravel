@@ -104,9 +104,6 @@ if (empty($r)) {
                             <input type="radio" name="on_sale" value="2" id="notsale" require>
                         </div>
 
-
-
-
                         <button type="submit" class="btn btn-primary" id="btn">Submit</button>
                     </form>
                 </div>
@@ -174,23 +171,29 @@ if (empty($r)) {
         return value.city_sid == (citylocation.selectedIndex) + 1
     })
 
-    firstarea.forEach(function(value,index,array){
-        let { area_name , area_sid} = value
-        arealocation[index] = new Option(area_name,area_sid)
-        if((arealocation[index].value) == <?= $r['area_sid'] ?>){
-           
-            arealocation[index].setAttribute('selected','selected')
+    firstarea.forEach(function(value, index, array) {
+        let {
+            area_name,
+            area_sid
+        } = value
+        arealocation[index] = new Option(area_name, area_sid)
+        if ((arealocation[index].value) == <?= $r['area_sid'] ?>) {
+
+            arealocation[index].setAttribute('selected', 'selected')
         }
     })
 
-    citylocation.addEventListener('change',function(){
-            arealocation.options.length = 0;
-            citychoose = citylocation.options[citylocation.selectedIndex].value
-            let areafilter = area.filter(function(value,index,array){
-                    return value.city_sid == citychoose
-                })
-            areafilter.forEach(function(value, index, array) {
-            let {area_name,area_sid} = value
+    citylocation.addEventListener('change', function() {
+        arealocation.options.length = 0;
+        citychoose = citylocation.options[citylocation.selectedIndex].value
+        let areafilter = area.filter(function(value, index, array) {
+            return value.city_sid == citychoose
+        })
+        areafilter.forEach(function(value, index, array) {
+            let {
+                area_name,
+                area_sid
+            } = value
             arealocation[index] = new Option(area_name, area_sid)
         })
     })

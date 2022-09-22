@@ -13,8 +13,8 @@ $pageName = 'insert';
 
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
-                    <form name="form1"  method="post" onsubmit="checkForm(); return false;">
-                                        
+                    <form name="form1" method="post" onsubmit="checkForm(); return false;">
+
                         <div class="mb-3">
                             <label for="product_number" class="form-label">票券代號</label>
                             <input type="text" class="form-control" id="product_number" name="product_number" required>
@@ -52,7 +52,7 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="product_cover" class="form-label">封面圖片</label>
-                            <input type="file" class="form-control" id="product_cover" name="product_cover">
+                            <input type="text" class="form-control" id="product_cover" name="product_cover">
                         </div>
 
                         <div class="mb-3">
@@ -62,7 +62,8 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="categories_id" class="form-label">類別</label>
-                            <input type="text" class="form-control" id="categories_id" name="categories_id">
+                            <select type="text" name="categories_id" id="cateOption">
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -71,8 +72,11 @@ $pageName = 'insert';
                         </div>
 
                         <div class="mb-3">
-                            <label for="on_sale" class="form-label">狀態</label>
-                            <input type="text" class="form-control" id="on_sale" name="on_sale">
+                            <label class="form-label">上下架狀態:&nbsp</label>
+                            <label class="form-label " for="onsale">上架</label>
+                            <input type="radio" name="on_sale" value="1" id="sale" require>
+                            <label class="form-label " for="onsale">下架</label>
+                            <input type="radio" name="on_sale" value="2" id="notsale" require>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -85,28 +89,58 @@ $pageName = 'insert';
 </div>
 
 
-<script>
-        function checkForm() {
-
-            const fd = new FormData(document.form1);
-
-            for (let k of fd.keys()) {
-                console.log(`${k}: ${fd.get(k)}`);
-            }
-
-            fetch('ticket-insert-api.php', {
-                method: 'POST',
-                body: fd
-            }).then(r => r.json()).then(obj => {
-                console.log(obj);
-                if(!obj.success){
-                    alert(obj.error);
-                }else{
-                    alert('新增成功');
-                    location.href = 'ticket.php';
-                }
-            })
-        }
-</script>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
+<script src="tickets.js"></script>
+<script>
+    let cateOption = document.getElementById('cateOption');
+    let sale = document.getElementById('sale');
+    let notsale = document.getElementById('notsale');
+    let citylocation = document.getElementById('citylocation');
+    let arealocation = document.getElementById('arealocation');
+    let btn = document.getElementById('btn');
+
+    // 票券種類
+    ticketsCategories.forEach(function(value, index, array) {
+        let {
+            classname,
+            id
+        } = value;
+        cateOption[index] = new Option(classname, id);
+
+        if ((cateOption[index].value) == <?= $r['categories_id'] ?>) {
+            cateOption[index].setAttribute('selected', 'selected')
+        }
+    })
+
+    // 上下架狀態
+    if ('<?= $r['on_sale'] ?>' == "1") {
+        sale.checked = true;
+    } else if ('<?= $r['on_sale'] ?>' == "2") {
+        notsale.checked = true;
+    }
+
+
+    function checkForm() {
+
+        const fd = new FormData(document.form1);
+
+        for (let k of fd.keys()) {
+            console.log(`${k}: ${fd.get(k)}`);
+        }
+
+        fetch('ticket-insert-api.php', {
+            method: 'POST',
+            body: fd
+        }).then(r => r.json()).then(obj => {
+            console.log(obj);
+            if (!obj.success) {
+                alert(obj.error);
+            } else {
+                alert('新增成功');
+                location.href = 'ticket.php';
+            }
+        })
+    }
+</script>
+
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
