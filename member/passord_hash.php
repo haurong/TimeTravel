@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_athome_db.php';
-// require __DIR__ . '/../parts/connect_db.php';
+// require __DIR__ . '/../parts/connect_athome_db.php';
+require __DIR__ . '/../parts/connect_db.php';
 
 $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 

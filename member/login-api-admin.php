@@ -1,6 +1,6 @@
 <?php
-// require __DIR__ . '/../parts/connect_db.php';
-require __DIR__ . '/../parts/connect_athome_db.php';
+require __DIR__ . '/../parts/connect_db.php';
+// require __DIR__ . '/../parts/connect_athome_db.php';
 header('Content-Type: application/json');
 
 $output = [
@@ -11,7 +11,7 @@ $output = [
 
 
 if (empty($_POST['email']) or empty($_POST['password'])) {
-    $output['error'] = '參數不足';
+    $output['error'] = '請輸入帳號密碼';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit; // 結束程式
 }

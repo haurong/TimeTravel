@@ -7,5 +7,4 @@ $pageName = 'base';
 <div class="container">
 Home
 </div>
-<?php include __DIR__ . '/../parts/scripts.php'; ?>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>

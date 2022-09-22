@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_athome_db.php';
-// require __DIR__ . '/../parts/connect_db.php';
+// require __DIR__ . '/../parts/connect_athome_db.php';
+require __DIR__ . '/../parts/connect_db.php';
 
 header('Content-Type: application/json');
 
@@ -19,13 +19,12 @@ if (empty($_POST['username'])) {
 }
 
 // TODO: 檢查欄位資料
-$hash = password_hash($_POST['password_hash'], PASSWORD_DEFAULT);
-$sql =
-    "SELECT `password_hash` FROM member_information WHERE `password_hash` = '$hash'";
+
+// $sql =
+//     "SELECT `password_hash` FROM member_information WHERE `password_hash` = '$hash'";
 
 $telephone = null;
-$sql = "SELECT `password_hash` FROM member_information WHERE `password_hash` = '$hash'
-INSERT INTO `member_information`(
+$sql = "INSERT INTO `member_information`(
     `username`,
     `email`,
     `password_hash`,
@@ -39,7 +38,7 @@ try {
     $stmt->execute([
         $_POST['username'],
         $_POST['email'],
-        $_POST['password_hash'],
+        password_hash($_POST['password_hash'], PASSWORD_DEFAULT),
         $_POST['telephone'],
     ]);
 } catch (PDOException $ex) {
