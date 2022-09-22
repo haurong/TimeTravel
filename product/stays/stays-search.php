@@ -125,9 +125,9 @@ $output = [
 
 <div class="mx-5 mt-3">
     <div class="d-flex justify-content-center">
-        <form action="stays-search.php"  class="form-inline my-2 my-lg-0">
-            <input type="text" name="search" class="searchbar form-control mr-sm-2">
-            <button type="submit">Search</button>
+        <form action="stays-search.php"  class="">
+            <input type="text" name="search" class="searchbar">
+            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
         </form>
     </div>
     <div class="row justify-content-center d-flex align-items-center">
