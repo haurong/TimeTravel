@@ -33,7 +33,7 @@ if (empty($row)) {
 if (password_verify($_POST['password'], $row['password_hash'])) {
     $output['success'] = true;
     $_SESSION['admin'] = [
-        'sid' => $row['sid'],
+        'username' => $row['username'],
         'email' => $row['email'],
     ];
 } else {

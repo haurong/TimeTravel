@@ -13,7 +13,7 @@ $pageName = 'login';
                 <div class="card-body">
                     <h5 class="card-title">登入</h5>
 
-                    <form name="loginForm" onsubmit="checkForm(); return false;">
+                    <form name="loginForm" onsubmit="checkForm(); return false; ">
                         <div class="mb-3">
                             <label for="email" class="form-label">帳號</label>
                             <input type="text" class="form-control" id="email" name="email">
