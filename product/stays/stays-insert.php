@@ -54,7 +54,7 @@ $totalPages = ceil($totalRows / $perPage);
                         </div>
                         <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
-                            <input type="text" class="form-control" id="picture" name="picture">
+                            <input type="text" class="form-control" id="picture" name="picture" readonly>
 
                             <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
                         </div>

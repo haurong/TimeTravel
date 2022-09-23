@@ -57,7 +57,9 @@ if (empty($r)) {
                         </div>
                         <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
-                            <input type="text" class="form-control" id="picture" name="picture" value="<?= $r['picture'] ?>">
+                            <input type="text" class="form-control" id="picture" name="picture" value = "<?= $r['picture'] ?>"readonly>
+
+                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
                         </div>
                         <div class="mb-3">
                             <label class="form-label mr-5">WIFI</label>
@@ -104,6 +106,9 @@ if (empty($r)) {
                         </div>
                         <button type="submit" class="btn btn-primary" id="submitbtn">更改</button>
                     </form>
+                    <form action="" name="form_for_picture" style="display: none;">
+                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                    </form> 
                 </div>
             </div>
 
@@ -127,6 +132,10 @@ if (empty($r)) {
     let dinnertrue = document.getElementById('dinnertrue')
     let dinnerfalse = document.getElementById('dinnerfalse')
 
+
+    let realpicture = document.getElementById('realpicture')
+
+    let picture = document.getElementById('picture')
 
 
     hotelcategories.forEach(function(value,index,array){
@@ -209,6 +218,22 @@ if (empty($r)) {
         dinnerfalse.checked = true
     }
 
+    realpicture.addEventListener('change',function(){
+        console.log(realpicture.files);
+        let fd_for_pic = new FormData(document.form_for_picture)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('uploadpicapi.php',{
+            method:'POST',
+            body:fd_for_pic,
+        }).then(function(fdfp_r){
+            return fdfp_r.json()
+        }).then(function(fdfp_obj){
+            // console.log(fdfp_obj.filename);
+            picture.value = fdfp_obj.filename
+        })
+    })
 
     function checkForm() {
         let fd = new FormData(document.form1);
