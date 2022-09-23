@@ -44,40 +44,7 @@ $output = [
     'perPage' => $perPage,
 ];
 
-if (!isset($_SESSION['food-cart'])) {
-    $_SESSION['food-cart'] = [];
-}
 
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
-$qty = isset($_GET['qty']) ? intval($_GET['qty']) : 0;
-
-// C: 加到購物車, sid, qty
-// R: 查看購物車內容
-// U: 更新, sid, qty
-// D: 移除項目, sid
-
-if (!empty($sid)) {
-    if (!empty($qty)) {
-        // 新增或變更
-        if (!empty($_SESSION['food-cart'][$sid])) {
-            // 已存在, 變更
-            $_SESSION['food-cart'][$sid]['qty'] = $qty;
-        } else {
-            // 新增
-            // TODO: 檢查資料表是不是有這個商品
-
-            $row = $pdo->query("SELECT * FROM food_product_all WHERE sid=$sid")->fetch();
-            if (!empty($row)) {
-                $row['qty'] = $qty;  // 先把數量放進去
-                $_SESSION['food-cart'][$sid] = $row;
-            }
-        }
-    } else {
-        // 刪除項目
-        unset($_SESSION['food-cart'][$sid]);
-    }
-}
-// echo json_encode($_SESSION['food-cart']);
 // echo json_encode($output); exit;
 
 ?>
@@ -152,7 +119,7 @@ if (!empty($sid)) {
             <tbody>
                 <!--foreach去抓底下的資料欄位-->
                 <?php foreach ($rows as $r) : ?>
-                    <form action="food-list.php">
+                    <form action="./../../cart/put-in-cart-food.php">
                         <tr>
                             <td>
                                 <a href="javascript: delete_it(<?= $r['sid'] ?>)">
