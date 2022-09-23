@@ -16,7 +16,7 @@ $pageName = 'site_insert';
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-row">
-                <div class="mb-3 pr-2" >
+                <div class="mb-3 pr-2">
                     <label for="city_name" class="form-label">縣市名稱</label>
                     <br>
                     <select name="city_name" id="citysel" name="city_sid"></select>
@@ -38,7 +38,9 @@ $pageName = 'site_insert';
             </div>
             <div class="form-group">
                 <label for="img_small">圖片</label>
-                <input type="text" id="img_small" name="img_small">
+                <input type="text" class="form-control" id="img_small" name="img_small" readonly>
+                <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
+
             </div>
             <div class="form-group">
                 <label for="website">外部網站</label>
@@ -49,10 +51,13 @@ $pageName = 'site_insert';
                 <input type="text" class="form-control" id="map" name="map">
             </div>
 
-            
+
 
             <button type="submit" onclick="checkForm(); return false;" class="btn btn-primary">確認並送出</button>
             <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
+        </form>
+        <form action="" name="form_for_picture" style="display: none;">
+            <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
         </form>
     </div>
 </div>
@@ -65,35 +70,69 @@ $pageName = 'site_insert';
     let citysel = document.getElementById('citysel')
     let areasel = document.getElementById('areasel')
 
-    cate.forEach((value, index, arry)=>{
-        let {site_category_name, site_category_sid} =value
+    cate.forEach((value, index, arry) => {
+        let {
+            site_category_name,
+            site_category_sid
+        } = value
         catesel[index] = new Option(site_category_name, site_category_sid)
     })
 
-    county.forEach(function(value,index,array){
-            let {city_name,city_sid} = value
-            citysel[index] = new Option(city_name,city_sid)
-        })
+    county.forEach(function(value, index, array) {
+        let {
+            city_name,
+            city_sid
+        } = value
+        citysel[index] = new Option(city_name, city_sid)
+    })
 
-    let firstarea = area.filter(function(value,index,array){
+    let firstarea = area.filter(function(value, index, array) {
         return value.city_sid == 1
     })
     firstarea.forEach(function(value, index, array) {
-        let {area_name,area_sid} = value
+        let {
+            area_name,
+            area_sid
+        } = value
         areasel[index] = new Option(area_name, area_sid)
     })
 
-    citysel.addEventListener('change',function(){
-            areasel.options.length = 0;
-            citychoose = citysel.options[citysel.selectedIndex].value
-            let areafilter = area.filter(function(value,index,array){
-                    return value.city_sid == citychoose
-                })
-            areafilter.forEach(function(value, index, array) {
-            let {area_name,area_sid} = value
+    citysel.addEventListener('change', function() {
+        areasel.options.length = 0;
+        citychoose = citysel.options[citysel.selectedIndex].value
+        let areafilter = area.filter(function(value, index, array) {
+            return value.city_sid == citychoose
+        })
+        areafilter.forEach(function(value, index, array) {
+            let {
+                area_name,
+                area_sid
+            } = value
             areasel[index] = new Option(area_name, area_sid)
         })
+    })
+
+    let realpicture = document.getElementById('realpicture')
+
+    let img_small = document.getElementById('img_small')
+
+    realpicture.addEventListener('change', function() {
+        console.log(realpicture.files);
+        let fd_for_pic = new FormData(document.form_for_picture)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('uploadpicapi.php', {
+            method: 'POST',
+            body: fd_for_pic,
+        }).then(function(fdfp_r) {
+            return fdfp_r.json()
+        }).then(function(fdfp_obj) {
+            console.log(fdfp_obj);
+            img_small.value = fdfp_obj.filename
         })
+    })
+
 
     function checkForm() {
         const fd = new FormData(document.form1);

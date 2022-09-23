@@ -57,7 +57,7 @@
     </div>
     <div class="row ">
         <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" onclick="location.href='site-insert.php'">新增景點</button>
+            <button type="button" class="btn btn-primary mr-1" onclick="location.href='site-insert.php'">新增景點</button>
             <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
         </div>
     </div>

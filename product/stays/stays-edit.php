@@ -107,7 +107,7 @@ if (empty($r)) {
                         <button type="submit" class="btn btn-primary" id="submitbtn">更改</button>
                     </form>
                     <form action="" name="form_for_picture" style="display: none;">
-                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                        <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
                     </form> 
                 </div>
             </div>
@@ -136,6 +136,10 @@ if (empty($r)) {
     let realpicture = document.getElementById('realpicture')
 
     let picture = document.getElementById('picture')
+
+    let delpic_form = new FormData()
+    let delpic = picture.value
+    delpic_form.append('delname',delpic)
 
 
     hotelcategories.forEach(function(value,index,array){
@@ -218,23 +222,40 @@ if (empty($r)) {
         dinnerfalse.checked = true
     }
 
+    console.log(picture.value);
+    
     realpicture.addEventListener('change',function(){
         console.log(realpicture.files);
         let fd_for_pic = new FormData(document.form_for_picture)
+        let delpic_form = new FormData()
+        let delpic = picture.value
+        delpic_form.append('delname',delpic)
         // for (let fdfp of fd_for_pic.keys()) {
         //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
         // }
+        
+        
         fetch('uploadpicapi.php',{
-            method:'POST',
-            body:fd_for_pic,
-        }).then(function(fdfp_r){
-            return fdfp_r.json()
-        }).then(function(fdfp_obj){
-            // console.log(fdfp_obj.filename);
-            picture.value = fdfp_obj.filename
-        })
-    })
+                method:'POST',
+                body:fd_for_pic,
+            }).then(function(fdfp_r){
+                return fdfp_r.json()
+            }).then(function(fdfp_obj){
+                // console.log(fdfp_obj.filename);
+                picture.value = fdfp_obj.filename
+            })
 
+        // fetch('deloldpicapi.php',{
+        //             method:'POST',
+        //             body:delpic_form,
+        //         }).then(function(delpic_r){
+        //             return delpic_r.json()
+        //         }).then(function(delpic_obj){
+        //             console.log(delpic_obj.success);
+        //         })
+    
+        
+    }) 
     function checkForm() {
         let fd = new FormData(document.form1);
         for (let k of fd.keys()) {
@@ -260,7 +281,16 @@ if (empty($r)) {
                     alert('更改成功')
                     location.href = 'stays.php';
                 }
-            })
+        })
+
+        fetch('deloldpicapi.php',{
+                    method:'POST',
+                    body:delpic_form,
+                }).then(function(delpic_r){
+                    return delpic_r.json()
+                }).then(function(delpic_obj){
+                    console.log(delpic_obj.success);
+                })
     }
 </script>
 

@@ -108,14 +108,13 @@ $rows = $pdo->query($sql)->fetchAll();
 
                     <?php foreach ($rows as $r) : ?>
                         <h2><?= $r['name'] ?></h2>
-                        <h3>所在地區:<?= $r['city_name'] ?><?= $r['area_name'] ?></h3>
-                        <h3>分類:<?= $r['site_category_name'] ?></h3>
-                        <h3>簡介:<?= $r['description'] ?></h3>
-                        <h3>網站:<a href="<?= $r['website'] ?>"></a></h3>
+                        <h5>所在地區:<?= $r['city_name'] ?><?= $r['area_name'] ?></h5>
+                        <h5>分類:<?= $r['site_category_name'] ?></h5>
+                        <h5>簡介:<?= $r['description'] ?></h5>
+                        <h5>網站:<a href="<?= $r['website'] ?>"></a></h5>
                         <div class="map-box">
                             <h3>所在位置:</h3>
-                            <iframe src="https://www.google.com/maps/embed?pb=<?= $r['map'] ?>!5m2!1szh-TW!2stw" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                            <?= $r['map'] ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
