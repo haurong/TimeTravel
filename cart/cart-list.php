@@ -142,7 +142,7 @@ if (!isset($_SESSION['ticket-cart'])) {
     // console.log(tr);
     // }
     function removefood(sid){
-        location.href = `removefood.php?sid=${sid}`;
+        location.href = `remove-from-cart-food.php?sid=${sid}`;
     }
 </script>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
