@@ -2,7 +2,15 @@
 // require __DIR__ . '/parts/admin-required.php';
 require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'insert';
+
+$lastsql ="SELECT * FROM `tickets`
+WHERE 1
+order by SID DESC
+LIMIT 1"; 
+$last = $pdo->query($lastsql)->fetch();
 ?>
+
+
 
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
@@ -17,7 +25,7 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="product_number" class="form-label">票券代號</label>
-                            <input type="text" class="form-control" id="product_number" name="product_number" required>
+                            <input type="text" class="form-control" id="product_number" name="product_number" readonly>
                         </div>
 
                         <div class="mb-3">
@@ -120,6 +128,15 @@ $pageName = 'insert';
 
     let realpicture2 = document.getElementById('realpicture2');
     let product_imgs = document.getElementById('product_imgs');
+
+    let product_number = document.getElementById('product_number');
+    let lastcode = "<?=$last['product_number']?>";
+    let T = lastcode.split('T');
+    let lastnumber = Number(T[1]);
+    console.log(lastnumber);
+    let new_ticket_num = "T" + (lastnumber+1);
+    console.log(new_ticket_num);
+    product_number.value = new_ticket_num;
 
     // 票券種類
     ticketsCategories.forEach(function(value, index, array) {
