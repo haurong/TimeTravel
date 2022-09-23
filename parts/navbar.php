@@ -6,7 +6,11 @@
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand"  href="/TimeTravel/index.php">TimeTravel</a>
+            <?php if (empty($_SESSION['admin'])) : ?>
+            <a class="navbar-brand" <?= $pageName=='index' ? 'active' : ''  ?>  href="/TimeTravel/index.php">TimeTravel</a>
+            <?php else : ($_SESSION['admin']) ?>
+            <a class="navbar-brand" <?= $pageName=='base' ? 'active' : ''  ?>  href="/TimeTravel/member/basepage.php">TimeTravel</a>
+            <?php endif; ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

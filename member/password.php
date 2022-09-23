@@ -4,6 +4,7 @@
 
 <form class="needs-validation col-6 mx-auto" name="signinForm" action="" onsubmit="checkForm();return false;" validate>
   <h4 class="text-center">重設密碼</h4>
+  <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
   <div class="my-3">
     <label for="password">舊密碼</label>
     <input type="password" class="form-control" id="old_password" placeholder="old_password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="old_password" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入舊密碼');" required />

@@ -30,7 +30,6 @@ WHERE sid=?";
 
 $stmt = $pdo->prepare($sql);
 
-if()
 
 try {
     $stmt->execute([
