@@ -26,7 +26,7 @@ $pageName = 'base';
         <div class="card d-flex m-3 shadow p-3 mb-5 bg-white rounded">
             <img src="../imgs/itinerary_img.jpg" class="card-img-top" alt="...">
             <div class="card-body text-center">
-            <button type="button" class="btn btn-link  "><a href="./../product/./itinerary/./site-list.php">行程</a></button>
+            <button type="button" class="btn btn-link"><a href="./../product/./itinerary/./site-list.php">行程</a></button>
             </div>
         </div>
         <div class="card d-flex  m-3 shadow p-3 mb-5 bg-white rounded">

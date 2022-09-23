@@ -11,13 +11,18 @@ $output = [
     'postData' => $_POST, // 除錯用的
 ];
 
-if (empty($_POST['password'])) {
+if (empty($_POST['old_password'])) {
     $output['error'] = '參數不足';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
-
+if (password_verify($_POST['old_password'], $row['password_hash'])) {
+    $output['success'] = true;
+} else {
+    $output['error'] = '舊密碼錯誤！'; // 帳號錯誤
+    $output['code'] = 455;
+}
 // TODO: 檢查欄位資料
 
 // $sql =
@@ -44,10 +49,8 @@ if ($stmt->rowCount()) {
     $output['success'] = true;
 } else {
     if (empty($output['error']))
-        $output['error'] = '資料沒有新增';
+        $output['error'] = '密碼沒有修改成功';
 }
-
-
 
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
