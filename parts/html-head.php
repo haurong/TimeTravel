@@ -1,3 +1,17 @@
+<?php 
+if (!isset($_SESSION)) {
+    session_start();
+}
+if (!isset($_SESSION['food-cart'])) {
+    $_SESSION['food-cart'] = [];
+}
+if (!isset($_SESSION['hotel-cart'])) {
+    $_SESSION['hotel-cart'] = [];
+}
+if (!isset($_SESSION['ticket-cart'])) {
+    $_SESSION['ticket-cart'] = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="zh">
 
