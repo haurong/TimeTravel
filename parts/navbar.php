@@ -12,15 +12,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                <?php if (empty($_SESSION['admin'])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='base' ? 'active' : ''?>"  href="/TimeTravel/member/basepage.php">商品列表</a>
+                        <a class="nav-link <?= $pageName=='' ? 'disabled' : '' ?>"  href="">會員資料列表</a>
                     </li>
+                    <?php else : ($_SESSION['admin']) ?>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='member-list' ? 'active' : ''  ?>"  href="/TimeTravel/member/member-list.php">會員資料列表</a>
+                        <a class="nav-link <?= $pageName=='member-list' ? 'disabled' : '' ?>"  href="/TimeTravel/member/member-list.php">會員資料列表</a>
                     </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/TimeTravel/cart/cart-list.php">購物車
-                            <?php
+
+                        <?php
                             if (isset($_SESSION['food-cart'])||isset($_SESSION['hotel-cart'])||isset($_SESSION['ticket-cart'])) {
                                 $count = count($_SESSION['food-cart']) + count($_SESSION['hotel-cart']) + count($_SESSION['ticket-cart']);
                                 echo "<span class=\"badge badge-pill badge-info cart-count\">$count</span>";
@@ -41,7 +45,7 @@
                             <a class="nav-link" href="/TimeTravel/member/signin-form.php">註冊</a>
                         </li>
                     <?php else : ?>
-                        
+                    
                         <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?= $_SESSION['admin']['email'] ?></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
