@@ -51,7 +51,6 @@ $output = [
 
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
-<<<<<<< HEAD
 <style>
     .searchbar{
         width: 500px;
@@ -65,11 +64,6 @@ $output = [
             </form>      
     <div class="d-flex justify-content-center">     
          <nav aria-label="Page navigation example  justify-content-center">
-=======
-<div class="container-fluid p-4">
-    <div class="d-flex justify-content-center">
-        <nav aria-label="Page navigation example  justify-content-center">
->>>>>>> 7a16bab35c8311e3da945ab30f2004a5ade92d9e
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                     <a class="page-link" href="?page=1">
