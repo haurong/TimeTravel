@@ -23,23 +23,18 @@ if (empty($_POST['password'])) {
 // $sql =
 //     "SELECT `password_hash` FROM member_information WHERE `password_hash` = '$hash'";
 
-$telephone = null;
-$sql = "INSERT INTO `member_information`(
-    `username`,
-    `email`,
-    `password_hash`,
-    `telephone`
-    ) VALUES (?, ?, ?, ?)";
+$sql = "UPDATE `member_information` SET 
+`password_hash`=?
+WHERE sid=?";
+
 
 $stmt = $pdo->prepare($sql);
 
+if()
 
 try {
     $stmt->execute([
-        $_POST['username'],
-        $_POST['email'],
-        password_hash($_POST['password_hash'], PASSWORD_DEFAULT),
-        $_POST['telephone'],
+        password_hash($_POST['password_hash'], PASSWORD_DEFAULT)
     ]);
 } catch (PDOException $ex) {
     $output['error'] = $ex->getMessage();
