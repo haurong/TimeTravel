@@ -59,7 +59,7 @@ $output = [
 ?>
 
 <style>
-    .searchbar{
+    .searchbar {
         width: 600px;
         height: 50px;
     }
@@ -146,39 +146,48 @@ $output = [
                 </thead>
                 <tbody>
                     <?php foreach ($row as $r) : ?>
-                        <tr>
-                            <td>
-                                <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                            </td>
-                            <td><?= $r['sid'] ?></td>
-                            <td><?= $r['hotel_categories'] ?></td>
-                            <td><?= $r['city_name'] ?></td>
-                            <td><?= $r['area_name'] ?></td>
-                            <td><?= $r['hotel_name'] ?></td>
-                            <td><?= $r['hotel_code'] ?></td>
-                            <td><?= $r['phone'] ?></td>
-                            <td><?= $r['address'] ?></td>
-                            <td>
-                                <img style="width:200px"src="/../TimeTravel/imgs/hotel/A/<?= $r['picture'] ?>">
+                        <form action="./../../cart/put-in-cart-hotel.php">
+                            <tr>
+                                <td>
+                                    <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                                <td><?= $r['sid'] ?></td>
+                                <td><?= $r['hotel_categories'] ?></td>
+                                <td><?= $r['city_name'] ?></td>
+                                <td><?= $r['area_name'] ?></td>
+                                <td><?= $r['hotel_name'] ?></td>
+                                <td><?= $r['hotel_code'] ?></td>
+                                <td><?= $r['phone'] ?></td>
+                                <td><?= $r['address'] ?></td>
+                                <td>
+                                    <img style="width:200px" src="/../TimeTravel/imgs/hotel/A/<?= $r['picture'] ?>">
                                     <?= $r['picture'] ?>
-                                </img>
+                                    </img>
+                                </td>
+                                <td><?= $r['wifi'] ?></td>
+                                <td><?= $r['breakfast'] ?></td>
+                                <td><?= $r['lunch'] ?></td>
+                                <td><?= $r['dinner'] ?></td>
+                                <td><?= $r['check_in'] ?></td>
+                                <td><?= $r['check_out'] ?></td>
+                                <td><?= $r['facility'] ?></td>
+                                <td><?= $r['tag'] ?></td>
+                                <td>
+                                    <a href="stays-edit.php?sid=<?= $r['sid'] ?>">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                <input type="number" name="qty" value="1">
+                                <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
+                                <input type="hidden" name="hotel_name" value="<?= $r['hotel_name'] ?>">
+                                <input type="hidden" name="hotel_address" value="<?= $r['address'] ?>">
+                                <input type="submit" name="add_to_cart" value="加入購物車">
                             </td>
-                            <td><?= $r['wifi'] ?></td>
-                            <td><?= $r['breakfast'] ?></td>
-                            <td><?= $r['lunch'] ?></td>
-                            <td><?= $r['dinner'] ?></td>
-                            <td><?= $r['check_in'] ?></td>
-                            <td><?= $r['check_out'] ?></td>
-                            <td><?= $r['facility'] ?></td>
-                            <td><?= $r['tag'] ?></td>
-                            <td>
-                                <a href="stays-edit.php?sid=<?= $r['sid'] ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                            </td>
-                        </tr>
+                            </tr>
+                        </form>
                     <?php endforeach; ?>
                 </tbody>
             </table>

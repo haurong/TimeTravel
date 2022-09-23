@@ -39,6 +39,7 @@ $stmt = $pdo->prepare($sql);
 $product_address = null;
 
 
+
 try {
     $stmt->execute([
         $_POST['product_number'],

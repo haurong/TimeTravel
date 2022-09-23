@@ -3,27 +3,10 @@
 require __DIR__ . '/../../parts/connect_db.php';
 // $pageName = 'food-list';
 $search = $_GET['search'];
-// $perPage = 10; // 一頁有幾筆
-// $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-// 算總筆數
-// $t_sql = "SELECT COUNT(1) FROM food_product_all";
-
-// $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-
-// $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
-// 如果有資料
-// if ($totalRows) {
-//     if ($page < 1) {
-//         header('Location: ?page=1');
-//         exit;
-//     }
-//     if ($page > $totalPages) {
-//         header('Location: ?page=' . $totalPages);
-//         exit;
-//     }
+
     $sql = "SELECT * 
     FROM `food_product_all`
     JOIN `city` 
@@ -62,14 +45,20 @@ $output = [
 // echo json_encode($output); exit;
 
 ?>
+<style>
+    .searchbar{
+        width: 500px;
+        padding-bottom: 30px;
+    }
+</style>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-center">
-        <form action="food-search.php">
-            <input type="text" name="search" class="searchbar" >
-            <button type="submit">Search</button>
-        </form>
+    <form action="food-search.php" class="d-flex m-auto searchbar">
+                    <input type="text" name="search" class="searchbar p-1 " placeholder="請輸入關鍵字">
+                    <button class=" p-1 ml-3" type="submit">search</button>
+            </form>  
          <!-- <nav aria-label="Page navigation example  justify-content-center">
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
