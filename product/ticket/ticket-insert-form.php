@@ -59,7 +59,9 @@ $pageName = 'insert';
 
                         <div class="mb-3">
                             <label for="product_imgs" class="form-label">介紹圖片</label>
-                            <input type="text" class="form-control" id="product_imgs" name="product_imgs">
+                            <input type="text" class="form-control" id="product_imgs" name="product_imgs" readonly>
+
+                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture2.click()">上傳圖片</button>
                         </div>
 
                         <div class="mb-3">
@@ -92,6 +94,9 @@ $pageName = 'insert';
                     <form action="" name="form_for_picture" style="display: none;">
                                 <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
                     </form> 
+                    <form action="" name="form_for_picture2" style="display: none;">
+                                <input type="file" name="realpicture2" id="realpicture2" accept="image/png , image/jpeg" style="display: none;">
+                    </form> 
                 </div>
             </div>
 
@@ -112,6 +117,9 @@ $pageName = 'insert';
 
     let realpicture = document.getElementById('realpicture');
     let product_cover = document.getElementById('product_cover');
+
+    let realpicture2 = document.getElementById('realpicture2');
+    let product_imgs = document.getElementById('product_imgs');
 
     // 票券種類
     ticketsCategories.forEach(function(value, index, array) {
@@ -144,7 +152,7 @@ $pageName = 'insert';
             areasel[index] = new Option(area_name, area_sid)
         })
         })
-
+    // 產品封面
     realpicture.addEventListener('change',function(){
         console.log(realpicture.files);
         let fd_for_pic = new FormData(document.form_for_picture)
@@ -159,6 +167,24 @@ $pageName = 'insert';
         }).then(function(fdfp_obj){
             // console.log(fdfp_obj.filename);
             product_cover.value = fdfp_obj.filename
+        })
+    })
+
+    // 介紹圖片
+    realpicture2.addEventListener('change',function(){
+        console.log(realpicture2.files);
+        let fd_for_pic = new FormData(document.form_for_picture2)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('img-upload-api2.php',{
+            method:'POST',
+            body:fd_for_pic,
+        }).then(function(fdfp_r){
+            return fdfp_r.json()
+        }).then(function(fdfp_obj){
+            //console.log(fdfp_obj.filename);
+            product_imgs.value = fdfp_obj.filename
         })
     })
 
