@@ -1,7 +1,7 @@
 <?php 
-//連結權限頁
-//require __DIR__ . '/../../parts/connect_athome_db.php'; 
-require __DIR__ . '/../../parts/connect_db.php';
+
+require __DIR__ . '/../../parts/connect_athome_db.php'; 
+//require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-edit';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
