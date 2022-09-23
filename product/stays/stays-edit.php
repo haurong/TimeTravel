@@ -45,7 +45,7 @@ if (empty($r)) {
                         </div>
                         <div class="mb-3">
                             <label for="hotel_code" class="form-label">飯店代碼</label>
-                            <input type="text" class="form-control" id="hotel_code" name="hotel_code" value="<?= $r['hotel_code'] ?>">
+                            <input type="text" class="form-control" id="hotel_code" name="hotel_code" value="<?= $r['hotel_code'] ?>" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">飯店電話</label>

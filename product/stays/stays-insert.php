@@ -9,6 +9,12 @@ $t_sql = "SELECT COUNT(1) FROM hotel";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 $totalPages = ceil($totalRows / $perPage);
+$lastsql= "SELECT * 
+            FROM `hotel` 
+            WHERE 1
+            order by sid DESC
+            LIMIT 1";
+$last = $pdo->query($lastsql)->fetch();
 ?>
 
 
@@ -42,7 +48,7 @@ $totalPages = ceil($totalRows / $perPage);
                         </div>
                         <div class="mb-3">
                             <label for="hotel_code" class="form-label">飯店代碼</label>
-                            <input type="text" class="form-control" id="hotel_code" name="hotel_code">
+                            <input type="text" class="form-control" id="hotel_code" name="hotel_code" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">飯店電話</label>
@@ -118,10 +124,21 @@ $totalPages = ceil($totalRows / $perPage);
     let citysel = document.getElementById('citysel')
     let areasel = document.getElementById('areasel')
     let submitbtn = document.getElementById('submitbtn')
+    let hotel_code = document.getElementById('hotel_code')
 
     let realpicture = document.getElementById('realpicture')
 
     let picture = document.getElementById('picture')
+
+    let lastcode = "<?=$last['hotel_code']?>"
+    console.log(lastcode);
+    let A = lastcode.split('A')
+    console.log(A);
+    let lastnumber = Number(A[1])
+    console.log(lastnumber);
+    let lasthotelcode = "A"+ (lastnumber+1)
+    console.log(lasthotelcode);
+    hotel_code.value = lasthotelcode
 
     hotelcategories.forEach(function(value, index, array) {
         let {hotel_categories,hotel_categories_sid} = value
