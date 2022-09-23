@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/../../parts/connect_huang_db.php';
+<?php include __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/navbar.php'; ?>
+
+<?php require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 30; //一頁幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
@@ -191,3 +194,5 @@ $output = [
     </script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
+<?php include __DIR__ . '/../../parts/script.php';?>
+<?php include __DIR__ . '/../../parts/html-foot.php'; ?>
