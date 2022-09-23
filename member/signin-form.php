@@ -2,11 +2,11 @@
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
 
-<form class="needs-validation col-6 mx-auto" name="signinForm" action="" onsubmit="checkForm();return false;" validate>
+<form class="needs-validation col-6 mx-auto" name="signinForm" action="register.php" method="post" onsubmit="checkForm();return false;" validate>
   <h4 class="text-center">創建帳戶</h4>
   <div class="my-3">
     <label for="username">姓名</label>
-    <input type="text" class="form-control" id="username" placeholder="username" name="username" required>
+    <input type="text" class="form-control" id="username" placeholder="王小明" name="username" required>
     <div class="invalid-feedback">
       請輸入正確姓名
     </div>
@@ -16,7 +16,7 @@
   </div>
   <div class="my-3">
     <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+    <input type="email" class="form-control" id="email" placeholder="example@mail.com" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
     <div class="invalid-feedback">
       請輸入正確的email格式
     </div>
@@ -26,20 +26,20 @@
   </div>
   <div class="my-3">
     <label for="password">密碼</label>
-    <input type="password" class="form-control" id="password" placeholder="password" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password_hash" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
-    <div class="valid" id="passwordStatus">
+    <input type="password" class="form-control" id="password" placeholder="請輸入8個字元以上的英文大小寫字母、數字" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password_hash" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
+    <!-- <div class="valid" id="passwordStatus">
       請輸入8個字元以上的英文大小寫字母、數字
-    </div>
+    </div> -->
   </div>
   <div class="my-3">
     <label for="password_check">再次輸入密碼</label>
-    <input type="password" class="form-control" id="password_check" placeholder="password_check" oninput="setCustomValidity('');" onchange="if(document.getElementById('password').value != document.getElementById('password_check').value){setCustomValidity('密碼不相同');}" required />
+    <input type="password" class="form-control" id="password_check" placeholder="再次輸入相同密碼" oninput="setCustomValidity('');" onchange="if(document.getElementById('password').value != document.getElementById('password_check').value){setCustomValidity('密碼不相同');}" required />
     <div class="valid" id="passwordCheckStatus">
     </div>
   </div>
   <div class="my-3">
     <label for="telephone">手機號碼</label>
-    <input type="text" class="form-control" id="telephone" placeholder="telephone" name="telephone">
+    <input type="text" class="form-control" id="telephone" placeholder="09xxxxxxxx" name="telephone">
     <div class="invalid-feedback">
       請輸入正確姓名
     </div>

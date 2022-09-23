@@ -1,5 +1,8 @@
-<?php include __DIR__ . '/../parts/html-head.php'; ?>
-<?php include __DIR__ . '/../parts/navbar.php'; ?>
+<?php include __DIR__ . '/../parts/html-head.php'; 
+include __DIR__ . '/../parts/navbar.php'; 
+$pageName = 'list';
+?>
+
 
 <div class="container">
     <div class="btn-group-vertical col-2 my-3" role="group" aria-label="Vertical button group">
@@ -10,5 +13,6 @@
         <a type="button" class="btn btn-outline-dark py-2" href="./ticket/ticket.php">票卷</a>
     </div>
 </div>
+
 <?php include __DIR__ . '/../parts/script.php';?>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>

@@ -1,5 +1,67 @@
 <?php require __DIR__ . '/../../parts/connect_db.php'; ?>
-<?php require __DIR__ . '/site-list-api.php'; ?>
+
+<?php 
+$pageName = 'list';
+
+$perPage = 10; // 一頁有幾筆
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+// 分類篩選
+
+$cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
+$pageBtnQS=[];
+
+$where = ' WHERE 1 ';
+
+if(! empty($cate)){
+    $where .= " AND `site`.`site_category_sid` = $cate";
+    $pageBtnQS['cate'] = $cate;
+}
+// 分類篩選
+
+// 算總筆數  +$where
+$t_sql = "SELECT COUNT(1) FROM `site` $where";  
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+$totalPages = ceil($totalRows / $perPage);
+
+$rows = [];
+$search = $_GET['search'];
+// 如果有資料
+if ($totalRows) {
+    if ($page < 1) {
+        header('Location: ?page=1');
+        exit;
+    }
+    if ($page > $totalPages) {
+        header('Location: ?page=' . $totalPages);
+        exit;
+    }
+
+    $sql = 
+        "SELECT * FROM `site` 
+        JOIN `area` ON `site`.`area_sid`=`area`.`area_sid` 
+        JOIN `city` ON `area`.`city_sid`=`city`.`city_sid`
+        JOIN `site_categories` ON `site`.`site_category_sid`=`site_categories`.`site_category_sid`
+        WHERE `name` LIKE '%$search%'
+        ORDER BY `site`.`sid`"    ;
+    $rows = $pdo->query($sql)->fetchAll();
+}
+
+//分類資料
+$c_sql = "SELECT * FROM site_categories " ;
+$cates = $pdo->query($c_sql)->fetchAll();
+//分類資料
+
+$output = [
+    'totalRows' => $totalRows,
+    'totalPages' => $totalPages,
+    'page' => $page,
+    'rows' => $rows,
+    'perPage' => $perPage,
+];
+
+?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
@@ -7,25 +69,25 @@
 
     <div class="row d-flex justify-content-center">
         <form action="site-search.php" class="form-inline my-2 my-lg-0">
-            <input name="search" class="form-control mr-sm-2" type="search" aria-label="Search">
+            <input name="search" class="form-control mr-sm-2" type="text" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
         </form>
     </div>
     <div class="row">
         <!-- 分類選單 -->
-        <div class="col d-flex justify-content-center mt-3">
+        <!-- <div class="col d-flex justify-content-center mt-3">
             <div class="btn-group">
                 <a type="button" href="?" class="btn btn-primary <?= empty($cate) ? 'active' : '' ?>">所有分類</a>
                 <?php foreach ($cates as $c) : ?>
                     <a type="button" href="?cate=<?= $c['site_category_sid'] ?>" class="btn btn-primary <?= $cate == $c['site_category_sid'] ? 'active' : '' ?>"><?= $c['site_category_name'] ?></a>
                 <?php endforeach; ?>
             </div>
-        </div>
+        </div> -->
         <!-- 分類選單 -->
 
 
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col d-flex justify-content-center mt-3">
 
             <ul class="pagination">
@@ -54,7 +116,7 @@
             </ul>
 
         </div>
-    </div>
+    </div> -->
     <div class="row ">
         <div class="col d-flex justify-content-end">
             <button type="button" class="btn btn-primary" onclick="location.href='site-insert.php'">新增景點</button>
