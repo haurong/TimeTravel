@@ -54,12 +54,9 @@ $totalPages = ceil($totalRows / $perPage);
                         </div>
                         <div class="mb-3">
                             <label for="picture" class="form-label">飯店圖片</label>
-                            <input type="text" class="form-control" id="picture" name="picture">
+                            <input type="text" class="form-control" id="picture" name="picture" readonly>
 
-                            <form action="" name="2" style="display: none;">
-                                <input type="file" name="realpicture" id="" accept="image/png , image/jpeg">    
-                            </form> 
-                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn">上傳圖片</button>
+                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
                         </div>
                         <div class="mb-3">
                             <label class="form-label mr-5">WIFI</label>
@@ -107,6 +104,9 @@ $totalPages = ceil($totalRows / $perPage);
                         <button type="submit" class="btn btn-primary" id="submitbtn"
                         onclick="">新增</button>
                     </form>
+                    <form action="" name="form_for_picture" style="display: none;">
+                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                    </form> 
                 </div>
             </div>
         </div>
@@ -119,7 +119,9 @@ $totalPages = ceil($totalRows / $perPage);
     let areasel = document.getElementById('areasel')
     let submitbtn = document.getElementById('submitbtn')
 
-    let picturebtn = document.getElementById('picturebtn')
+    let realpicture = document.getElementById('realpicture')
+
+    let picture = document.getElementById('picture')
 
     hotelcategories.forEach(function(value, index, array) {
         let {hotel_categories,hotel_categories_sid} = value
@@ -152,11 +154,23 @@ $totalPages = ceil($totalRows / $perPage);
         })
     })
 
+    realpicture.addEventListener('change',function(){
+        console.log(realpicture.files);
+        let fd_for_pic = new FormData(document.form_for_picture)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('uploadpicapi.php',{
+            method:'POST',
+            body:fd_for_pic,
+        }).then(function(fdfp_r){
+            return fdfp_r.json()
+        }).then(function(fdfp_obj){
+            // console.log(fdfp_obj.filename);
+            picture.value = fdfp_obj.filename
+        })
+    })
     
-    
-
-
-
 
 
 

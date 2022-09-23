@@ -1,3 +1,6 @@
+<?php include __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/navbar.php'; ?>
+
 <?php require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 30; //一頁幾筆
@@ -200,3 +203,5 @@ $output = [
     </script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
+<?php include __DIR__ . '/../../parts/script.php';?>
+<?php include __DIR__ . '/../../parts/html-foot.php'; ?>

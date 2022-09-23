@@ -1,15 +1,198 @@
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
-<?php require __DIR__ . '/ticket-list.php'?>
-<!-- <div class="container">
-    <div class="btn-group-vertical col-2 my-3" role="group" aria-label="Vertical button group">
-        <a type="button" class="btn btn-outline-dark py-2" href="../product-list.php">全部</a>
-        <a type="button" class="btn btn-outline-dark py-2" href="../itinerary/itinerary.php">行程</a>
-        <a type="button" class="btn btn-outline-dark py-2" href="../food/food.php">美食</a>
-        <a type="button" class="btn btn-outline-dark py-2" href="../stays/stays.php">住宿</a>
-        <a type="button" class="btn btn-outline-dark py-2" href="../ticket/ticket.php">票卷</a>
+<?php require __DIR__ . '/../../parts/connect_db.php';
+
+$perPage = 30; //一頁幾筆
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
+
+//算資料總比數
+$t_sql = "SELECT COUNT(1) FROM tickets ";
+
+//query資料庫溝通
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+$totalPages = ceil($totalRows / $perPage);
+//ceil 天花板 floor 地板,
+
+$rows = []; //預設給他一個陣列
+//如果有資料,做判別
+if ($totalRows) {
+    if ($page < 1) {
+        header('Location: ?page=1');
+        exit;
+    }
+    if ($page > $totalPages) {
+        header('Location: ?page=' . $totalPages);
+        exit;
+    }
+
+    $sql = sprintf(
+        "SELECT * FROM tickets 
+    JOIN `area` 
+    ON `tickets`.`cities_id` = `area`.`area_sid`
+    JOIN `city`
+    ON `area`.`city_sid` = `city`.`city_sid`
+    JOIN `tickets_categories`
+    ON `tickets`.`categories_id` = `tickets_categories`.`id`
+    JOIN `listing_status`
+    ON `tickets`.`on_sale` = `listing_status`.`status_sid`
+    ORDER BY sid DESC LIMIT %s, %s",
+        ($page - 1) * $perPage,
+        $perPage
+    );
+    //第1個參數%s, 索引值 ;第2個參數%s抓幾個   DESC降冪 ASC升冪
+
+    $rows = $pdo->query($sql)->fetchAll();
+}
+
+$output = [
+    'totalRows' => $totalRows,
+    'totalPages' => $totalPages,
+    'page' => $page,
+    'rows' => $rows,
+    'perPage' => $perPage,
+];
+?>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                            最前一頁
+                        </a>
+                    </li>
+                    <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-left"></i>
+                        </a>
+                    </li>
+
+                    <?php for ($i = $page - 4; $i <= $page + 4; $i++) :
+                        if ($i >= 1 and $i <= $totalPages) :
+                    ?>
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                    <?php
+                        endif;
+                    endfor; ?>
+
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            最後一頁
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <form action="ticket-search.php">
+                <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <style>
+            .btn {
+                width: 150px;
+                height: 50px;
+            }
+        </style>
+
+        <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button>
+
     </div>
-</div> -->
+
+
+    <div class="row">
+    <div class="col">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </th>
+                    <th scope="col">#</th>
+                    <th scope="col">票券代號</th>
+                    <th scope="col">票券名稱</th>
+                    <th scope="col">價錢</th>
+                    <th scope="col">介紹</th>
+                    <th scope="col">注意說明</th>
+                    <th scope="col">開始日</th>
+                    <th scope="col">結束日</th>
+                    <th scope="col">封面圖片</th>
+                    <th scope="col">產品圖片</th>
+                    <th scope="col">分類</th>
+                    <th scope="col">所在縣市</th>
+                    <th scope="col">所在行政區</th>
+                    <th scope="col">狀態</th>
+                    <th scope="col">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </th>
+            </thead>
+            <tbody>
+                <?php foreach ($rows as $r) : ?>
+                    <tr>
+                        <td>
+                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+
+                        <td><?= $r['sid'] ?></td>
+                        <td><?= $r['product_number'] ?></td>
+                        <td><?= $r['product_name'] ?></td>
+                        <td><?= $r['product_price'] ?></td>
+                        <td><?= $r['product_introduction'] ?></td>
+                        <td><?= $r['product_notice'] ?></td>
+                        <td><?= $r['start_day'] ?></td>
+                        <td><?= $r['end_day'] ?></td>
+                        <!-- 封面圖片 -->
+                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $r['product_cover'] ?>" alt=""></td>
+                        <!-- 產品圖片 -->
+                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $r['product_imgs'] ?>" alt=""></td>
+
+                        <td><?= $r['classname'] ?></td>
+                        <td><?= $r['city_name'] ?></td>
+                        <td><?= $r['area_name'] ?></td>
+                        <td><?= $r['status'] ?></td>
+
+                        <td>
+                            <a href="ticket-edit-form.php?sid=<?= $r['sid'] ?>">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+    <?php include __DIR__ . '/../../parts/script.php'; ?>
+    <script>
+        const table = document.querySelector('table');
+
+        function delete_it(sid) {
+            if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
+                location.href = `ticket-delete.php?sid=${sid}`;
+            }
+        }
+    </script>
+
+    <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
 <?php include __DIR__ . '/../../parts/script.php';?>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

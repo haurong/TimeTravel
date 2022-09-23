@@ -48,11 +48,28 @@ $output = [
 // echo json_encode($output); exit;
 
 ?>
+
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
+<<<<<<< HEAD
+<style>
+    .searchbar{
+        width: 500px;
+        padding-bottom: 30px;
+    }
+</style>
+<div class="container-fluid p-4 ">
+            <form action="food-search.php" class="d-flex m-auto searchbar">
+                    <input type="text" name="search" class="searchbar p-1 "placeholder="請輸入關鍵字" >
+                    <button class=" p-1 ml-3" type="submit">search</button>
+            </form>      
+    <div class="d-flex justify-content-center">     
+         <nav aria-label="Page navigation example  justify-content-center">
+=======
 <div class="container-fluid p-4">
     <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation example  justify-content-center">
+>>>>>>> 7a16bab35c8311e3da945ab30f2004a5ade92d9e
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                     <a class="page-link" href="?page=1">

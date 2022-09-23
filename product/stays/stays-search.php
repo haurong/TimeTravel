@@ -17,7 +17,7 @@ require __DIR__ . '/../../parts/connect_db.php';
 
 // $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-// $totalPages = ceil($totalRows / $       perPage);
+// $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
 $search = $_GET['search'];
