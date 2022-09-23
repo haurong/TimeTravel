@@ -68,7 +68,9 @@ if (empty($r)) {
 
                         <div class="mb-3">
                             <label for="product_cover" class="form-label">封面圖片</label>
-                            <input type="text" class="form-control" id="product_cover" name="product_cover" value="<?= $r['product_cover'] ?>">
+                            <input type="text" class="form-control" id="product_cover" name="product_cover" value="<?= $r['product_cover'] ?>" readonly>
+
+                            <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
                         </div>
 
                         <div class="mb-3">
@@ -108,6 +110,9 @@ if (empty($r)) {
 
                         <button type="submit" class="btn btn-primary" id="btn">Submit</button>
                     </form>
+                    <form action="" name="form_for_picture" style="display: none;">
+                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                    </form> 
                 </div>
             </div>
 
@@ -125,6 +130,9 @@ if (empty($r)) {
     let citylocation = document.getElementById('citylocation');
     let arealocation = document.getElementById('arealocation');
     let btn = document.getElementById('btn');
+
+    let realpicture = document.getElementById('realpicture');
+    let product_cover = document.getElementById('product_cover');
 
     ticketsCategories.forEach(function(value, index, array) {
         let {
@@ -195,6 +203,23 @@ if (empty($r)) {
             areafilter.forEach(function(value, index, array) {
             let {area_name,area_sid} = value
             areasel[index] = new Option(area_name, area_sid)
+        })
+    })
+
+    realpicture.addEventListener('change',function(){
+        console.log(realpicture.files);
+        let fd_for_pic = new FormData(document.form_for_picture)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('img-upload-api.php',{
+            method:'POST',
+            body:fd_for_pic,
+        }).then(function(fdfp_r){
+            return fdfp_r.json()
+        }).then(function(fdfp_obj){
+            // console.log(fdfp_obj.filename);
+            product_cover.value = fdfp_obj.filename
         })
     })
 
