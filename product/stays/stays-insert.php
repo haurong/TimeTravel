@@ -105,7 +105,7 @@ $totalPages = ceil($totalRows / $perPage);
                         onclick="">新增</button>
                     </form>
                     <form action="" name="form_for_picture" style="display: none;">
-                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                        <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
                     </form> 
                 </div>
             </div>
@@ -166,7 +166,7 @@ $totalPages = ceil($totalRows / $perPage);
         }).then(function(fdfp_r){
             return fdfp_r.json()
         }).then(function(fdfp_obj){
-            // console.log(fdfp_obj.filename);
+            console.log(fdfp_obj);
             picture.value = fdfp_obj.filename
         })
     })

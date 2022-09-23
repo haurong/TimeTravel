@@ -107,7 +107,7 @@ if (empty($r)) {
                         <button type="submit" class="btn btn-primary" id="submitbtn">更改</button>
                     </form>
                     <form action="" name="form_for_picture" style="display: none;">
-                                <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                        <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
                     </form> 
                 </div>
             </div>
@@ -218,6 +218,7 @@ if (empty($r)) {
         dinnerfalse.checked = true
     }
 
+    
     realpicture.addEventListener('change',function(){
         console.log(realpicture.files);
         let fd_for_pic = new FormData(document.form_for_picture)
