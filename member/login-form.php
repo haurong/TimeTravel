@@ -26,7 +26,7 @@ $pageName = 'login';
                     </div>
                         <div class="my-3">
                             <label for="password">密碼</label>
-                            <input type="password" class="form-control" id="password" placeholder="請輸入8個字元以上的英文大小寫字母、數字" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password_hash" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
+                            <input type="password" class="form-control" id="password" placeholder="請輸入8個字元以上的英文大小寫字母、數字" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
                                 <!-- <div class="valid" id="passwordStatus">
                                 請輸入8個字元以上的英文大小寫字母、數字
                                 </div> -->
