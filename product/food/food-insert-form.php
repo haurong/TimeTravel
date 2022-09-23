@@ -4,6 +4,17 @@
 require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-insert';
 
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+$t_sql = "SELECT COUNT(1) FROM hotel";
+
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+$lastsql= "SELECT * 
+            FROM `food_product_all` 
+            WHERE 1
+            order by sid DESC
+            LIMIT 1";
+$last = $pdo->query($lastsql)->fetch();
 
 ?>
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
@@ -19,7 +30,7 @@ $pageName = 'food-insert';
                     <!--產品編號-->
                         <div class="mb-3">
                             <label for="product_number" class="form-label">產品編號</label>
-                            <input type="text" class="form-control" id="product_number" name="product_number" placeholder="ex:F000" required >
+                            <input type="text" class="form-control" id="product_number" name="product_number"  readonly >
                         </div>
                     <!--產品名稱-->
                         <div class="mb-3">
@@ -121,9 +132,23 @@ $pageName = 'food-insert';
 </div>
 
 <script>
-
+let product_number = document.getElementById('product_number')
 let product_photo = document.getElementById('product_photo')
 let realpicture = document.getElementById('realpicture')
+
+
+    let productnumber = "<?=$last['product_number']?>"
+    console.log(productnumber);
+    let F = productnumber.split('F')
+    console.log(F);
+    let lastnumber = Number(F[1])+1
+    let lastnumbertostring = String(lastnumber) ;
+    let last_product_number=lastnumbertostring.padStart(4,"F00");
+  
+    product_number.value = last_product_number;
+ 
+
+
     function checkForm(){
         // document.form1.email.value
 
