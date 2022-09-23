@@ -1,18 +1,6 @@
 <?php require __DIR__ . '/../parts/connect_db.php' ?>
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
-<?php
-if (!isset($_SESSION['food-cart'])) {
-    $_SESSION['food-cart'] = [];
-}
-if (!isset($_SESSION['hotel-cart'])) {
-    $_SESSION['hotel-cart'] = [];
-}
-if (!isset($_SESSION['ticket-cart'])) {
-    $_SESSION['ticket-cart'] = [];
-}
-
-?>
 <?php $food = $_SESSION['food-cart']; ?>
 <?php $hotel = $_SESSION['hotel-cart'] ?>
 <?php $ticket = $_SESSION['ticket-cart'] ?>
@@ -38,26 +26,35 @@ if (!isset($_SESSION['ticket-cart'])) {
 
                 </tr>
             </thead>
-            <tbody>
-                <?php
-                foreach ($food as $k => $val) { ?>
-                    <tr>
-                        <td>
-                            <a href="javascript: removefood(<?= $val['sid'] ?>)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </td>
-                        <td><?= $val['product_name'] ?></td>
-                        <td><?= $val['product_photo'] ?></td>
-                        <td><?= $val['p_selling_price'] ?></td>
-                        <td><?= $val['applicable_store'] ?></td>
-                        <td>
-                            <p><?= $val['qty'] ?></p>
-                        </td>
-                        <td><?= $val['p_selling_price'] * $val['qty']; ?></td>
-                    <?php } ?>
-                    </tr>
-            </tbody>
+            <form action="submit.php" method="post">
+                <tbody>
+                    <?php
+                    foreach ($food as $k => $val) { ?>
+
+                        <tr>
+                            <td>
+                                <a href="javascript: removefood(<?= $val['sid'] ?>)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                            <td><?= $val['product_name'] ?></td>
+                            <td><?= $val['product_photo'] ?></td>
+                            <td><?= $val['applicable_store'] ?></td>
+                            <td><?= $val['p_selling_price'] ?></td>
+                            <td>
+                                <p><?= $val['qty'] ?></p>
+                            </td>
+                            <td><?= $val['p_selling_price'] * $val['qty']; ?></td>
+                            <td>
+                                <input type="hidden" name="food_sid" value="<?= $val['sid'] ?>">
+                                <input type="hidden" name="food_name" value="<?= $val['product_name'] ?>">
+                                <input type="hidden" name="food_quantity" value="<?= $val['qty'] ?>">
+                                <input type="hidden" name="food_total_price" value="<?= $val['p_selling_price'] * $val['qty']; ?>">
+                            </td>
+
+                        <?php } ?>
+                        </tr>
+                </tbody>
         </table>
         <table class="table">
             <thead>
@@ -77,13 +74,17 @@ if (!isset($_SESSION['ticket-cart'])) {
                 foreach ($hotel as $k => $val) { ?>
                     <tr>
                         <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                            <a href="javascript: removehotel(<?= $val['sid'] ?>)">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
                         <td><?= $val['hotel_name'] ?></td>
                         <td><?= $val['picture'] ?></td>
                         <td><?= $val['address'] ?></td>
+                        <td>
+                            <input type="hidden" name="hotel_sid" value="<?= $val['sid'] ?>">
+                            <input type="hidden" name="hotel_name" value="<?= $val['hotel_name'] ?>">
+                        </td>
                     <?php } ?>
                     </tr>
             </tbody>
@@ -109,7 +110,7 @@ if (!isset($_SESSION['ticket-cart'])) {
                 foreach ($ticket as $k => $val) { ?>
                     <tr>
                         <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                            <a href="javascript: removeticket(<?= $val['sid'] ?>)">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
@@ -122,10 +123,18 @@ if (!isset($_SESSION['ticket-cart'])) {
                         </td>
                         <td><?= $val['product_price'] * $val['qty']; ?></td>
                     <?php } ?>
+                    <td>
+                        <input type="hidden" name="ticket_sid" value="<?= $val['sid'] ?>">
+                        <input type="hidden" name="ticket_name" value="<?= $val['product_name'] ?>">
+                        <input type="hidden" name="ticket_quantity" value="<?= $val['qty'] ?>">
+                        <input type="hidden" name="ticket_total_price" value="<?= $val['product_price'] * $val['qty']; ?>">
+                    </td>
+
                     </tr>
             </tbody>
         </table>
-
+        <input type="submit" id="food-submit" value="結帳">
+        </form>
     </div>
 </div>
 <?php include __DIR__ . '/../parts/script.php'; ?>
@@ -141,8 +150,16 @@ if (!isset($_SESSION['ticket-cart'])) {
     // console.log(newqty);
     // console.log(tr);
     // }
-    function removefood(sid){
+    function removefood(sid) {
         location.href = `remove-from-cart-food.php?sid=${sid}`;
+    }
+
+    function removehotel(sid) {
+        location.href = `remove-from-cart-hotel.php?sid=${sid}`;
+    }
+
+    function removeticket(sid) {
+        location.href = `remove-from-cart-ticket.php?sid=${sid}`;
     }
 </script>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
