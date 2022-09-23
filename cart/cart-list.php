@@ -133,7 +133,11 @@
                     </tr>
             </tbody>
         </table>
-        <input type="submit" id="food-submit" value="結帳">
+        <?php if (empty($_SESSION['admin'])) : ?>
+            <div><p>請先登入後再進行結帳</p></div>
+        <?php else : ?>
+            <input type="submit" id="food-submit" value="結帳">
+        <?php endif ?>
         </form>
     </div>
 </div>
