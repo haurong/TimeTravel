@@ -43,7 +43,7 @@ if (!isset($_SESSION['ticket-cart'])) {
                 foreach ($food as $k => $val) { ?>
                     <tr>
                         <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                            <a href="javascript: removefood(<?= $val['sid'] ?>)">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
@@ -141,5 +141,8 @@ if (!isset($_SESSION['ticket-cart'])) {
     // console.log(newqty);
     // console.log(tr);
     // }
+    function removefood(sid){
+        location.href = `removefood.php?sid=${sid}`;
+    }
 </script>
 <?php include __DIR__ . '/../parts/html-foot.php'; ?>
