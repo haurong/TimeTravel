@@ -7,7 +7,7 @@
 <?php
 //  在別的地方是 connect_athome_db.php
 //  原本是   connect_db.php
-require __DIR__ . '/../../parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_athome_db.php';
 
 $perPage = 40;
 
@@ -21,6 +21,7 @@ $totalPages = ceil($totalRows / $perPage);
 
 $rows = [];
 
+$ascordesc = isset($_POST['ascordesc']) ? intval($_POST['ascordesc']) : 'ASC';
 
 if ($totalRows) {
     if ($page < 1) {
@@ -40,7 +41,7 @@ if ($totalRows) {
         ON `area`.`city_sid` = `city`.`city_sid`
         JOIN `hotel_categories`
         ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
-        ORDER BY SID $asc LIMIT %s , %s ",
+        ORDER BY SID $ascordesc  LIMIT %s , %s ",
         ($page - 1) * $perPage,
         $perPage
     );
@@ -76,9 +77,7 @@ $output = [
         </form>
     </div>
     <div class="row justify-content-center align-items-center">
-        <!-- <input type="button" class="btn btn-success" id="ascbtn" value="升冪">
-            <a href="?"></a> 
-        </input> -->
+        <input type="button" class="btn btn-success" id="ascbtn" value="升冪"></input>
         <div class="mt-3 d-flex  justify-content-center flex-grow-1">
             <nav aria-label="Page navigation example" class="d-flex">
                 <ul class="pagination align-items-center">
@@ -247,6 +246,14 @@ $output = [
 <script src="hotel.js"></script>
 <script>
     // console.log(allhotel);
+
+    let ascForm = new FormData()
+    let asc = 'ASC'
+    let desc = 'DESC'
+    
+    
+
+    
     function delete_it(sid) {
         if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
             location.href = `stays-del.php?sid=${sid}`;
@@ -254,30 +261,31 @@ $output = [
     }
     let ascbtn = document.getElementById('ascbtn')
 
-    // ascbtn.addEventListener('click',function(){
-    //     if(ascbtn.value =="升冪"){
-    //         ascbtn.value ="降冪"
-    //         location.href = "?"
-    //     }else{
-    //         ascbtn.value ="升冪"
-    //         // <?php
-    //         // $sql = sprintf(
-    //         //     "SELECT * 
-    //         //     FROM hotel 
-    //         //     JOIN `area` 
-    //         //     ON `hotel`.`area_sid` = `area`.`area_sid` 
-    //         //     JOIN `city`
-    //         //     ON `area`.`city_sid` = `city`.`city_sid`
-    //         //     JOIN `hotel_categories`
-    //         //     ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
-    //         //     ORDER BY SID LIMIT %s , %s ASC",
-    //         //     ($page - 1) * $perPage,
-    //         //     $perPage
-    //         // );
-    //         // ?>
-    //         // location.reload()
-    //     }
-    // })
+    ascbtn.addEventListener('click',function(){
+        if(ascbtn.value =="升冪"){
+            ascbtn.value ="降冪"
+            ascForm.append('ascordesc',desc)
+            fetch('stays.php',{
+                    method:'POST',
+                    body:ascForm,
+                }).then(function(ascForm_r){
+                    return ascForm_r.json()
+                }).then(function(ascForm_obj){
+                    console.log(ascForm_obj);
+                })
+        }else{
+            ascbtn.value ="升冪"
+            ascForm.append('ascordesc',asc)
+            fetch('stays.php',{
+                    method:'POST',
+                    body:ascForm,
+                }).then(function(ascForm_r){
+                    return ascForm_r.json()
+                }).then(function(ascForm_obj){
+                    console.log(ascForm_obj);
+                })
+        }
+    })
 </script>
 
 <?php include __DIR__ . '/../../parts/script.php'; ?>
