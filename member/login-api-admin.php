@@ -35,6 +35,7 @@ if (password_verify($_POST['password'], $row['password_hash'])) {
     $_SESSION['admin'] = [
         'username' => $row['username'],
         'email' => $row['email'],
+        'sid' => $row['sid'],
     ];
 } else {
     $output['error'] = '帳號或密碼錯誤'; // 帳號錯誤
