@@ -21,8 +21,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/TimeTravel/cart/cart-list.php">購物車
                             <?php
-                            if (isset($_SESSION['food-cart'])) {
-                                $count = count($_SESSION['food-cart']);
+                            if (isset($_SESSION['food-cart'])||isset($_SESSION['hotel-cart'])||isset($_SESSION['ticket-cart'])) {
+                                $count = count($_SESSION['food-cart']) + count($_SESSION['hotel-cart']) + count($_SESSION['ticket-cart']);
                                 echo "<span class=\"badge badge-pill badge-info cart-count\">$count</span>";
                             } else {
                                 echo "<span class=\"badge badge-pill badge-info cart-count\">0</span>";

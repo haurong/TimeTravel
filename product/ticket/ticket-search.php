@@ -62,6 +62,10 @@ $output = [
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
+<form action="ticket-search.php">
+            <input type="text" name="search" class="searchbar" >
+            <button type="submit">Search</button>
+        </form>
     <div class="row">
         <div class="col">
             <!-- <nav aria-label="Page navigation example">

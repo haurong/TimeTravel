@@ -131,38 +131,38 @@ $output = [
                 <!--foreach去抓底下的資料欄位-->
                 <?php foreach ($rows as $r) : ?>
                     <form action="./../../cart/put-in-cart-food.php">
-                    <tr>
-                        <td>
-                            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </td>
-                        <td><?= $r['sid'] ?></td>
-                        <td><?= $r['product_number'] ?></td>
-                        <td><?= $r['product_name'] ?></td>
-                        <td><?= $r['p_selling_price'] ?></td>
-                        <td><?= $r['p_discounted_price'] ?></td>
+                        <tr>
+                            <td>
+                                <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                            <td><?= $r['sid'] ?></td>
+                            <td><?= $r['product_number'] ?></td>
+                            <td><?= $r['product_name'] ?></td>
+                            <td><?= $r['p_selling_price'] ?></td>
+                            <td><?= $r['p_discounted_price'] ?></td>
                             <td><img width=200 src="./../../imgs/./food-img/<?= $r['product_photo'] ?>" alt=""></td>
-                        <td><?= $r['applicable_store'] ?></td>
-                        <td><?= $r['product_introdution'] ?></td>
-                        <td><?= $r['p_business_hours'] ?></td>
-                        <td><?= $r['product_address'] ?></td>
-                        <td><?= $r['status'] ?></td>
-                        <td><?= $r['name'] ?></td>
-                        <td><?= $r['city_name'] ?></td>
-                        <td>
-                            <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                        </td>
-                        <td>
+                            <td><?= $r['applicable_store'] ?></td>
+                            <td><?= $r['product_introdution'] ?></td>
+                            <td><?= $r['p_business_hours'] ?></td>
+                            <td><?= $r['product_address'] ?></td>
+                            <td><?= $r['status'] ?></td>
+                            <td><?= $r['name'] ?></td>
+                            <td><?= $r['city_name'] ?></td>
+                            <td>
+                                <a href="food-edit-form.php?sid=<?= $r['sid'] ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td>
                                 <input type="number" name="qty" value="1">
                                 <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
                                 <input type="hidden" name="product_name" value="<?= $r['product_name'] ?>">
                                 <input type="hidden" name="p_selling_price" value="<?= $r['p_selling_price'] ?>">
                                 <input type="submit" name="add_to_cart" value="加入購物車">
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     </form>
                     </tr>
                 <?php endforeach; ?>
@@ -181,7 +181,7 @@ $output = [
             location.href = `food-delete.php?sid=${sid}`;
         }
     }
-            
+
 
 
     let search = document.getElementById('form2');
@@ -195,7 +195,7 @@ $output = [
             console.log(`${k}: ${fd.get(k)}`);
         };
         // TODO: 檢查欄位資料
-            
+
         fetch('food-insert-api.php', {
                 method: 'POST',
                 body: fd
@@ -207,7 +207,7 @@ $output = [
                 } else {
                     alert('新增成功')
                     location.href = 'food-list.php';
-        }
+                }
             })
     }
 </script>
