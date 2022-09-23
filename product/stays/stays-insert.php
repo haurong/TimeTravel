@@ -130,15 +130,21 @@ $last = $pdo->query($lastsql)->fetch();
 
     let picture = document.getElementById('picture')
 
+
+
     let lastcode = "<?=$last['hotel_code']?>"
-    console.log(lastcode);
+
     let A = lastcode.split('A')
-    console.log(A);
-    let lastnumber = Number(A[1])
-    console.log(lastnumber);
-    let lasthotelcode = "A"+ (lastnumber+1)
-    console.log(lasthotelcode);
+    
+    let lastnumber = Number(A[1])+1
+
+    let lastnumbertostring = String(lastnumber)
+
+    let lasthotelcode = lastnumbertostring.padStart(4,"A00")
+
     hotel_code.value = lasthotelcode
+    
+
 
     hotelcategories.forEach(function(value, index, array) {
         let {hotel_categories,hotel_categories_sid} = value
