@@ -94,14 +94,23 @@ $output = [
                     </li>
                 </ul>
             </nav>
+                    <div class="d-flex justify-content-center">
+                        <form action="ticket-search.php">
+                            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
+                            <button type="submit">Search</button>
+                        </form>
+                        <form action="ticket-price-search.php">
+                            <input type="text" name="min_p" class="searchbar" placeholder="最低價">
+                            <input type="text" name="max_p" class="searchbar" placeholder="最高價">
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        
+                    </div>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <form action="ticket-search.php">
-                <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+        
 
         <style>
             .btn {

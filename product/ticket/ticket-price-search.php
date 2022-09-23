@@ -14,7 +14,8 @@
 
 
 $rows = []; //預設給他一個陣列
-$search = $_GET['search'];
+$min_p = $_GET['min_p'];
+$max_p = $_GET['max_p'];
 //如果有資料,做判別
 // if ($totalRows) {
 //     if ($page < 1) {
@@ -36,14 +37,10 @@ $search = $_GET['search'];
     JOIN `listing_status`
     ON `tickets`.`on_sale` = `listing_status`.`status_sid`
     WHERE
-    `sid` LIKE '%search'
-    OR `city`.`city_name` LIKE '%$search%'
-    OR `area`.`area_name` LIKE '%$search%'
-    OR `product_introduction` LIKE '%$search%'
-    OR `product_notice` LIKE '%$search%'
-    OR `start_day` LIKE '%$search%'
-    OR `end_day` LIKE '%$search%'
-    ORDER BY SID";
+    `product_price` 
+    BETWEEN '$min_p' AND '$max_p'
+   
+    ORDER BY PRODUCT_PRICE ASC";
     //第1個參數%s, 索引值 ;第2個參數%s抓幾個   DESC降冪 ASC升冪
 
     $rows = $pdo->query($sql)->fetchAll();
@@ -61,9 +58,9 @@ $output = [
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
-<form action="ticket-search.php">
-        <input type="text" name="search" class="searchbar" >
-        <button type="submit">Search</button>
+<form action="ticket-price-search.php">
+            <input type="text" name="search" class="searchbar" >
+            <button type="submit">Search</button>
 </form>
     <div class="row">
         <div class="col">

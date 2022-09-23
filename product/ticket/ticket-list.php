@@ -94,20 +94,30 @@ $output = [
                     </li>
                 </ul>
             </nav>
+                    <div class="d-flex justify-content-center">
+                        <form action="ticket-search.php">
+                            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
+                            <button type="submit">Search</button>
+                        </form>
+                        <form action="ticket-price-search.php">
+                            <input type="text" name="min_p" class="searchbar" placeholder="最低價">
+                            <input type="text" name="max_p" class="searchbar" placeholder="最高價">
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        
+                    </div>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <form action="ticket-search.php">
-                <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+
 
         <style>
             .btn {
                 width: 150px;
                 height: 50px;
             }
+
         </style>
 
         <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button>
@@ -175,12 +185,12 @@ $output = [
                                     </a>
                                 </td>
                                 <td>
-                                <input type="number" name="qty" value="1">
-                                <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
-                                <input type="hidden" name="product_name" value="<?= $r['product_name'] ?>">
-                                <input type="hidden" name="product_price" value="<?= $r['product_price'] ?>">
-                                <input type="submit" name="add_to_cart" value="加入購物車">
-                            </td>
+                                    <input type="number" name="qty" value="1">
+                                    <input type="hidden" name="sid" value="<?= $r['sid'] ?>">
+                                    <input type="hidden" name="product_name" value="<?= $r['product_name'] ?>">
+                                    <input type="hidden" name="product_price" value="<?= $r['product_price'] ?>">
+                                    <input type="submit" name="add_to_cart" value="加入購物車">
+                                </td>
                             </tr>
                         </form>
                     <?php endforeach; ?>
@@ -203,5 +213,5 @@ $output = [
     </script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
-<?php include __DIR__ . '/../../parts/script.php';?>
-<?php include __DIR__ . '/../../parts/html-foot.php'; ?>
+    <?php include __DIR__ . '/../../parts/script.php'; ?>
+    <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
