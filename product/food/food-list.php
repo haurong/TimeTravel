@@ -47,14 +47,21 @@ $output = [
 // echo json_encode($output); exit;
 
 ?>
+
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
-<div class="container-fluid p-4">
-    <div class="d-flex justify-content-center">
-        <form action="food-search.php">
-            <input type="text" name="search" class="searchbar" placeholder="請輸入關鍵字 也可輸入wifi或早餐或午餐或是晚餐">
-            <button type="submit">Search</button>
-        </form>
+<style>
+    .searchbar{
+        width: 500px;
+        padding-bottom: 30px;
+    }
+</style>
+<div class="container-fluid p-4 ">
+            <form action="food-search.php" class="d-flex m-auto searchbar">
+                    <input type="text" name="search" class="searchbar p-1 "placeholder="請輸入關鍵字" >
+                    <button class=" p-1 ml-3" type="submit">search</button>
+            </form>      
+    <div class="d-flex justify-content-center">     
          <nav aria-label="Page navigation example  justify-content-center">
             <ul class="pagination">
                 <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
