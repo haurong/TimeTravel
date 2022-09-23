@@ -26,25 +26,25 @@ $pageName = 'base';
         <div class="card d-flex m-3 shadow p-3 mb-5 bg-white rounded">
             <img src="./../imgs/food-img/./comebuy1.jpg" class="card-img-top" alt="...">
             <div class="card-body justify-content-center">
-            <button type="button" class="btn btn-link">行程</button>
+            <button type="button" class="btn btn-link"><a href="./../product/./itinerary/./site-list.php">行程</a></button>
             </div>
         </div>
         <div class="card d-flex  m-3 shadow p-3 mb-5 bg-white rounded">
             <img src="./../imgs/food-img/./comebuy1.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-            <button type="button" class="btn btn-link">美食</button>
+            <button type="button" class="btn btn-link"><a href="./../product/./food/food-list.php">美食</a></button>
             </div>
         </div>
         <div class="card d-flex m-3 shadow p-3 mb-5 bg-white rounded">
             <img src="./../imgs/food-img/./comebuy1.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-            <button type="button" class="btn btn-link">住宿</button>
+            <button type="button" class="btn btn-link"><a href="./../product/./stays/./stays.php">住宿</a></button>
             </div>
         </div>
         <div class="card d-flex  m-3 shadow p-3 mb-5 bg-white rounded">
             <img src="./../imgs/food-img/./comebuy1.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-            <button type="button" class="btn btn-link  ">票券</button>
+            <button type="button" class="btn btn-link "><a href="./../product/./ticket/./ticket-list.php">票券</a></button>
             </div>
         </div>
     </div>

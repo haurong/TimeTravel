@@ -55,6 +55,7 @@ if(empty($r)){
                         <div class="mb-3">
                             <label for="product_photo" class="form-label">產品照片</label>
                             <input type="text" class="form-control" id="product_photo" name="product_photo"  value="<?= $r['product_photo'] ?>" >
+                            <button type="button" class="btn btn-outline-info mt-3" id="product_photobtn" onclick="realpicture.click()">上傳圖片</button>
                         </div>
                     <!--適用店家-->
                         <div class="mb-3">
@@ -124,6 +125,9 @@ if(empty($r)){
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                    <form action="" name="form_for_picture" style="display: none;">
+                            <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
+                    </form> 
                 </div>
             </div>
 
@@ -132,6 +136,9 @@ if(empty($r)){
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
 <script>
+
+let product_photo = document.getElementById('product_photo')
+let realpicture = document.getElementById('realpicture')
     let listing_status_sid1 = document.getElementById('listing_status_sid1');
     let listing_status_sid2 = document.getElementById('listing_status_sid2');
 
@@ -221,5 +228,21 @@ if(empty($r)){
             }
         });
     }
+    realpicture.addEventListener('change',function(){
+        console.log(realpicture.files);
+        let fd_for_pic = new FormData(document.form_for_picture)
+        // for (let fdfp of fd_for_pic.keys()) {
+        //     console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
+        // }
+        fetch('uploadpicapi.php',{
+            method:'POST',
+            body:fd_for_pic,
+        }).then(function(fdfp_r){
+            return fdfp_r.json()
+        }).then(function(fdfp_obj){
+            // console.log(fdfp_obj.filename);
+            product_photo.value = fdfp_obj.filename
+        })
+    })
 </script>
 <?php include __DIR__ . '/../../parts/html-foot.php'; ?>
