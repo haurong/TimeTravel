@@ -19,9 +19,18 @@ $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 $totalPages = ceil($totalRows / $perPage);
 
+
 $rows = [];
 
-$ascordesc = isset($_POST['ascordesc']) ? intval($_POST['ascordesc']) : 'ASC';
+
+setcookie('ascordesc','ASC');
+
+
+$ascordesc = $_COOKIE['ascordesc'];
+
+
+
+
 
 if ($totalRows) {
     if ($page < 1) {
@@ -41,7 +50,7 @@ if ($totalRows) {
         ON `area`.`city_sid` = `city`.`city_sid`
         JOIN `hotel_categories`
         ON `hotel`.`categories_sid` = `hotel_categories`.`hotel_categories_sid`
-        ORDER BY SID $ascordesc  LIMIT %s , %s ",
+        ORDER BY SID $ascordesc LIMIT %s , %s ",
         ($page - 1) * $perPage,
         $perPage
     );
@@ -57,7 +66,6 @@ $output = [
     'rows' => $row,
     'perPage' => $perPage,
 ];
-
 
 
 ?>
@@ -249,9 +257,14 @@ $output = [
 
     let ascForm = new FormData()
     let asc = 'ASC'
-    let desc = 'DESC'
+    let desc = 'DESC';
+
+
     
     
+    // document.cookie = "ascordesc = 'DESC'"
+    // document.cookie = "ascordesc = 'ASC'"
+    // console.log');
 
     
     function delete_it(sid) {
@@ -261,31 +274,29 @@ $output = [
     }
     let ascbtn = document.getElementById('ascbtn')
 
+    if(('<?=$_COOKIE['ascordesc']?>') == 'ASC'){
+            ascbtn.value ="升冪"
+        }else if (('<?=$_COOKIE['ascordesc']?>') == 'DESC'){
+            ascbtn.value ="降冪";
+        }
+
     ascbtn.addEventListener('click',function(){
         if(ascbtn.value =="升冪"){
-            ascbtn.value ="降冪"
-            ascForm.append('ascordesc',desc)
-            fetch('stays.php',{
-                    method:'POST',
-                    body:ascForm,
-                }).then(function(ascForm_r){
-                    return ascForm_r.json()
-                }).then(function(ascForm_obj){
-                    console.log(ascForm_obj);
-                })
+            ascbtn.value ="降冪";
+            document.cookie = "ascordesc = DESC"
+            console.log('<?=$_COOKIE['ascordesc']?>');
+            location.reload()
+
+            
         }else{
             ascbtn.value ="升冪"
-            ascForm.append('ascordesc',asc)
-            fetch('stays.php',{
-                    method:'POST',
-                    body:ascForm,
-                }).then(function(ascForm_r){
-                    return ascForm_r.json()
-                }).then(function(ascForm_obj){
-                    console.log(ascForm_obj);
-                })
+            document.cookie = "ascordesc = ASC"
+            console.log('<?=$_COOKIE['ascordesc']?>');
+            location.reload()
         }
     })
+
+    
 </script>
 
 <?php include __DIR__ . '/../../parts/script.php'; ?>
