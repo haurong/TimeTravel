@@ -19,7 +19,8 @@ $o_stmt->execute([
 // TODO: 檢查欄位資料
 
 $orders_sid = $pdo->lastInsertId(); // 最近新增資料的 PK
-if (!empty($_SESSION['food-cart'])) {
+$fKeys = array_keys($_SESSION['food-cart']);
+if (!empty($fkeys)) {
     $odf_sql = "INSERT INTO `orders_details_food`(`orders_sid`, `food_products_sid`, `quantity`, `total_price`) VALUES (?, ?, ?, ?)";
     $odf_stmt = $pdo->prepare($odf_sql);
     $odf_stmt->execute([
@@ -28,7 +29,9 @@ if (!empty($_SESSION['food-cart'])) {
         $_POST['food_quantity'],
         $_POST['food_total_price']
     ]);
+    
 }
+$hKeys = array_keys($_SESSION['hotel-cart']);
 if (!empty($_SESSION['hotel-cart'])) {
     $odh_sql = "INSERT INTO `orders_details_hotel`(`orders_sid`, `hotel_products_sid`) VALUES (?,?)";
     $odh_stmt = $pdo->prepare($odh_sql);
@@ -36,7 +39,9 @@ if (!empty($_SESSION['hotel-cart'])) {
         $orders_sid,
         $_POST['hotel_sid']
     ]);
+    
 }
+$tKeys = array_keys($_SESSION['ticket-cart']);
 if (!empty($_SESSION['ticket-cart'])) {
     $odt_sql = "INSERT INTO `orders_details_ticket`(`orders_sid`, `ticket_products_sid`,`quantity`,`total_price`) VALUES (?,?,?,?)";
     $odt_stmt = $pdo->prepare($odt_sql);
@@ -46,39 +51,21 @@ if (!empty($_SESSION['ticket-cart'])) {
         $_POST['ticket_quantity'],
         $_POST['ticket_total_price']
     ]);
+    
 }
+unset($_SESSION['food-cart']);
+unset($_SESSION['hotel-cart']);
+unset($_SESSION['ticket-cart']);
+?>
+<?php include __DIR__ . '/../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../parts/navbar.php'; ?>
 
-header('Location: ?page=' . $index);
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        感謝訂購 
+    </div>
 
+</div>
+<?php include __DIR__ . '/../parts/script.php'; ?>
 
-
-
-// $sql = "INSERT INTO `orders_details_food`
-// (`food_products_sid`, 
-// `quantity`, 
-// `total_price`) 
-
-// VALUES (?,?,?)";
-
-// $stmt = $pdo->prepare($sql);
-
-
-
-// try {
-//     $stmt->execute([
-//         $_POST['food_sid'],
-//         $_POST['food_quantity'],
-//         $_POST['food_total_price'],
-//     ]);
-// } catch(PDOException $ex) {
-//     $output['error'] = $ex->getMessage();
-// }
-
-
-// if($stmt->rowCount()){
-//     $output['success'] = true;
-// } else {
-//     if(empty($output['error']))
-//         $output['error'] = '資料沒有新增';
-
-// }
+<?php include __DIR__ . '/../parts/html-foot.php'; ?>
