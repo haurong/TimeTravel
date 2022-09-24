@@ -3,7 +3,8 @@
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
 <?php $food = $_SESSION['food-cart']; ?>
 <?php $hotel = $_SESSION['hotel-cart'] ?>
-<?php $ticket = $_SESSION['ticket-cart'] ?>
+<?php $ticket = $_SESSION['ticket-cart'] ;
+$pageName = 'cart-list';?>
 
 <div class="container">
     <h3 class="text-center">購物車</h3>
@@ -134,7 +135,13 @@
             </tbody>
         </table>
         <?php if (empty($_SESSION['admin'])) : ?>
-            <div><p>請先登入後再進行結帳</p></div>
+            <div>
+                <p>請先登入後再進行結帳</p>
+            </div>
+        <?php elseif (empty($_SESSION['food-cart']) and empty($_SESSION['hotel-cart']) and empty($_SESSION['ticket-cart'])) : ?>
+            <div>
+                <p>購物車目前空無一物喔！</p>
+            </div>
         <?php else : ?>
             <input type="submit" id="food-submit" value="結帳">
         <?php endif ?>
