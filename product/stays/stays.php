@@ -1,5 +1,18 @@
-<?php include __DIR__ . '/../../parts/html-head.php'; ?>
+<?php include __DIR__ . '/../../parts/html-head.php'; 
+
+if(!isset($_COOKIE['ascordesc'])){
+    setcookie('ascordesc','ASC');
+}
+
+
+
+$ascordesc = $_COOKIE['ascordesc'];
+?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
+
+
+
+
 <style>
 </style>
 
@@ -21,13 +34,6 @@ $totalPages = ceil($totalRows / $perPage);
 
 
 $rows = [];
-
-
-setcookie('ascordesc','ASC');
-
-
-$ascordesc = $_COOKIE['ascordesc'];
-
 
 
 
@@ -253,20 +259,6 @@ $output = [
 
 <script src="hotel.js"></script>
 <script>
-    // console.log(allhotel);
-
-    let ascForm = new FormData()
-    let asc = 'ASC'
-    let desc = 'DESC';
-
-
-    
-    
-    // document.cookie = "ascordesc = 'DESC'"
-    // document.cookie = "ascordesc = 'ASC'"
-    // console.log');
-
-    
     function delete_it(sid) {
         if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
             location.href = `stays-del.php?sid=${sid}`;
