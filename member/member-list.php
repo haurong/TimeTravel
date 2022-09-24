@@ -1,6 +1,6 @@
 <?php
-// require __DIR__ . '/../parts/connect_athome_db.php';
-require __DIR__ . '/../parts/connect_db.php';
+require __DIR__ . '/../parts/connect_athome_db.php';
+// require __DIR__ . '/../parts/connect_db.php';
 $pageName = 'member-list';
 
 $perPage = 10; // 一頁有幾筆

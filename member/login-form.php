@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . '/../parts/connect_db.php';
-// require __DIR__ . '/../parts/connect_athome_db.php';
+// require __DIR__ . '/../parts/connect_db.php';
+require __DIR__ . '/../parts/connect_athome_db.php';
 $pageName = 'login';
 ?>
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
@@ -14,20 +14,20 @@ $pageName = 'login';
                     <h5 class="card-title">登入</h5>
 
                     <form name="loginForm" onsubmit="checkForm(); return false; ">
-                    <div class="my-3">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="example@mail.com" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
-                    <div class="invalid-feedback">
-                    請輸入正確的email格式
-                    </div>
-                    <div class="valid-feedback">
-                    輸入正確
-                    </div>
-                    </div>
+                        <div class="my-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="example@mail.com" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                            <div class="invalid-feedback">
+                                請輸入正確的email格式
+                            </div>
+                            <div class="valid-feedback">
+                                輸入正確
+                            </div>
+                        </div>
                         <div class="my-3">
                             <label for="password">密碼</label>
                             <input type="password" class="form-control" id="password" placeholder="請輸入8個字元以上的英文大小寫字母、數字" pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" name="password" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('請輸入8個字元以上的英文大小寫字母、數字');" required />
-                                <!-- <div class="valid" id="passwordStatus">
+                            <!-- <div class="valid" id="passwordStatus">
                                 請輸入8個字元以上的英文大小寫字母、數字
                                 </div> -->
                         </div>
