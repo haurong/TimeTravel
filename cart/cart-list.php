@@ -2,9 +2,8 @@
 <?php include __DIR__ . '/../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
 <?php $food = $_SESSION['food-cart']; ?>
-<?php $hotel = $_SESSION['hotel-cart'] ?>
-<?php $ticket = $_SESSION['ticket-cart'] ;
-$pageName = 'cart-list';?>
+<?php $hotel = $_SESSION['hotel-cart']; ?>
+<?php $ticket = $_SESSION['ticket-cart'] ;?>
 
 <div class="container">
     <h3 class="text-center">購物車</h3>
@@ -143,7 +142,7 @@ $pageName = 'cart-list';?>
                 <p>購物車目前空無一物喔！</p>
             </div>
         <?php else : ?>
-            <input type="submit" id="food-submit" value="結帳">
+            <input type="submit" id="submit" value="結帳">
         <?php endif ?>
         </form>
     </div>
