@@ -68,10 +68,10 @@ $last = $pdo->query($lastsql)->fetch();
                             <input type="text" class="form-control" id="p_business_hours" name="p_business_hours" placeholder="1100-2100">
                         </div>
                     <!--商家地址-->
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="product_address" class="form-label">商家地址</label>
                             <input type="text" class="form-control" id="product_address" name="product_address"  >
-                        </div> -->
+                        </div>
                     <!--上架狀態-->
                         <div class="mb-3">
                             <label for="listing_status_sid" >上架狀態</label>

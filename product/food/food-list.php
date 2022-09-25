@@ -60,7 +60,8 @@ $output = [
 <div class="container-fluid p-4 ">
             <form action="food-search.php" class="d-flex m-auto searchbar">
                     <input type="text" name="search" class="searchbar p-1 "placeholder="請輸入關鍵字" >
-                    <button class=" p-1 ml-3" type="submit">search</button>
+                    <!--<button class=" p-1 ml-3" type="submit">search</button>-->
+                    <button type="submit" class="btn btn-outline-secondary ml-3">search</button>
             </form>      
     <div class="d-flex justify-content-center">     
          <nav aria-label="Page navigation example  justify-content-center">
