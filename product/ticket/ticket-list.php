@@ -1,7 +1,9 @@
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
-<?php require __DIR__ . '/../../parts/connect_db.php';
+<?php 
+ require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 $perPage = 30; //一頁幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
@@ -102,6 +104,8 @@ $output = [
                         <form action="ticket-price-search.php">
                             <input type="text" name="min_p" class="searchbar" placeholder="最低價">
                             <input type="text" name="max_p" class="searchbar" placeholder="最高價">
+                            <input type="text" name="location" class="searchbar" placeholder="地區">
+                            
                             <button type="submit">Search</button>
                         </form>
                     </div>
@@ -117,6 +121,7 @@ $output = [
                 width: 150px;
                 height: 50px;
             }
+            
 
         </style>
 

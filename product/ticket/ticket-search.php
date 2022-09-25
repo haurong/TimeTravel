@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/../../parts/connect_db.php'; 
+<?php 
+require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 //$perPage = 30; //一頁幾筆
 //$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁

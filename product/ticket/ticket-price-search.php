@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/../../parts/connect_db.php'; 
+<?php 
+ require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 //$perPage = 30; //一頁幾筆
 //$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
@@ -16,6 +18,8 @@
 $rows = []; //預設給他一個陣列
 $min_p = $_GET['min_p'];
 $max_p = $_GET['max_p'];
+$location = $_GET['location'];
+
 //如果有資料,做判別
 // if ($totalRows) {
 //     if ($page < 1) {
@@ -37,6 +41,8 @@ $max_p = $_GET['max_p'];
     JOIN `listing_status`
     ON `tickets`.`on_sale` = `listing_status`.`status_sid`
     WHERE
+    `city`.`city_name` LIKE '%$location%'
+    AND
     `product_price` 
     BETWEEN '$min_p' AND '$max_p'
    
