@@ -78,7 +78,7 @@ $rows = $pdo->query($sql)->fetchAll();
             </table> -->
 
             <div class="card" dflex>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -103,17 +103,18 @@ $rows = $pdo->query($sql)->fetchAll();
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>
+                </div> -->
                 <div class="card-body">
 
                     <?php foreach ($rows as $r) : ?>
+                        <img src="./../../imgs/site/<?= $r['img_small'] ?>" alt="" class="w-100">
                         <h2><?= $r['name'] ?></h2>
                         <h5>所在地區:<?= $r['city_name'] ?><?= $r['area_name'] ?></h5>
                         <h5>分類:<?= $r['site_category_name'] ?></h5>
                         <h5>簡介:<?= $r['description'] ?></h5>
                         <h5>網站:<a href="<?= $r['website'] ?>"></a></h5>
                         <div class="map-box">
-                            <h3>所在位置:</h3>
+                            <h5>所在位置:</h5>
                             <?= $r['map'] ?>
                         </div>
                     <?php endforeach; ?>
