@@ -3,7 +3,7 @@
 <?php include __DIR__ . '/../parts/navbar.php'; ?>
 <?php $food = $_SESSION['food-cart']; ?>
 <?php $hotel = $_SESSION['hotel-cart']; ?>
-<?php $ticket = $_SESSION['ticket-cart'] ;?>
+<?php $ticket = $_SESSION['ticket-cart']; ?>
 
 <div class="container">
     <h3 class="text-center">購物車</h3>
@@ -38,7 +38,7 @@
                                 </a>
                             </td>
                             <td><?= $val['product_name'] ?></td>
-                            <td><?= $val['product_photo'] ?></td>
+                            <td><img width=200 src="./../../imgs/./food-img/<?= $val['product_photo'] ?>" alt=""></td>
                             <td><?= $val['applicable_store'] ?></td>
                             <td><?= $val['p_selling_price'] ?></td>
                             <td>
@@ -79,7 +79,10 @@
                             </a>
                         </td>
                         <td><?= $val['hotel_name'] ?></td>
-                        <td><?= $val['picture'] ?></td>
+                        <td>
+                            <img style="width:200px" src="/../TimeTravel/imgs/hotel/A/<?= $val['picture'] ?>">
+                            </img>
+                        </td>
                         <td><?= $val['address'] ?></td>
                         <td>
                             <input type="hidden" name="hotel_sid" value="<?= $val['sid'] ?>">
@@ -115,7 +118,7 @@
                             </a>
                         </td>
                         <td><?= $val['product_name'] ?></td>
-                        <td><?= $val['product_imgs'] ?></td>
+                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $val['product_imgs'] ?>" alt=""></td>
                         <td><?= $val['product_introduction'] ?></td>
                         <td><?= $val['product_price'] ?></td>
                         <td>
