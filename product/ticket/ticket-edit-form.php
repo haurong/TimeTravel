@@ -1,6 +1,8 @@
 <?php
 // require __DIR__ . '/parts/admin-required.php';
+
 require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php';
 $pageName = 'edit';
 
 
@@ -268,7 +270,7 @@ if (empty($r)) {
                 alert(obj.error);
             } else {
                 alert('修改成功');
-                location.href = 'ticket.php';
+                location.href = 'ticket-list.php';
                 //改完回列表↑
             }
         });

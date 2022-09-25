@@ -3,16 +3,16 @@ require __DIR__ . '/../../parts/connect_db.php';
 // require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 //$perPage = 30; //一頁幾筆
-//$page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
+// $page = isset($_GET['page']) ? intval($_GET['page']) : 1; //第幾頁,有被設定就選那頁,沒有就第1頁
 
 //算資料總比數
-//$t_sql = "SELECT COUNT(1) FROM tickets ";
+// $t_sql = "SELECT COUNT(1) FROM tickets ";
 
 //query資料庫溝通
-//$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+// $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
-//$totalPages = ceil($totalRows / $perPage);
-//ceil 天花板 floor 地板,
+// $totalPages = ceil($totalRows / $perPage);
+// ceil 天花板 floor 地板,
 
 
 $rows = []; //預設給他一個陣列
@@ -66,7 +66,9 @@ $output = [
 <form action="ticket-search.php">
         <input type="text" name="search" class="searchbar" >
         <button type="submit">Search</button>
+        <button type="button" class="btn btn-light" onclick="location.href='ticket-list.php'">返回列表</button>
 </form>
+
     <div class="row">
         <div class="col">
             <!-- <nav aria-label="Page navigation example">
@@ -103,12 +105,10 @@ $output = [
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
+            
         </div>
-        
-        <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button> -->
-
-    <!-- </div> -->
+    </div>
 
 
     <div class="row">
