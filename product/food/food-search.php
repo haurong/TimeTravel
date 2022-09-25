@@ -58,7 +58,7 @@ $output = [
     <form action="food-search.php" class="d-flex m-auto searchbar">
                     <input type="text" name="search" class="searchbar p-1 " placeholder="請輸入關鍵字">
                     <button type="submit" class="btn btn-outline-secondary ml-3">search</button>
-                    <!--<button class=" p-1 ml-3" type="submit">search</button>-->
+                    <a href="./food-list.php"><button type="button" class="btn btn-outline-success ml-3">back</button></a> 
             </form>  
          <!-- <nav aria-label="Page navigation example  justify-content-center">
             <ul class="pagination">
