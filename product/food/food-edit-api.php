@@ -1,7 +1,7 @@
 <?php 
 
-require __DIR__ . '/../../parts/connect_athome_db.php'; 
-//require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_athome_db.php'; 
+require __DIR__ . '/../../parts/connect_db.php';
 
 header('Content-Type: application/json');
 

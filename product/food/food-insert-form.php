@@ -1,6 +1,6 @@
 <?php 
-require __DIR__ . '/../../parts/connect_athome_db.php'; 
-//require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_athome_db.php'; 
+require __DIR__ . '/../../parts/connect_db.php';
 $pageName = 'food-insert';
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;

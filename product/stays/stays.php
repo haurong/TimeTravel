@@ -20,7 +20,7 @@ $ascordesc = $_COOKIE['ascordesc'];
 <?php
 //  在別的地方是 connect_athome_db.php
 //  原本是   connect_db.php
-require __DIR__ . '/../../parts/connect_athome_db.php';
+require __DIR__ . '/../../parts/connect_db.php';
 
 $perPage = 40;
 
