@@ -1,7 +1,7 @@
 <?php 
 $pageName = 'list';
 
-$perPage = 10; // 一頁有幾筆
+$perPage = 5; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 分類篩選
