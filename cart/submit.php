@@ -19,8 +19,8 @@ $o_stmt->execute([
 // TODO: 檢查欄位資料
 
 $orders_sid = $pdo->lastInsertId(); // 最近新增資料的 PK
-$fKeys = array_keys($_SESSION['food-cart']);
-if (!empty($fkeys)) {
+
+if (!empty($_SESSION['food-cart'])) {
     $odf_sql = "INSERT INTO `orders_details_food`(`orders_sid`, `food_products_sid`, `quantity`, `total_price`) VALUES (?, ?, ?, ?)";
     $odf_stmt = $pdo->prepare($odf_sql);
     $odf_stmt->execute([
@@ -31,7 +31,7 @@ if (!empty($fkeys)) {
     ]);
     
 }
-$hKeys = array_keys($_SESSION['hotel-cart']);
+
 if (!empty($_SESSION['hotel-cart'])) {
     $odh_sql = "INSERT INTO `orders_details_hotel`(`orders_sid`, `hotel_products_sid`) VALUES (?,?)";
     $odh_stmt = $pdo->prepare($odh_sql);
@@ -41,7 +41,7 @@ if (!empty($_SESSION['hotel-cart'])) {
     ]);
     
 }
-$tKeys = array_keys($_SESSION['ticket-cart']);
+
 if (!empty($_SESSION['ticket-cart'])) {
     $odt_sql = "INSERT INTO `orders_details_ticket`(`orders_sid`, `ticket_products_sid`,`quantity`,`total_price`) VALUES (?,?,?,?)";
     $odt_stmt = $pdo->prepare($odt_sql);
