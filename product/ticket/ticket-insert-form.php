@@ -1,6 +1,8 @@
 <?php
 // require __DIR__ . '/parts/admin-required.php';
+
 require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php';
 $pageName = 'insert';
 
 $lastsql ="SELECT * FROM `tickets`
@@ -143,7 +145,7 @@ $last = $pdo->query($lastsql)->fetch();
         let {classname, id} = value
         cateOption[index] = new Option(classname, id)
     })
-
+    /*地區選單*/
     county.forEach(function(value,index,array){
             let {city_name,city_sid} = value
             citysel[index] = new Option(city_name,city_sid)
@@ -156,7 +158,7 @@ $last = $pdo->query($lastsql)->fetch();
         let {area_name,area_sid} = value
         areasel[index] = new Option(area_name, area_sid)
     })
-
+    
     citysel.addEventListener('change',function(){
             areasel.options.length = 0;
             citychoose = citysel.options[citysel.selectedIndex].value
@@ -222,7 +224,7 @@ $last = $pdo->query($lastsql)->fetch();
                 alert(obj.error);
             } else {
                 alert('新增成功');
-                location.href = 'ticket.php';
+                location.href = 'ticket-list.php';
             }
         })
     }

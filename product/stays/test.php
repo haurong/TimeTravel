@@ -1,5 +1,26 @@
-<?php require __DIR__ . '/../../parts/connect_db.php';?>
+<?php require __DIR__ . '/../../parts/connect_athome_db.php';
+$area = "SELECT * 
+FROM `area`
+WHERE 1
+ORDER BY area_sid";
+
+$county = "SELECT * 
+FROM `city`
+WHERE 1
+ORDER BY city_sid";
+
+$hotelcategories = "SELECT * 
+FROM `hotel_categories`
+WHERE 1
+ORDER BY hotel_categories_sid";
+
+$rowarea = $pdo->query($area)->fetchAll();
+$rowcounty = $pdo->query($county)->fetchAll();
+$rowhotelcategories = $pdo->query($hotelcategories)->fetchAll();
+?>
 <?php include __DIR__ . '/../../parts/html-head.php'; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,44 +37,23 @@
         <button type="submit" class="btn btn-primary" id="submitbtn">Submit</button>
     </form>
 
-    <script src="hotel.js"></script>
 
     <script>
+        let area = <?php 
+        echo json_encode($rowarea, JSON_UNESCAPED_UNICODE) 
+        ?>;
+        let county = <?php 
+        echo json_encode($rowcounty, JSON_UNESCAPED_UNICODE) 
+        ?>;
+        let hotelcategories = <?php 
+        echo json_encode($rowhotelcategories, JSON_UNESCAPED_UNICODE) 
+        ?>;
 
-        let submitbtn = document.getElementById('submitbtn')
-        let img = document.getElementById('img')
-
-
-        submitbtn.addEventListener('click',function(){
-            console.log(this.name);
-        })
-        
-        function checkForm() {
-        let fd = new FormData(document.form1);
-        for (let k of fd.keys()) {
-            console.log(`${k}:${fd.get(k)}`);
-        }
-        fetch('test-api.php', {
-                method: 'POST',
-                body: fd
-            })
-            // .then(r=>r.json()).then(obj=>{
-            //      console.log(obj);
-            //     if(! obj.success){
-            //         alert(obj.error);
-            //     }
-            //  })
-            .then(function(f) {
-                return f.json()
-            }).then(function(obj) {
-                console.log(obj.success);
-                if (!obj.success) {
-                    alert(obj.error);
-                } else {
-                    alert('新增成功')
-                }
-            })
-    }
+        console.log(area);
+        console.log(county);  
+        console.log(hotelcategories);
+    
+    
     </script>
 </body>
 

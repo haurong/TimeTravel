@@ -1,6 +1,8 @@
 <?php 
 //require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/../../parts/connect_db.php'; 
+
+ require __DIR__ . '/../../parts/connect_db.php';
+// require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 

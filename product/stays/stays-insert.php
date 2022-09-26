@@ -120,6 +120,10 @@ $last = $pdo->query($lastsql)->fetch();
 </div>
 <script src="hotel.js"></script>
 <script>
+
+
+
+
     let categoriessel = document.getElementById('categoriessel')
     let citysel = document.getElementById('citysel')
     let areasel = document.getElementById('areasel')

@@ -2,7 +2,7 @@
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
 <?php 
- require __DIR__ . '/../../parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_db.php';
 // require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 $perPage = 30; //一頁幾筆
@@ -104,10 +104,14 @@ $output = [
                         <form action="ticket-price-search.php">
                             <input type="text" name="min_p" class="searchbar" placeholder="最低價">
                             <input type="text" name="max_p" class="searchbar" placeholder="最高價">
-                            <input type="text" name="location" class="searchbar" placeholder="地區">
                             
+                            <!-- <select id="citysel" name="location"></select> -->
                             <button type="submit">Search</button>
+                            
+                            
+                            
                         </form>
+                        
                     </div>
                     <div class="d-flex justify-content-center">
                         
@@ -207,6 +211,7 @@ $output = [
 
 
     <?php include __DIR__ . '/../../parts/script.php'; ?>
+    <script src="tickets.js"></script>
     <script>
         const table = document.querySelector('table');
 
@@ -215,6 +220,9 @@ $output = [
                 location.href = `ticket-delete.php?sid=${sid}`;
             }
         }
+
+
+        
     </script>
 
     <?php include __DIR__ . '/../../parts/html-foot.php'; ?>

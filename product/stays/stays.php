@@ -73,7 +73,6 @@ $output = [
     'perPage' => $perPage,
 ];
 
-
 ?>
 
 <style>
@@ -259,6 +258,8 @@ $output = [
 
 <script src="hotel.js"></script>
 <script>
+
+
     function delete_it(sid) {
         if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
             location.href = `stays-del.php?sid=${sid}`;

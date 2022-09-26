@@ -8,30 +8,9 @@
 </head>
 <body>
     
-        <form action="" name="form_for_picture" style="display: none;">
-            <input type="file" name="realpicture" id="realpicture" accept="image/png , image/jpeg" style="display: none;">
-        </form> 
-        <button type="button" class="btn btn-outline-info mt-3" id="picturebtn" onclick="realpicture.click()">上傳圖片</button>
-
     <script>
-        let realpicture = document.getElementById('realpicture')
-
-        realpicture.addEventListener('change',function(){
-        console.log(realpicture.files);
-        let fd_for_pic = new FormData(document.form_for_picture)
-        for (let fdfp of fd_for_pic.keys()) {
-            console.log(`${fdfp}:${fd_for_pic.get(fdfp)}`);
-        }
-        fetch('uploadpicapi.php',{
-            method:'POST',
-            body:fd_for_pic,
-        }).then(function(fdfp_r){
-            return fdfp_r.json()
-        }).then(function(fdfp_obj){
-            console.log(fdfp_obj);
-        })
-    })
-    </script>
+        
+    </script>  
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <?php 
- require __DIR__ . '/../../parts/connect_db.php';
+require __DIR__ . '/../../parts/connect_db.php';
 // require __DIR__ . '/../../parts/connect_huang_db.php'; 
 
 //$perPage = 30; //一頁幾筆
@@ -18,7 +18,7 @@
 $rows = []; //預設給他一個陣列
 $min_p = $_GET['min_p'];
 $max_p = $_GET['max_p'];
-$location = $_GET['location'];
+//$location = $_GET['location'];
 
 //如果有資料,做判別
 // if ($totalRows) {
@@ -41,12 +41,11 @@ $location = $_GET['location'];
     JOIN `listing_status`
     ON `tickets`.`on_sale` = `listing_status`.`status_sid`
     WHERE
-    `city`.`city_name` LIKE '%$location%'
-    AND
+    
     `product_price` 
     BETWEEN '$min_p' AND '$max_p'
    
-    ORDER BY PRODUCT_PRICE ASC";
+    ORDER BY PRODUCT_PRICE ASC, SID ASC";
     //第1個參數%s, 索引值 ;第2個參數%s抓幾個   DESC降冪 ASC升冪
 
     $rows = $pdo->query($sql)->fetchAll();
@@ -64,10 +63,14 @@ $output = [
 <?php require __DIR__ . '/../../parts/html-head.php'; ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 <div class="container">
-<form action="ticket-price-search.php">
-            <input type="text" name="search" class="searchbar" >
+    <form action="ticket-price-search.php">
+            <input type="text" name="min_p" class="searchbar" placeholder="最低價">
+            <input type="text" name="max_p" class="searchbar" placeholder="最高價">
+            <!-- <input type="text" name="location" class="searchbar" placeholder="地區"> -->
             <button type="submit">Search</button>
-</form>
+            <a class="btn btn-light" href="ticket-list.php" role="button">返回列表</a>
+        </form>
+ 
     <div class="row">
         <div class="col">
             <!-- <nav aria-label="Page navigation example">
@@ -109,7 +112,7 @@ $output = [
         
         <button type="button" class="btn btn-light" onclick="location.href='ticket-insert-form.php'">新增商品</button> -->
 
-    <!-- </div> -->
+    </div>
 
 
     <div class="row">

@@ -58,7 +58,7 @@
     <div class="row ">
         <div class="col d-flex justify-content-end">
             <button type="button" class="btn btn-primary mr-1" onclick="location.href='site-insert.php'">新增景點</button>
-            <button type="button" class="btn btn-primary" onclick="history.back()">回上一頁</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='./../../member/basepage.php'">回上一頁</button>
         </div>
     </div>
     <!-- <button type="submit" class="btn btn-warning">刪除</button> -->
@@ -116,7 +116,36 @@
 
         </div>
     </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center mt-3">
 
+            <ul class="pagination">
+                <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-left"></i>
+                    </a>
+                </li>
+
+                <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
+                    if ($i >= 1 and $i <= $totalPages) :
+                        $pageBtnQS['page'] = $i;
+                ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?<?= http_build_query($pageBtnQS) ?>"><?= $i ?></a>
+                        </li>
+                <?php
+                    endif;
+                endfor; ?>
+
+                <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
 </div>
 <?php include __DIR__ . '/../../parts/script.php'; ?>
 
