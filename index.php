@@ -1,5 +1,8 @@
 <?php session_start();
 $pageName = 'index';
+if(!isset($_COOKIE['ascordesc'])){
+    setcookie('ascordesc','ASC');
+}
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php'; ?>
