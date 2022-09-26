@@ -33,11 +33,13 @@ if (!empty($_SESSION['food-cart'])) {
 }
 
 if (!empty($_SESSION['hotel-cart'])) {
-    $odh_sql = "INSERT INTO `orders_details_hotel`(`orders_sid`, `hotel_products_sid`) VALUES (?,?)";
+    $odh_sql = "INSERT INTO `orders_details_hotel`(`orders_sid`, `hotel_products_sid` ,`checkin_time`, `checkout_time`) VALUES (?,?,?,?)";
     $odh_stmt = $pdo->prepare($odh_sql);
     $odh_stmt->execute([
         $orders_sid,
-        $_POST['hotel_sid']
+        $_POST['hotel_sid'],
+        $_POST['checkin_time'],
+        $_POST['checkout_time']
     ]);
     
 }

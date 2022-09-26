@@ -66,6 +66,8 @@
                     <th scope="col">飯店名稱</th>
                     <th scope="col">飯店圖片</th>
                     <th scope="col">飯店地址</th>
+                    <th scope="col">預定入住時間</th>
+                    <th scope="col">預定退房時間</th>
 
                 </tr>
             </thead>
@@ -84,6 +86,8 @@
                             </img>
                         </td>
                         <td><?= $val['address'] ?></td>
+                        <td><input type="datetime-local" name="checkin_time" value="now()"></td>
+                        <td><input type="datetime-local" name="checkout_time" value="now()"></td>
                         <td>
                             <input type="hidden" name="hotel_sid" value="<?= $val['sid'] ?>">
                             <input type="hidden" name="hotel_name" value="<?= $val['hotel_name'] ?>">
