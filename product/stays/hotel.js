@@ -58,7 +58,7 @@ let area = [
 let hotelcategories = [
     { "hotel_categories_sid": "1", "hotel_categories": "旅館" },
     { "hotel_categories_sid": "2", "hotel_categories": "飯店" },
-    { "hotel_categories_sid": "3", "hotel_categories": "名宿" }
+    { "hotel_categories_sid": "3", "hotel_categories": "民宿" }
 ]
 
 let allhotel = [
