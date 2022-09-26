@@ -131,12 +131,15 @@ $last = $pdo->query($lastsql)->fetch();
     let realpicture2 = document.getElementById('realpicture2');
     let product_imgs = document.getElementById('product_imgs');
 
+    //產品編號
     let product_number = document.getElementById('product_number');
     let lastcode = "<?=$last['product_number']?>";
     let T = lastcode.split('T');
-    let lastnumber = Number(T[1]);
+    let lastnumber = Number(T[1])+1;
     console.log(lastnumber);
-    let new_ticket_num = "T" + (lastnumber+1);
+    let lastnumbertostring = String(lastnumber);
+    console.log(lastnumbertostring);
+    let new_ticket_num = lastnumbertostring.padStart(4,"A00");
     console.log(new_ticket_num);
     product_number.value = new_ticket_num;
 
