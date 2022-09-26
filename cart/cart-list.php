@@ -38,7 +38,7 @@
                                 </a>
                             </td>
                             <td><?= $val['product_name'] ?></td>
-                            <td><img width=200 src="./../../imgs/./food-img/<?= $val['product_photo'] ?>" alt=""></td>
+                            <td><img width=200 src="./../imgs/./food-img/<?= $val['product_photo'] ?>" alt=""></td>
                             <td><?= $val['applicable_store'] ?></td>
                             <td><?= $val['p_selling_price'] ?></td>
                             <td>
@@ -118,7 +118,7 @@
                             </a>
                         </td>
                         <td><?= $val['product_name'] ?></td>
-                        <td><img style="width: 100px;" src="../../imgs/tickets_imgs/<?= $val['product_imgs'] ?>" alt=""></td>
+                        <td><img style="width: 200px;" src="./../imgs/tickets_imgs/<?= $val['product_imgs'] ?>" alt=""></td>
                         <td><?= $val['product_introduction'] ?></td>
                         <td><?= $val['product_price'] ?></td>
                         <td>
