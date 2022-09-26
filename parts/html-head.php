@@ -11,6 +11,9 @@ if (!isset($_SESSION['hotel-cart'])) {
 if (!isset($_SESSION['ticket-cart'])) {
     $_SESSION['ticket-cart'] = [];
 }
+if(!isset($_COOKIE['ascordesc'])){
+    setcookie('ascordesc','ASC');
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh">
