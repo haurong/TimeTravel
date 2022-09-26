@@ -4,9 +4,14 @@ if(!isset($_COOKIE['ascordesc'])){
     setcookie('ascordesc','ASC');
 }
 
-
-
 $ascordesc = $_COOKIE['ascordesc'];
+
+while ($ascordesc == $_COOKIE['ascordesc']){
+    break;
+}
+
+
+// $ascordesc = $_COOKIE['ascordesc'];
 ?>
 <?php include __DIR__ . '/../../parts/navbar.php'; ?>
 
@@ -21,6 +26,8 @@ $ascordesc = $_COOKIE['ascordesc'];
 //  在別的地方是 connect_athome_db.php
 //  原本是   connect_db.php
 require __DIR__ . '/../../parts/connect_db.php';
+
+
 
 $perPage = 40;
 
